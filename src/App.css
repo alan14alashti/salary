@@ -1,0 +1,33 @@
+@import './font.css';
+html,
+body {
+  background-color: var(--my-page-bg-color) !important;
+  padding: 0;
+  margin: 0;
+}
+:root {
+  --my-danger-color: #FFC04E;
+  --my-primary-color: #0050f0;
+  --my-primary-2-color: #E8E5FF;
+  --my-secondary-color: #1E8F93;
+  --my-secondary-2-color: #D6F3F4;
+  --my-skip-color:#007C48;
+  --my-skip-2-color: #00B578;
+  --my-bg-color: #fff;
+  --my-page-bg-color:#FAF8FF;
+  --my-text-color: #1B1A27;
+  --my-text-second-color:#ACA9BB;
+  --my-alt-blue-color: #215a88;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+* {
+  font-family: FaraTekno;
+  box-sizing: border-box; 
+}
+ul li {
+  list-style: none;
+}

@@ -1,0 +1,19 @@
+.bread_crumb_container {
+    font-size: 1.1rem;
+    color: var(--my-text-color);
+    margin: 1rem 0;
+    padding:0 .5rem;
+}
+.bread_crumb_ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.bread_crumb_li {
+    color: var(--my-primary-color);
+}
+.bread_crumb_li_active {
+    color: var(--my-text-color);
+}

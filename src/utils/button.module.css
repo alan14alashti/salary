@@ -1,0 +1,30 @@
+.button {
+    color: #fff;
+    outline: 0;
+    border-radius: 5px;
+    padding: .35rem 1rem;
+}
+.button_primary {
+    background-color: var(--my-primary-color);
+    border: 2px solid var(--my-primary-color);
+}
+.button_secondary {
+    background-color: var(--my-secondary-color);
+    border: 2px solid var(--my-secondary-color);
+}
+.button_danger {
+    background-color: var(--my-danger-color);
+    border: 2px solid var(--my-danger-color);
+}
+.button_primary:hover {
+    color: var(--my-primary-color);
+    background-color: #fff;
+}
+.button_secondary:hover {
+    color: var(--my-secondary-color);
+    background-color: #fff;
+}
+.button_danger:hover {
+    color: var(--my-danger-color);
+    background-color: #fff;
+}

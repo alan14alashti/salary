@@ -1,0 +1,58 @@
+.orgchart.myChart {
+    background-image: linear-gradient(
+        90deg,
+        rgba(33, 90, 136, 0.15) 10%,
+        rgba(0, 0, 0, 0) 10%
+    ),
+    linear-gradient(rgba(33, 90, 136, 0.15) 10%, rgba(0, 0, 0, 0) 10%) !important;
+}
+  
+.orgchart.myChart > ul > li > ul li::before {
+    border-top-color: var(--my-primary-color);
+}
+  
+.orgchart.myChart > ul > li > ul li .oc-node::before,
+.orgchart.myChart ul li .oc-node:not(:only-child)::after {
+    background-color: var(--my-primary-color);
+}
+.orgchart.myChart .oc-node .position {
+    direction: rtl;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--my-bg-color);
+    color: var(--my-text-color);
+    padding:0 1rem .75rem 1rem;
+    width: auto;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.dropdown {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: -50%;
+    left: 0px;
+    background-color: var(--my-page-bg-color);
+    min-width: 8rem;
+    height: 8rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content div:hover {
+    cursor: pointer;
+    background-color: var(--my-bg-color);
+}
+.dropdown:hover .dropdown-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: column;
+}
+  

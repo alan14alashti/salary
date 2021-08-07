@@ -1,0 +1,25 @@
+.drawer_container {
+    width: 100%;
+    background-color: var(--my-bg-color);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    height: 100%;
+    font-size: 1rem;
+}
+.drawer_item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 .25rem;
+}
+.drawer_item i {
+    margin-left: .45rem;
+}
+.drawer_item:hover {
+    background-color: #ABA5DB;
+}

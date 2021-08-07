@@ -1,0 +1,27 @@
+.base_info_container {
+    width: 100%;
+    background-color: var(--my-bg-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 2.5px;
+    padding: 2rem 1rem;
+    margin: 1rem auto;
+}
+.fill {
+    border: 1px solid var(--my-danger-color); 
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: .025rem;
+    background-color: #fff;
+    width: 100%;
+    padding: 1rem .5rem;
+    color: var(--my-danger-color);
+    outline: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:background-color ease-out .35s;
+}
+.fill:hover {
+    color: #fff;
+    background-color: var(--my-danger-color);
+    border:1px solid rgba(255, 255, 255, 0);  
+}

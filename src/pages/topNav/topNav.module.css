@@ -1,0 +1,75 @@
+.topNav_container {
+    background-color: var(--my-bg-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .25rem 1rem;  
+    color: var(--my-primary-color);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+}
+.bar_menue_icon_container i {
+    cursor: pointer;
+    font-size: 2.5rem;
+}
+.menue_container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1050;
+    height: 100vh;
+    background-color: rgba(0,0,0,70%);
+}
+.menue {
+    padding: 1rem 1rem;
+    background-color: var(--my-bg-color);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-left: 3.5px solid var(--my-primary-color);
+    height: 100%;
+}
+.times_icon {
+    align-self: flex-end;
+    color: var(--my-secondary-color);
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.img_container {
+    width: 75px;
+    height: 65px;
+}
+.img_container img {
+    width: 100%;
+    height: 100%;
+}
+.top_nav_left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: 1.5rem;
+}
+.dropdown_content {
+    font-size: 1rem;
+    display: none;
+    position: absolute;
+    left: 50px;
+    color: var(--my-text-color);
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: .5rem .6rem;
+    z-index: 1;
+}
+.dropdown:hover .dropdown_content {
+    display: block;
+}
+  
