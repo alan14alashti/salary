@@ -1,9 +1,7 @@
 import './defChart.css'
 import Modal from 'react-modal'
 import FormModal from "../../utils/formModal";
-import Register from "../registerPage/register";
 import PropTypes from "prop-types";
-import Swal from 'sweetalert2';
 import { useState } from 'react';
 import AddPosition from './addPosition';
 import DelPosition from './delPosition';

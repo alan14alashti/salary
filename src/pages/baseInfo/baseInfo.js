@@ -49,7 +49,16 @@ const BaseInfo = () => {
                     <Link to="/admin/MainPage/karmandan" type="button" className={`${classes.fill} text-decoration-none text-center`}> آیتم های منو </Link>
                 </div>
                 <div className="">
+                    <Link to="/admin/MainPage/baseInfo/ListOfRoles" type="button" className={`${classes.fill} text-decoration-none text-center`}> نقش ها </Link>
+                </div>
+                <div className="">
                     <Link to="/admin/MainPage/baseInfo/OrganizationChart" type="button" className={`${classes.fill} text-decoration-none text-center`}> چارت سازمانی </Link>
+                </div>
+                <div className="">
+                    <Link to="/admin/MainPage/baseInfo/ListOfBimeTypes" type="button" className={`${classes.fill} text-decoration-none text-center`}> بیمه </Link>
+                </div>
+                <div className="">
+                    <Link to="/admin/MainPage/baseInfo/MahalKhedmat" type="button" className={`${classes.fill} text-decoration-none text-center`}> محل خدمت </Link>
                 </div>
             </div>
         </div>

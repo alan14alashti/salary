@@ -31,6 +31,11 @@ const gridStyle = {
     minHeight: 550 ,
 }
 const ListOfUsers = () => {
+    const [selected, setSelected] = useState({});
+    const onSelectionChange = useCallback(({ selected }) => {
+        setSelected(selected)
+    }, [])
+    console.log(selected)
     const breadCrumb = [
         {
             text: " ادمین " ,
@@ -54,7 +59,7 @@ const ListOfUsers = () => {
         { name: 'role', header: ' نقش ', defaultFlex:1},
         { name: 'email', header: ' ایمیل ', defaultFlex:1},
         { name: 'phone', header: ' شماره تلفن ', defaultFlex:1},
-        { name: 'id', header: ' # ' , defaultFlex:1, render: ({ data }) => <div><Button sty="danger" text="حذف"/> <Button sty="secondary" text="ویرایش"/></div>},
+        { name: 'id', header: ' # ' , defaultFlex:1, render: ({ data }) => <div><Button onclick={() => console.log(data)} sty="danger" text="حذف"/> <Button sty="secondary" text="ویرایش"/></div>},
     ];
     const modalHandler = () => {
         setRegisterIsOpen(!registerIsOpen)
@@ -75,6 +80,9 @@ const ListOfUsers = () => {
         </FormModal>
         <div>
             <ReactDataGrid
+                selected={selected}
+                checkboxColumn
+                onSelectionChange={onSelectionChange}
                 theme="default-light"
                 idProperty="id"
                 rtl={true}

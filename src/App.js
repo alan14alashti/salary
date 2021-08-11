@@ -21,6 +21,14 @@ import ListOfLoanTypes from './pages/loan/loanTypes';
 import ContractItems from './pages/contractPage/contractItems';
 import Hokms from './pages/hokm/hokms';
 import OrgChart from './pages/orgChart/orgChart'
+import ShowSalaryFormulaTypes from './pages/salary/salaryFormulaTypes';
+import ShowSalaryItems from './pages/salary/showSalaryItems';
+import ListOfRoles from './pages/createRole/listOfRoles';
+import AddUser from './pages/addUser/addUser';
+import Date from './pages/datePicker/datePicker';
+import Mosaede from './pages/mosaede/mosaede';
+import ListOfBimeTypes from './pages/bime/bimeTypes';
+import MahalKhedmat from './pages/mahalKhedmat/mahalKhedmat';
 const queryClient = new QueryClient()
 function App() {
   return (
@@ -54,8 +62,14 @@ function App() {
                 <Route path={'/admin/MainPage/loans'}>
                     <Loan/>
                 </Route>
+                <Route path={'/admin/MainPage/mosaede'}>
+                    <Mosaede/>
+                </Route>
                 <Route path={'/admin/MainPage/baseInfo/loanTypes'}>
                     <ListOfLoanTypes/>
+                </Route>
+                <Route path={'/admin/MainPage/baseInfo/ListOfBimeTypes'}>
+                    <ListOfBimeTypes/>
                 </Route>
                 <Route path={'/admin/MainPage/baseInfo/contractItems'}>
                     <ContractItems/>
@@ -66,11 +80,13 @@ function App() {
                 <Route path={'/admin/MainPage/baseInfo/OrganizationChart'}>
                     <OrgChart/>
                 </Route>
+                <Route path={'/admin/MainPage/baseInfo/ListOfRoles'}>
+                    <ListOfRoles/>
+                </Route>
+                <Route path={'/admin/MainPage/baseInfo/MahalKhedmat'}>
+                    <MahalKhedmat/>
+                </Route>
             </Switch>
-            {/* <OrgChart nodes={
-                                     [{id: 1, name: "Name1" , title: "Tytle1" },
-                                     {id: 2, pid: 1, name: "Name2" , title: "Tytle2" },
-                                     {id: 3, pid: 1, name: "Name3" , title: "Tytle3" }]} /> */}
         </Router>
         {/* <Login/>
         <Register/>
@@ -84,6 +100,10 @@ function App() {
         {/* <Loan/> */}
         {/* <ListOfLoanTypes/> */}
         {/* <ListOfContractDet/> */}
+        {/* <ShowSalaryFormulaTypes/> */}
+        {/* <ShowSalaryItems/> */}
+        <AddUser/>
+        {/* <Date/> */}
     </QueryClientProvider>
   );
 }

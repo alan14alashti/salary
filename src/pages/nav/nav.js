@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom"
-import Flipclock from "react-simple-flipclock"
 import * as React from "react";
 
 const NavBar = () => {

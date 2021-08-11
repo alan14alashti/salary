@@ -40,6 +40,7 @@ const OrgChart = () => {
 		return output
 	}
 	const chartt = getUnflatten(response,null)
+	console.log(chartt[0])
 	return (
 		<>
 		<div className={classes.chart}>

@@ -1,0 +1,16 @@
+.search_section_container {
+    background-color: #fff;
+    padding: 1rem;
+}
+.input_container {
+    width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.message {
+    color: var(--my-danger-color);
+    font-size: 1rem;
+    margin:.2rem 0;
+    padding: 0;
+}

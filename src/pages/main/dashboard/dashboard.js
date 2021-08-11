@@ -19,7 +19,7 @@ const Dashboard = () => {
                 <button type="button" className={classes.fill}> محاسبه </button>
             </div>
             <div className="">
-                <button type="button" className={classes.fill}> مساعده </button>
+                <Link to="/admin/MainPage/mosaede" type="button" className={`${classes.fill} text-decoration-none text-center`}> مساعده </Link>
             </div>
             <div className="">
                 <Link to="/admin/MainPage/loans" type="button" className={`${classes.fill} text-decoration-none text-center`}> وام </Link>

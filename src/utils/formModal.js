@@ -4,6 +4,7 @@ const FormModal = ({ children, open ,modalHandler }) => {
     return (
         <Modal
 			isOpen={open}
+			ariaHideApp={false}
 			className={`${classes.content} col-xl-3 col-lg-4 col-md-6 col-sm-8 col-10`}
            	overlayClassName={`${classes.overlay}`}
 			>
@@ -14,5 +15,4 @@ const FormModal = ({ children, open ,modalHandler }) => {
 		</Modal>
     );
 }
- 
 export default FormModal;

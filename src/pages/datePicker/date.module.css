@@ -1,0 +1,21 @@
+.date_input {
+    width: 100%;
+    outline:0;
+    border: 0;
+    padding: .5rem;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.1);
+    color: var(--my-text-color);
+    background-color: #FAF8FF;
+    border-radius: 3px;
+}
+.date_input:focus {
+    border: 2px solid var(--my-primary-color);
+    box-shadow: 3px 3px 3px rgba(0,0,0,.0);
+}
+.form_input_label {
+
+    color: var(--my-text-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: .5rem 0;
+}
