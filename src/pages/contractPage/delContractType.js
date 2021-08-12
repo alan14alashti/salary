@@ -1,30 +1,19 @@
-import { BaseUrl } from "../../utils/baseUrl";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useQueryClient, useMutation } from "react-query";
-import Button from "../../utils/button";
-// post form method
-const PostForm =async (id) => {
-	const token = localStorage.getItem("accessToken")
-	const res = await axios(`${BaseUrl}/api/Contract/DeleteContract?id=${id.id}`, {
-		method:'POST',
-		headers: {
-			"Content-Type": "application/json",
-			"accept": "*/*",
-			'Authorization':`Bearer ${token}`
-		},                                   
-		data : ""
-	})
-    return res
-}
-// del position component
-const DelContractItem = ({ id }) => {
+import Swal from "sweetalert2"
+import { useQueryClient, useMutation } from "react-query"
+import Button from "../../utils/button"
+import useRequest from '../../components/fetchReq'
+const DelContractType = ({ id }) => {
     const queryClient = useQueryClient()
-    const mutation = useMutation(PostForm, {
+    const mutation = useMutation(useRequest({
+        url:`api/Contract/DeleteContractDetail?id=${id}`,
+        method:"POST",
+        body:""
+    }),
+    {
         onSuccess: (res) => {
             Swal.fire({
     			title: 'Success',
-                text: "  حکم با موفقیت حذف شد ",
+                text: res.data.message,
         		icon: 'success',
     			confirmButtonColor: '#0050F0',
                 timer: 3000
@@ -36,10 +25,10 @@ const DelContractItem = ({ id }) => {
             // queryClient.refetchQueries(["OrgChart"])
             queryClient.refetchQueries({ stale: true })
         },
-        onError: () => {
+        onError: (error) => {
             Swal.fire({
                 title: 'Error!',
-                text:   " مشکلی وجود دارد ",
+                text:   error.response.data.message,
                 icon: 'error',
                 confirmButtonColor: '#0050f0',
                 confirmButtonText: 'امتحان دوباره',
@@ -49,7 +38,7 @@ const DelContractItem = ({ id }) => {
     })
 	const clickHandler = (event) => {
 		event.preventDefault();
-        mutation.mutate({id: id})
+        mutation.mutate()
   	}
     return (
 		<div className="w-100 mx-auto">
@@ -63,4 +52,4 @@ const DelContractItem = ({ id }) => {
 		</div>
     );
 }
-export default DelContractItem;
+export default DelContractType;

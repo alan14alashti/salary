@@ -1,26 +1,17 @@
 import { useQuery } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
 import classes from './orgChart.module.css'
 import DefaultChart from "./dechart"
-const getfetcher = async () => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/OrganizationChart/ShowPositions`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
+import useRequest from "../../components/fetchReq"
+
 const OrgChart = () => {
-    const { isLoading, error, data } = useQuery('OrgChart', getfetcher
-	)
+    const { isLoading, error, data } = useQuery('OrgChart',useRequest(
+		{
+			url:"api/OrganizationChart/ShowPositions",
+			method:"POST",
+			body:""
+		}
+	))
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const response = data.data
@@ -30,7 +21,6 @@ const OrgChart = () => {
 		for(const obj of arr) {
 		  if(obj.parent == parentid) {
 			var children = getUnflatten(arr, obj.id)
-	  
 			if(children.length) {
 			  obj.children = children
 			}

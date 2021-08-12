@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../utils/baseUrl"
+import useRequest from '../../components/fetchReq'
 import React, { useState, useCallback } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
@@ -13,40 +12,10 @@ import { Input } from "../../utils/input"
 import FormModal from "../../utils/formModal"
 import classes from './hokms.module.css'
 import RegisterContract from "./registerContract"
-
-const getContractDetails = async () => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Contract/GetContractDetails`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
 const gridStyle = { 
     minHeight: 550 ,
 }
-const getfetcher = async (username) => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Contract/FindContractByUser?username=${username.userName}`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json",
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
 const Hokms = () => {
-    const { isLoading, error, data } = useQuery('getContractDetails', getContractDetails)
     const breadCrumb = [
         {
             text: " ادمین " ,
@@ -64,38 +33,43 @@ const Hokms = () => {
             active: 1
         }
     ]
-    const [searched, setSearched] = useState([]);   
+    const [userName,setUserName] = useState("")
+    const [searched, setSearched] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const modalHandler = () => {
         setModalIsOpen(!modalIsOpen)
     }
     const [clickedUser, setClickedUser] = useState()
-    const mutation = useMutation(getfetcher, {
+    const mutation = useMutation(useRequest({
+        url:`api/Contract/FindContractByUser?username=${userName}`,
+        method:"POST",
+        body:""
+    }), {
         onSuccess : (res) => {
             setSearched(res.data)
         }
     })
     const searchHandler = (e) => {
-        mutation.mutate({userName : e.target.value})
+        setUserName(e.target.value)
+        mutation.mutate()
     }
-    const registerBtnHandler = (data) => {
-        setModalIsOpen(!modalIsOpen)
-        setClickedUser(data)
-    }
+    // const registerBtnHandler = (data) => {
+    //     setModalIsOpen(!modalIsOpen)
+    //     setClickedUser(data)
+    // }
 	const columns =  [
         { name: 'userName', header: ' نام کاریری ', defaultFlex:1 },
 		{ name: 'detailName', header: ' نام جزییات ', defaultFlex:1 },
 		{ name: 'subimssionDate', header: ' تاریخ ثبت ', defaultFlex:1 },
 		{ name: 'effectiveDate', header: ' تاریخ اثر گذاری ', defaultFlex:1 },
         { name: 'executeDate', header: ' تاریخ اجرا  ', defaultFlex:1 },
-        { header: "#", defaultFlex:1, render: ({ data }) => <div><Button onclick={() => registerBtnHandler(data)} sty="secondary" text=" انتصاب حکم "/></div>}
+        { header: "#", defaultFlex:1, render: ({ data }) => <div><Button sty="secondary" text=" انتصاب حکم "/></div>}
     ];
-    if (isLoading) return "Loading..."
     return ( 
         <div>
-            <FormModal open={modalIsOpen} modalHandler={modalHandler}>
+            {/* <FormModal open={modalIsOpen} modalHandler={modalHandler}>
                 <RegisterContract clickedUser={clickedUser} formProps={data.data}/>
-            </FormModal>
+            </FormModal> */}
             <BreadCrumb data={breadCrumb}/>
             <div className={classes.search_section_container}>
                 <div className={classes.input_container}>

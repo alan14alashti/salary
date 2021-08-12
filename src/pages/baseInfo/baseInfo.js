@@ -60,6 +60,9 @@ const BaseInfo = () => {
                 <div className="">
                     <Link to="/admin/MainPage/baseInfo/MahalKhedmat" type="button" className={`${classes.fill} text-decoration-none text-center`}> محل خدمت </Link>
                 </div>
+                <div className="">
+                    <Link to="/admin/MainPage/baseInfo/Maliat" type="button" className={`${classes.fill} text-decoration-none text-center`}> مالیات </Link>
+                </div>
             </div>
         </div>
         </div>

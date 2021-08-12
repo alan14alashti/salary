@@ -11,7 +11,6 @@ import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import classes from './loan.module.css'
 import { Input } from "../../utils/input"
-import SubmitLoanForUser from "./submitLoanForUser"
 import FormModal from "../../utils/formModal"
 const gridStyle = { 
     minHeight: 250 ,

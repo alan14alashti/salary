@@ -9,9 +9,11 @@ import '@inovua/reactdatagrid-community/index.css'
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-light.css'
 import Button from "../../utils/button"
-import RegisterLoan from "./registerLoan"
+import AddLoanTypes from "./addLoanType"
 import classes from './loanTypes.module.css'
 import BreadCrumb from "../breadCrumb/breadCrumb"
+import DelLoanType from "./delLoanType"
+import EditLoanType from "./editLoanType"
 const gridStyle = { 
     minHeight: 250 ,
 }
@@ -30,9 +32,26 @@ const getfetcher = async () => {
     return res
 }
 const ListOfLoanTypes = () => {
-	const [registerIsOpen, setRegisterIsOpen] = useState(false);
-	const modalHandler = () => {
-        setRegisterIsOpen(!registerIsOpen)
+	const [delId,setDelId] = useState(null)
+	const [editId,setEditId] = useState(null)
+	const [modalDetHandler, setModalDetHandler] = useState(null)
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const modalHandler = () => {
+        setModalIsOpen(!modalIsOpen)
+    }
+    const addModalHandler = () => {
+        setModalIsOpen(true)
+        setModalDetHandler(1)
+    }
+    const delModalHandler = (data) => {
+		setDelId(data.id)
+        setModalIsOpen(true)
+        setModalDetHandler(0)
+    }
+    const editModalHandler = (data) => {
+		setEditId(data.id)
+        setModalIsOpen(true)
+        setModalDetHandler(2)
     }
 	const breadCrumb = [
         {
@@ -57,11 +76,11 @@ const ListOfLoanTypes = () => {
         }
     ]
 	const columns =  [
-        { name: 'masterId', header: ' masterId ', defaultFlex:1},
 		{ name: 'detailName', header: ' نام جزییات ', defaultFlex:1},
 		{ name: 'detailValue', header: ' مقدار جزییات ', defaultFlex:1},
 		{ name: 'description', header: ' توضیحات ', defaultFlex:1},
-		{ name: 'id', header: ' # ', defaultFlex:1, render: ({ data }) => <div><Button sty="danger" text="حذف"/> <Button sty="secondary" text="ویرایش"/></div>},
+		{ header: ' حذف ', defaultFlex:1, render: ({ data }) => <Button onclick={() => delModalHandler(data)} sty="danger" text="حذف"/>},
+		{ header: ' ویرایش ', defaultFlex:1, render: ({ data }) => <Button onclick={() => editModalHandler(data)} sty="secondary" text="ویرایش"/>}
     ];
     const { isLoading, error, data } = useQuery('listOfLoanTypes', getfetcher
 	)
@@ -72,18 +91,20 @@ const ListOfLoanTypes = () => {
         <div className="w-100 d-flex flex-column align-items-start">
 			<BreadCrumb data={breadCrumb}/>
 			<Modal
-				isOpen={registerIsOpen}
+				isOpen={modalIsOpen}
 				className={`${classes.content} col-xl-3 col-lg-4 col-md-6 col-sm-8 col-10`}
            		overlayClassName={`${classes.overlay}`}
 			>
-				<div onClick={modalHandler}>
-					<i className="fas fa-times"></i>
-				</div>
-				<RegisterLoan/>
+				{
+                	modalDetHandler === 1 ? <AddLoanTypes closeModal={modalHandler}/>:
+                	modalDetHandler === 0 ? <DelLoanType id={delId} closeModal={modalHandler}/>:
+                	modalDetHandler === 2 ? <EditLoanType id={editId} closeModal={modalHandler}/>:
+                	null
+            	}
 			</Modal>
 			<div className="w-100">
 				<div className="mb-3">
-					<Button text="اضافه کردن وام" onclick={modalHandler} sty="primary"/>
+					<Button text="اضافه کردن وام" onclick={addModalHandler} sty="primary"/>
 				</div>
 				<ReactDataGrid
 					theme="default-light"

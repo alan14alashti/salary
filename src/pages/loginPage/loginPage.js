@@ -39,6 +39,7 @@ const PostForm = (body, history, path) => {
 		}
 	})
 	.catch((error) => {
+		console.log(error)
 		Swal.fire({
 			title: 'Error!',
 			text: " نام کاربری یا رمز عبور شما اشتباه است ",

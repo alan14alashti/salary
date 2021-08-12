@@ -1,25 +1,9 @@
-import { useState } from "react";
-import { BaseUrl } from "../../utils/baseUrl";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useQueryClient, useMutation } from "react-query";
-import Button from "../../utils/button";
-import { Select } from "../../utils/input";
-// post form method
-const PostForm =async (body) => {
-	const token = localStorage.getItem("accessToken")
-	const res = await axios(`${BaseUrl}/api/OrganizationChart/DeletePosiotion`, {
-		method:'POST',
-		headers: {
-			"Content-Type": "application/json",
-			"accept": "*/*",
-			'Authorization':`Bearer ${token}`
-		},                                   
-		data : body.body
-	})
-    return res
-}
-// del position component
+import { useState } from "react"
+import useRequest from '../../components/fetchReq'
+import Swal from "sweetalert2"
+import { useQueryClient, useMutation } from "react-query"
+import Button from "../../utils/button"
+import { Select } from "../../utils/input"
 const DelPosition = ({ nodeData }) => {
     const queryClient = useQueryClient()
     const [formState, setFormState] = useState({
@@ -34,11 +18,16 @@ const DelPosition = ({ nodeData }) => {
           	[name]: value
         })
     }
-    const mutation = useMutation(PostForm, {
+    const mutation = useMutation(useRequest({
+		url:"api/OrganizationChart/DeletePosiotion",
+		method:"POST",
+		body: JSON.stringify(formState)
+	}), 
+    {
         onSuccess: (res) => {
             Swal.fire({
     			title: 'Success',
-                text: " پوزیشن با موفقیت حذف شد ",
+                text: res.data.message,
         		icon: 'success',
     			confirmButtonColor: '#0050F0',
                 timer: 3000
@@ -50,10 +39,10 @@ const DelPosition = ({ nodeData }) => {
             // queryClient.refetchQueries(["OrgChart"])
             queryClient.refetchQueries({ stale: true })
         },
-        onError: () => {
+        onError: (error) => {
             Swal.fire({
                 title: 'Error!',
-                text:   " مشکلی وجود دارد ",
+                text:   error.response.data.message,
                 icon: 'error',
                 confirmButtonColor: '#0050f0',
                 confirmButtonText: 'امتحان دوباره',
@@ -63,8 +52,7 @@ const DelPosition = ({ nodeData }) => {
     })
 	const clickHandler = (event) => {
 		event.preventDefault();
-		// const body = JSON.stringify(formState)
-        mutation.mutate({body: formState})
+        mutation.mutate()
   	}
     return (
 		<div className="w-100 mx-auto">

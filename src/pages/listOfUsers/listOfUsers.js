@@ -1,32 +1,17 @@
-import { BaseUrl } from "../../utils/baseUrl";
-import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery } from "react-query"
 import classes from "./listOfUsers.module.css"
 import React, { useState, useCallback } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 import '@inovua/reactdatagrid-community/index.css'
 import Modal from 'react-modal'
-import FormModal from "../../utils/formModal";
-import Register from "../registerPage/register";
+import FormModal from "../../utils/formModal"
+import Register from "../registerPage/register"
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-light.css'
-import Button from "../../utils/button";
-import BreadCrumb from "../breadCrumb/breadCrumb";
-const getfetcher = async () => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Authenticate/listOfUsers`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
+import Button from "../../utils/button"
+import BreadCrumb from "../breadCrumb/breadCrumb"
+import useRequest from '../../components/fetchReq'
 const gridStyle = { 
     minHeight: 550 ,
 }
@@ -64,8 +49,11 @@ const ListOfUsers = () => {
     const modalHandler = () => {
         setRegisterIsOpen(!registerIsOpen)
     }
-    const { isLoading, error, data } = useQuery('listOfUsers', getfetcher
-	)
+    const { isLoading, error, data } = useQuery('listOfUsers', useRequest({
+        url:"api/Authenticate/listOfUsers",
+        method:"POST",
+        body:""
+    }))
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const users = data.data;
