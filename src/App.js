@@ -22,14 +22,13 @@ import ContractItems from './pages/contractPage/contractTypes';
 import Hokms from './pages/hokm/hokms';
 import OrgChart from './pages/orgChart/orgChart'
 import ShowSalaryFormulaTypes from './pages/salary/salaryFormulaTypes';
-import ShowSalaryItems from './pages/salary/showSalaryItems';
 import ListOfRoles from './pages/createRole/listOfRoles';
 import AddUser from './pages/addUser/addUser';
-import Date from './pages/datePicker/datePicker';
 import Mosaede from './pages/mosaede/mosaede';
 import ListOfBimeTypes from './pages/bime/bimeTypes';
 import MahalKhedmat from './pages/mahalKhedmat/mahalKhedmat';
 import Maliat from './pages/maliat/maliat';
+import SalaryItems from './pages/salaryItems/salaryItems';
 const queryClient = new QueryClient()
 function App() {
   return (
@@ -59,6 +58,9 @@ function App() {
                 </Route>
                 <Route exact path={'/admin/MainPage/baseInfo'}>
                     <BaseInfo/>
+                </Route>
+                <Route exact path={'/admin/MainPage/salaryItems'}>
+                    <SalaryItems/>
                 </Route>
                 <Route path={'/admin/MainPage/loans'}>
                     <Loan/>

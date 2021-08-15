@@ -2,7 +2,8 @@ import Swal from "sweetalert2";
 import { useQueryClient, useMutation } from "react-query";
 import Button from "../../utils/button";
 import useRequest from "../../components/fetchReq";
-const DelMaliat = ({ id, closeModal }) => {
+
+const DelSalaryItems = ({ id, closeModal }) => {
     const queryClient = useQueryClient()
     // const mutation = useMutation(useRequest({
 	// 	url: `api/Loan/DeleteLoanType?id=${id}`,
@@ -42,8 +43,8 @@ const DelMaliat = ({ id, closeModal }) => {
     return (
 		<div className="w-100 mx-auto">
 			<form onSubmit={(e) => clickHandler(e)}  className={`w-100 d-flex flex-column align-items-center`}>
-				<h3> حذف جدول مالیاتی </h3>
-                <span> ایا از حذف جدول مالیاتی مورد نظر اطمینان دارید ؟ </span>
+				<h3> حذف آیتم حقوق </h3>
+                <span> ایا از حذف آیتم حقوق مورد نظر اطمینان دارید ؟ </span>
 				<div className="col-12 d-flex justify-content-between mt-3">
                     <Button type="submit" sty="secondary" text=" ثبت "/>
                     <Button onclick={closeModal} sty="danger" text=" انصراف "/>
@@ -52,4 +53,4 @@ const DelMaliat = ({ id, closeModal }) => {
 		</div>
     );
 }
-export default DelMaliat;
+export default DelSalaryItems;

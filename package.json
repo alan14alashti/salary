@@ -5,6 +5,7 @@
   "dependencies": {
     "@dabeng/react-orgchart": "^1.0.0",
     "@inovua/reactdatagrid-community": "^4.1.24",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -17,6 +18,8 @@
     "react-query": "^3.19.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-treebeard": "^3.2.4",
+    "react-treeview": "^0.4.7",
     "sweetalert2": "^11.0.20",
     "web-vitals": "^1.1.2"
   },

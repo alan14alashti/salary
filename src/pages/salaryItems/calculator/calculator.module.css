@@ -1,0 +1,73 @@
+.Calculator {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    margin: 1rem;
+}
+.second_calculator {
+    
+    width: 250px;
+    height: 150px;
+    position: relative;
+    margin: 1rem;
+}
+.Button {
+    direction: ltr;
+    background: var(--my-bg-color);
+    display: flex;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.5);
+    height: 25%;
+    min-width: 25%;
+}
+.logic_Button {
+    direction: ltr;
+    background: var(--my-bg-color);
+    display: flex;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: 33.33%;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.5);
+    height: 25%;
+    min-width: 33.33%;
+}
+.Button[data-value="null"], .logic_Button[data-value="null"] {
+    pointer-events: none;
+}
+.Button:hover, .logic_Button:hover {
+    background: var(--my-page-bg-color);
+    cursor: default;
+}
+.Keypad {
+    direction: ltr;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+}
+.Display {
+    direction: ltr;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: var(--my-bg-color);
+    height: 100px;
+    width: 100%;
+    color: var(--mt-text-color);
+    font-size: 1.1rem;
+}
+.show_formula_section {
+    border: 1px solid var(--my-text-second-color);
+}
+.tree_container {
+    width: 300px;
+    border: 1px solid var(--my-text-second-color);
+}

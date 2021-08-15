@@ -10,7 +10,7 @@ const Dashboard = () => {
                 <Link to="/admin/MainPage/hokms" type="button" className={`${classes.fill} text-decoration-none text-center`}> حکم ها </Link>
             </div>
             <div className="">
-                <button type="button" className={classes.fill}> آیتم های حقوقی </button>
+                <Link to="/admin/MainPage/salaryItems" type="button" className={`${classes.fill} text-decoration-none text-center`}> آیتم های حقوق </Link>
             </div>
             <div className="">
                 <button type="button" className={classes.fill}> ورود اطلاعات </button>
