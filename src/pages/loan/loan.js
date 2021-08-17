@@ -1,6 +1,3 @@
-import { useQuery, useMutation } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
@@ -9,39 +6,11 @@ import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-light.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
-import classes from './loan.module.css'
-import { Input } from "../../utils/input"
 import FormModal from "../../utils/formModal"
+import SearchSection from "../../utils/searchSection"
+import { useFindLoanByUser, useListOfUsers } from "../../hooks"
 const gridStyle = { 
     minHeight: 250 ,
-}
-const getUsers = async () => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Authenticate/listOfUsers`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
-const getfetcher = async (id) => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Loan/UserLoans?userId=${id.id}`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
 }
 const Loan = () => {
     const [submitedLoan, setSubmitedLoan] = useState()
@@ -75,22 +44,21 @@ const Loan = () => {
     // const modalHandler = () => {
     //     setModalIsOpen(!modalIsOpen)
     // }
-    const { isLoading, error, data } = useQuery('listOfUsers', getUsers)
+    const { isLoading, error, data } = useListOfUsers()
     const [searched, setSearched] = useState([]);   
     const [userId ,setUserId] = useState()
-    const [message, setMessage] = useState("")
-    const mutation = useMutation(getfetcher, {
-        onSuccess : (res) => {
-            setSearched(res.data)    
-        }
-    })
-    const searchHandler = (e) => {
+    const mutation = useFindLoanByUser(userId)
+    const searchHandler = () => {
+        mutation.mutate(userId, {onSuccess: (res) => {
+            setSearched(res.data)
+        }})
+    }
+    const changeHandler = (e) => {
         data.data.map(item => {
             if(item.userName === e.target.value) {
                 setUserId(item.id)
             }
         })
-        mutation.mutate({id : userId})
     }
    	// if (isLoading) return 'Loading...'
    	// if (error) return 'An error has occurred: ' + error.message
@@ -100,11 +68,13 @@ const Loan = () => {
                
             </FormModal> */}
             <BreadCrumb data={breadCrumb}/>
-            <div className={classes.search_section_container}>
-                <div className={classes.input_container}>
-                    <Input required="true" id="username" name="username" type="text" BlurHandler={searchHandler} label="نام کاربری : "/>
+            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
+                <div className="col-8 col-sm-9 col-md-10">
+                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
                 </div>
-                <span className={classes.message}>{message}</span>
+                <div className="col-4 col-sm-3 col-md-2">
+                    <Button sty="primary" text="جدید"/>
+                </div>
             </div>
             <ReactDataGrid
                 theme="default-light"

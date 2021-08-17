@@ -1,14 +1,8 @@
-import { useQuery } from "react-query"
 import React, { useState, useCallback } from 'react'
-import useRequest from "../../components/fetchReq"
-
+import { useSalaryFormulaTypes } from "../../hooks"
 
 const ShowSalaryFormulaTypes = () => {
-    const { isLoading, error, data } = useQuery('showSalaryFormulaTypes', useRequest({
-		url: 'api/Salary/ShowSalaryFormulaTypes',
-		method: 'POST',
-		body: "",
-	}))
+    const { isLoading, error, data } = useSalaryFormulaTypes()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     console.log(data.data)

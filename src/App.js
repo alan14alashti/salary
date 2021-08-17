@@ -29,6 +29,7 @@ import ListOfBimeTypes from './pages/bime/bimeTypes';
 import MahalKhedmat from './pages/mahalKhedmat/mahalKhedmat';
 import Maliat from './pages/maliat/maliat';
 import SalaryItems from './pages/salaryItems/salaryItems';
+import Mohasebe from './pages/mohasebe/mohasebe';
 const queryClient = new QueryClient()
 function App() {
   return (
@@ -67,6 +68,9 @@ function App() {
                 </Route>
                 <Route path={'/admin/MainPage/mosaede'}>
                     <Mosaede/>
+                </Route>
+                <Route path={'/admin/MainPage/Mohasebe'}>
+                    <Mohasebe/>
                 </Route>
                 <Route path={'/admin/MainPage/baseInfo/loanTypes'}>
                     <ListOfLoanTypes/>
@@ -108,7 +112,7 @@ function App() {
         {/* <ListOfContractDet/> */}
         {/* <ShowSalaryFormulaTypes/> */}
         {/* <ShowSalaryItems/> */}
-        {/* <AddUser/> */}
+        <AddUser/>
         {/* <Date/> */}
     </QueryClientProvider>
   );

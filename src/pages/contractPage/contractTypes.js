@@ -1,5 +1,3 @@
-import { useQuery } from "react-query"
-import useRequest from '../../components/fetchReq'
 import React, { useState, useCallback } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
@@ -12,6 +10,8 @@ import DelContractType from "./delContractType"
 import FormModal from "../../utils/formModal"
 import EditContractItem from "./editContractType"
 import AddContractItem from "./addContratType"
+import { useListOfContractTypes } from "../../hooks"
+
 const gridStyle = { 
     minHeight: 450 ,
 }
@@ -63,11 +63,7 @@ const ContractTypes = () => {
         { name: 'name', header: ' نام حکم ', defaultFlex: 1},
         { name: 'id', header: ' # ', defaultFlex: 1, render: ({ data }) => <div><Button onclick={() => delContract(data)} sty="danger" text="حذف"/> <Button onclick={() => editContract(data)} sty="secondary" text="ویرایش"/></div>},
     ];
-    const { isLoading, error, data } = useQuery('listOfContractDet', useRequest({
-        url:"api/Contract/ListOfContractDetails",
-        method:"POST",
-        body:""
-    }))
+    const { isLoading, error, data } = useListOfContractTypes()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const contracts = data.data

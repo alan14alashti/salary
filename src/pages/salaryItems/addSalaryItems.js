@@ -1,16 +1,10 @@
-import { useState } from "react";
-import Swal from "sweetalert2";
-import { useQueryClient, useMutation } from "react-query";
-import Button from "../../utils/button";
-import { Input, Select } from "../../utils/input";
-import useRequest from "../../components/fetchReq";
-import classes from './salaryItems.module.css'
-import Modal from 'react-modal'
-import ConfirmFormula from "./confirmFormula";
-import FormAddEdit from "./formAddEdit";
-const EditSalaryItems = ({ data, closeModal }) => {
+import { useState } from "react"
+import Swal from "sweetalert2"
+import { useQueryClient, useMutation } from "react-query"
+import useRequest from "../../components/fetchReq"
+import FormAddEdit from './formAddEdit.js'
+const AddSalaryItems = ({ closeModal }) => {
     const options = [{value: 0, title:" اطلاعات "},{value: 1, title:" اضافات "},{value: -1, title:" کسورات "}]
-    console.log(data)
     const queryClient = useQueryClient()
     const [radio, setRadio] = useState(2)
     const changeRadio = (e) => {
@@ -47,13 +41,13 @@ const EditSalaryItems = ({ data, closeModal }) => {
         canSetByUser:true
     })
     const [formState, setFormState] = useState({
-        title: data.title,
-        formula:data.formula,
-        isActive: data.isActive,
-        isTax: data.isTax,
-        isInsurance: data.isInsurance,
-        canUserEditValue: data.canUserEditValue,
-        itemType: data.itemType
+        title: "",
+        formula:null,
+        isActive: false,
+        isTax: false,
+        isInsurance: false,
+        canUserEditValue: false,
+        itemType: 1
     })
     const BlurHandler = (event) => {
         let value = event.target.value
@@ -103,7 +97,7 @@ const EditSalaryItems = ({ data, closeModal }) => {
         })
     }
     const mutation = useMutation(useRequest({
-        url:`api/Salary/EditSalaryItem?id=${data.id}`,
+        url:"api/Salary/AddSalaryItem",
         method:"POST",
         body: JSON.stringify(formState)
     }), {
@@ -154,4 +148,4 @@ const EditSalaryItems = ({ data, closeModal }) => {
         />
     );
 }
-export default EditSalaryItems;
+export default AddSalaryItems;

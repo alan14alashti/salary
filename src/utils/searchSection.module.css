@@ -1,0 +1,10 @@
+.search_section_container {
+    background-color: #fff;
+    padding: 1rem;
+}
+.input_container {
+    width: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

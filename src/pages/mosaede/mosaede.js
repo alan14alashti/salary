@@ -1,6 +1,3 @@
-import { useQuery, useMutation } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
@@ -10,40 +7,13 @@ import '@inovua/reactdatagrid-community/theme/default-light.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import classes from './mosaede.module.css'
-import { Input } from "../../utils/input"
 import FormModal from "../../utils/formModal"
 import Modal from 'react-modal'
 import AddMosaede from "./addMosaede"
+import { useListOfUsers, useFindLoanByUser } from '../../hooks'
+import SearchSection from '../../utils/searchSection'
 const gridStyle = { 
     minHeight: 250 ,
-}
-const getUsers = async () => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Authenticate/listOfUsers`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
-const getfetcher = async (id) => {
-	const token = localStorage.getItem("accessToken")
-    const res =await
-		axios(`${BaseUrl}/api/Loan/UserLoans?userId=${id.id}`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
 }
 const Mosaede = () => {
     const breadCrumb = [
@@ -76,26 +46,25 @@ const Mosaede = () => {
     // const modalHandler = () => {
     //     setModalIsOpen(!modalIsOpen)
     // }
-    const { isLoading, error, data } = useQuery('listOfUsers', getUsers)
-    const [searched, setSearched] = useState([]) 
+    const { isLoading, error, data } = useListOfUsers()
+    const [searched, setSearched] = useState([]);   
     const [userId ,setUserId] = useState()
-    const [message, setMessage] = useState("")
-    const mutation = useMutation(getfetcher, {
-        onSuccess : (res) => {
-            setSearched(res.data)    
-        }
-    })
-    const searchHandler = (e) => {
+    const mutation = useFindLoanByUser(userId)
+    const searchHandler = () => {
+        mutation.mutate(userId, {onSuccess: (res) => {
+            setSearched(res.data)
+        }})
+    }
+    const changeHandler = (e) => {
         data.data.map(item => {
             if(item.userName === e.target.value) {
                 setUserId(item.id)
             }
         })
-        mutation.mutate({id : userId})
     }
     const [modalIsOpen, setModalIsOpen] = useState(false)
-    const closeModal =() => {
-        setModalIsOpen(false)
+    const modalHandler =() => {
+        setModalIsOpen(!modalIsOpen)
     }
    	// if (isLoading) return 'Loading...'
    	// if (error) return 'An error has occurred: ' + error.message
@@ -107,15 +76,15 @@ const Mosaede = () => {
                 className={`${classes.content} col-11 col-xl-7 col-md-9 col-sm-10`}
                 overlayClassName={`${classes.overlay}`}
             >
-                <AddMosaede closeModal={closeModal}/>
+                <AddMosaede closeModal={modalHandler}/>
             </Modal>
             <BreadCrumb data={breadCrumb}/>
-            <div className={classes.search_section_container}>
-                <div className={classes.input_container}>
-                    <Input required="true" id="username" name="username" type="text" BlurHandler={searchHandler} label="نام کاربری : "/>
+            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
+                <div className="col-8 col-sm-9 col-md-10">
+                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
                 </div>
-                <div className="my-3">
-                    <Button sty="primary" text="ساخت کارمند" onclick={() => setModalIsOpen(true)}/>
+                <div className="col-4 col-sm-3 col-md-2">
+                    <Button sty="primary" text="جدید" onclick={modalHandler}/>
                 </div>
             </div>
             <ReactDataGrid

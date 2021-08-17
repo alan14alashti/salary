@@ -5,16 +5,17 @@ import '@inovua/reactdatagrid-community/index.css'
 import '@inovua/reactdatagrid-community/index.css'
 import Modal from 'react-modal'
 import FormModal from "../../utils/formModal"
-import Register from "../registerPage/register"
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-light.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import { useListOfUsers } from "../../hooks"
+import { useWizard } from 'react-use-wizard';
 const gridStyle = { 
     minHeight: 550 ,
 }
-const ListOfUsers = () => {
+const Karkard = () => {
+    const { handleStep, previousStep, nextStep } = useWizard();
     const breadCrumb = [
         {
             text: " ادمین " ,
@@ -61,18 +62,17 @@ const ListOfUsers = () => {
    	if (error) return 'An error has occurred: ' + error.message
     return (
         <div className="">
-        <BreadCrumb data={breadCrumb}/>
         <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
             <div className="col-8 col-sm-9 col-md-10">
                 <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
             </div>
             <div className="col-4 col-sm-3 col-md-2">
-                <Button sty="primary" text="جدید" onclick={modalHandler}/>
+                <Button sty="primary" text="انتخاب فایل" onclick={modalHandler}/>
             </div>
         </div>
-        <FormModal open={registerIsOpen} modalHandler={modalHandler}>
+        {/* <FormModal open={registerIsOpen} modalHandler={modalHandler}>
             <Register/>
-        </FormModal>
+        </FormModal> */}
         <div>
             <ReactDataGrid
                 theme="default-light"
@@ -83,7 +83,11 @@ const ListOfUsers = () => {
                 dataSource={data.data}
             />
         </div>
+        <div className="my-3 d-flex justify-content-between">
+            <Button onclick={() => previousStep()} sty="danger" text=" انتخاب کارمند "/>
+            <Button onclick={() => nextStep()} sty="secondary" text=" محاسبه "/>
+        </div>
         </div>
     );
 }
-export default ListOfUsers;
+export default Karkard;

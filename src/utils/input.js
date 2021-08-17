@@ -1,14 +1,16 @@
 import classes from './input.module.css'
-const Input = ({ type, name, id, BlurHandler, label, required, changeHandler}) => {
+const Input = ({ placeHolder, value, type, name, id, BlurHandler, label, required, changeHandler}) => {
     return (
         <div className="w-100 d-flex align-items-start flex-column">
             {label?
                 <label htmlFor={id} className={classes.form_input_label}>{label}</label>:
                 null
             }
-            <input 
-                onBlur={(e) => BlurHandler(e)}
-                onChange={(e) => BlurHandler(e)}
+            <input  
+                placeholder={placeHolder}
+                value={value}
+                onBlur={BlurHandler ? (e) => BlurHandler(e) : null}
+                onChange={changeHandler? (e) => changeHandler(e) : null}
 				id={id}
 				name={name}
 				type={type}

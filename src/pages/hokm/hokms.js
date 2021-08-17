@@ -1,5 +1,3 @@
-import { useMutation, useQuery } from "react-query"
-import useRequest from '../../components/fetchReq'
 import React, { useState, useCallback } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
@@ -8,10 +6,10 @@ import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-light.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
-import { Input } from "../../utils/input"
+import SearchSection from '../../utils/searchSection'
 import FormModal from "../../utils/formModal"
-import classes from './hokms.module.css'
 import RegisterContract from "./registerContract"
+import { useFindHokmsByUser } from '../../hooks/index' 
 const gridStyle = { 
     minHeight: 550 ,
 }
@@ -40,18 +38,14 @@ const Hokms = () => {
         setModalIsOpen(!modalIsOpen)
     }
     const [clickedUser, setClickedUser] = useState()
-    const mutation = useMutation(useRequest({
-        url:`api/Contract/FindContractByUser?username=${userName}`,
-        method:"POST",
-        body:""
-    }), {
-        onSuccess : (res) => {
-            setSearched(res.data)
-        }
-    })
-    const searchHandler = (e) => {
+    const mutation = useFindHokmsByUser(userName)
+    const changeHandler = (e) => {
         setUserName(e.target.value)
-        mutation.mutate()
+    }
+    const searchHandler = () => {
+        mutation.mutate(userName,{onSuccess: (res) => {
+            setSearched(res.data)
+        }})
     }
     // const registerBtnHandler = (data) => {
     //     setModalIsOpen(!modalIsOpen)
@@ -71,9 +65,12 @@ const Hokms = () => {
                 <RegisterContract clickedUser={clickedUser} formProps={data.data}/>
             </FormModal> */}
             <BreadCrumb data={breadCrumb}/>
-            <div className={classes.search_section_container}>
-                <div className={classes.input_container}>
-                    <Input required="true" id="username" name="username" type="text" BlurHandler={searchHandler} label="نام کاربری : "/>
+            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
+                <div className="col-8 col-sm-9 col-md-10">
+                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
+                </div>
+                <div className="col-4 col-sm-3 col-md-2">
+                    <Button sty="primary" text="جدید" onclick={modalHandler}/>
                 </div>
             </div>
             <ReactDataGrid

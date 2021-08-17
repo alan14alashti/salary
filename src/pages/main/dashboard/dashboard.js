@@ -16,7 +16,7 @@ const Dashboard = () => {
                 <button type="button" className={classes.fill}> ورود اطلاعات </button>
             </div>
             <div className="">
-                <button type="button" className={classes.fill}> محاسبه </button>
+                <Link to="/admin/MainPage/Mohasebe" type="button" className={`${classes.fill} text-decoration-none text-center`}> محاسبه </Link>
             </div>
             <div className="">
                 <Link to="/admin/MainPage/mosaede" type="button" className={`${classes.fill} text-decoration-none text-center`}> مساعده </Link>

@@ -5,7 +5,10 @@ import React, {useState} from 'react';
 const Date = ({label}) => {
     const renderCustomInput = ({ ref }) => (
         <div className="col-12 d-flex align-items-start flex-column">
-            <label htmlFor={label} className={classes.form_input_label}>{label} <i class="m-2 fas fa-calendar-alt"></i></label>
+            {label?
+                <label htmlFor={label} className={classes.form_input_label}>{label} <i class="m-2 fas fa-calendar-alt"></i></label>:
+                null
+            }
             <input
                 name={label}
                 readOnly
@@ -19,7 +22,6 @@ const Date = ({label}) => {
     const [selectedDay, setSelectedDay] = useState(null);
     return (
         <DatePicker
-            className="w-100"
             calendarPopperPosition='auto'
             renderInput={renderCustomInput}
             value={selectedDay}

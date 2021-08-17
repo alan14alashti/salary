@@ -1,17 +1,10 @@
-import { useQuery } from "react-query"
 import React, { useState, useCallback } from 'react'
 import classes from './orgChart.module.css'
 import DefaultChart from "./dechart"
-import useRequest from "../../components/fetchReq"
+import { useOrgChart } from "../../hooks"
 
 const OrgChart = () => {
-    const { isLoading, error, data } = useQuery('OrgChart',useRequest(
-		{
-			url:"api/OrganizationChart/ShowPositions",
-			method:"POST",
-			body:""
-		}
-	))
+    const { isLoading, error, data } = useOrgChart()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const response = data.data

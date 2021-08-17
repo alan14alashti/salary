@@ -1,0 +1,9 @@
+.mohasebe_container {
+    background-color: var(--my-bg-color);
+    z-index: -1;
+}
+.choose_employee_div {
+    border: 1px solid var(--my-text-second-color);
+    min-height: 15rem;
+    width: 45%;
+}

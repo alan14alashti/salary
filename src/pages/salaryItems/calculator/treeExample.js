@@ -54,7 +54,7 @@ const dataa = {
 const Tree = ({handleClick}) => {
 
     const renderTree = (nodes) => (
-        <TreeItem onClick={Array.isArray(nodes.children) ? () => handleClick(nodes.name): null} key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+        <TreeItem onClick={!Array.isArray(nodes.children) ? () => handleClick(nodes.name): null} key={nodes.id} nodeId={nodes.id} label={nodes.name}>
             {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
         </TreeItem>
     );
