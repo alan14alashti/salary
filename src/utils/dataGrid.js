@@ -4,7 +4,6 @@ import '@inovua/reactdatagrid-community/index.css'
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-light.css'
 
-
 const DataGrid = ({gridStyle, columns, data}) => {
   return ( 
     <div>

@@ -6,15 +6,16 @@ body {
   margin: 0;
 }
 :root {
-  --my-danger-color: #FFC04E;
-  --my-primary-color: #0050f0;
-  --my-primary-2-color: #E8E5FF;
+  --my-danger-color: #BA748C;
+  --my-danger-2-color: #ffecf2;
+  --my-primary-color: #215A88;
+  --my-primary-2-color: #5C8CBE;
   --my-secondary-color: #1E8F93;
-  --my-secondary-2-color: #D6F3F4;
+  --my-secondary-2-color: #D8E9E6;
   --my-skip-color:#007C48;
   --my-skip-2-color: #00B578;
   --my-bg-color: #fff;
-  --my-page-bg-color:#FAF8FF;
+  --my-page-bg-color:#EFFAFF;
   --my-text-color: #1B1A27;
   --my-text-second-color: #E1E7EE;
   --my-alt-blue-color: #215a88;

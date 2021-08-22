@@ -1,50 +1,28 @@
 import { Link } from 'react-router-dom';
 import classes from './dashboard.module.css'
 const Dashboard = () => {
+    const dashboardItems = [
+        {title:"کارمندان", icon:"mb-2 fs-1 fas fa-users", to:"/admin/MainPage/karmandan"},
+        {title:"حکم ها ", icon:"mb-2 fs-1 fas fa-file-contract", to:"/admin/MainPage/hokms"},
+        {title:"ایتم های حقوق", icon:"mb-2 fs-1 fas fa-file-invoice-dollar", to:"/admin/MainPage/salaryItems"},
+        {title:"محاسبه", icon:"mb-2 fs-1 fas fa-calculator", to:"/admin/MainPage/Mohasebe"},
+        {title:"مساعده", icon:"mb-2 fs-1 fas fa-money-check", to:"/admin/MainPage/mosaede"},
+        {title:"وام", icon:"mb-2 fs-1 fas fa-money-check", to:"/admin/MainPage/loans"},
+        {title:"اطلاعات پایه", icon:"mb-2 fs-1 fas fa-info-circle", to:"/admin/MainPage/baseInfo"},
+        {title:"کارمند ان", icon:"mb-2 fs-1 fas fa-users", to:"/admin/MainPage/karmandan"},
+        
+    ]
     return (
-        <div className={`${classes.dashboard_container} row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2`}>
-            <div className="">
-                <Link to="/admin/MainPage/karmandan" type="button" className={`${classes.fill} text-decoration-none text-center`}> کارمندان </Link>
-            </div>
-            <div className="">
-                <Link to="/admin/MainPage/hokms" type="button" className={`${classes.fill} text-decoration-none text-center`}> حکم ها </Link>
-            </div>
-            <div className="">
-                <Link to="/admin/MainPage/salaryItems" type="button" className={`${classes.fill} text-decoration-none text-center`}> آیتم های حقوق </Link>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> ورود اطلاعات </button>
-            </div>
-            <div className="">
-                <Link to="/admin/MainPage/Mohasebe" type="button" className={`${classes.fill} text-decoration-none text-center`}> محاسبه </Link>
-            </div>
-            <div className="">
-                <Link to="/admin/MainPage/mosaede" type="button" className={`${classes.fill} text-decoration-none text-center`}> مساعده </Link>
-            </div>
-            <div className="">
-                <Link to="/admin/MainPage/loans" type="button" className={`${classes.fill} text-decoration-none text-center`}> وام </Link>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> گزارش ها </button>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> خروجی ها </button>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> کاربران </button>
-            </div>
-            <div className="">
-                <Link to="/admin/MainPage/baseInfo" type="button" className={`${classes.fill} text-decoration-none text-center`}> اطلاعات پایه </Link>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> درخواست ها </button>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> مرخصی </button>
-            </div>
-            <div className="">
-                <button type="button" className={classes.fill}> ماموریت ها </button>
-            </div>
+        <div className={`${classes.dashboard_container} col-12 row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-5 row-cols-xl-4 gy-4 gx-4`}>
+            {dashboardItems.map(item => (
+                <div className="col">
+                    <Link to={item.to} type="button" className={`${classes.fill} text-decoration-none`}>
+                        <i className={item.icon}></i>
+                        {item.title}
+                    </Link>
+                </div>
+            ))
+            }
         </div>
     );
 }

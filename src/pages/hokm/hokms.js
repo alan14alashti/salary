@@ -37,8 +37,12 @@ const Hokms = () => {
     const mutation = useFindHokmsByUser(userName)
     const changeHandler = (e) => {
         setUserName(e.target.value)
+        mutation.mutate(userName,{onSuccess: (res) => {
+            setSearched(res.data)
+        }})
     }
-    const searchHandler = () => {
+    const searchHandler = (e) => {
+        e.preventDefault()
         mutation.mutate(userName,{onSuccess: (res) => {
             setSearched(res.data)
         }})
@@ -62,9 +66,9 @@ const Hokms = () => {
             </FormModal> */}
             <BreadCrumb data={breadCrumb}/>
             <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
-                <div className="col-8 col-sm-9 col-md-10">
+                <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
                     <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
-                </div>
+                </form>
                 <div className="col-4 col-sm-3 col-md-2">
                     <Button sty="primary" text="جدید" onclick={modalHandler}/>
                 </div>

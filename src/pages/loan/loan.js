@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react'
-import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import FormModal from "../../utils/formModal"
 import SearchSection from "../../utils/searchSection"
 import { useFindLoanByUser, useListOfUsers } from "../../hooks"
+import DataGrid from '../../utils/dataGrid'
 const gridStyle = { 
     minHeight: 250 ,
 }
@@ -41,10 +41,11 @@ const Loan = () => {
     //     setModalIsOpen(!modalIsOpen)
     // }
     const { isLoading, error, data } = useListOfUsers()
-    const [searched, setSearched] = useState([]);   
+    const [searched, setSearched] = useState([])  
     const [userId ,setUserId] = useState()
     const mutation = useFindLoanByUser(userId)
-    const searchHandler = () => {
+    const searchHandler = (e) => {
+        e.preventDefault()
         mutation.mutate(userId, {onSuccess: (res) => {
             setSearched(res.data)
         }})
@@ -65,9 +66,9 @@ const Loan = () => {
             </FormModal> */}
             <BreadCrumb data={breadCrumb}/>
             <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
-                <div className="col-8 col-sm-9 col-md-10">
-                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
-                </div>
+                <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
+                    <SearchSection searchHandler={searchHandler} changeHandler={changeHandler} name="userName"/>
+                </form>
                 <div className="col-4 col-sm-3 col-md-2">
                     <Button sty="primary" text="جدید"/>
                 </div>

@@ -24,11 +24,11 @@ const MainPage = () => {
         <>
         <div className="container-fluid">
             <BreadCrumb data={breadCrumb}/>
-            <div className="row d-flex align-items-start g-2 g-sm-4 ">
+            <div className="row">
                 {/* <div className="col-xxl-1 col-lg-2 col-3 ">
                     <DrawerMenue clickHandler={clickHandler} data={data}/>
                 </div> */}
-                <div className="col-xxl-12 col-lg-11 col-10 ">
+                <div className="col-12">
                     <Dashboard/>
                 </div>
             </div>
