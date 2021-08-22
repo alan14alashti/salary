@@ -1,30 +1,10 @@
 import { useQuery, useMutation } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
 import Button from "../../../utils/button"
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from "../../../utils/dataGrid"
 const gridStyle = { 
     minHeight: 250 ,
 }
-// const getUsers = async () => {
-// 	const token = localStorage.getItem("accessToken")
-//     const res =await 
-// 		axios(`${BaseUrl}/api/Authenticate/listOfUsers`, {
-// 		   method:'POST',
-// 		   headers: {
-// 			   "Content-Type": "application/json"	,
-// 			   "accept": "*/*",
-// 			   'Authorization':`Bearer ${token}`
-// 		   },                                   
-// 		   data : ""
-// 	    })
-//     return res
-// }
 
 const Tamas = () => {
     const columns =  [
@@ -53,14 +33,7 @@ const Tamas = () => {
                 <div className="mb-3">
                     <Button text="اضافه کردن شماره تماس" sty="primary"/>
                 </div>
-                <ReactDataGrid
-                    theme="default-light"
-                    idProperty="id"
-                    rtl={true}
-                    style={gridStyle}
-                    columns={columns}
-                    dataSource={phoneNumbers}
-                />
+                <DataGrid data={phoneNumbers} columns={columns} gridStyle={gridStyle}/>
             </div>
         </div>
     );

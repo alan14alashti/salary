@@ -5,11 +5,7 @@ import React, { useState, useCallback } from 'react'
 import Button from "../../utils/button"
 import BreadCrumb from '../breadCrumb/breadCrumb'
 import Modal from 'react-modal'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from "../../utils/dataGrid"
 import classes from './maliat.module.css'
 import DelMaliat from "./delMaliat"
 import EditMaliat from "./editMaliat"
@@ -92,14 +88,7 @@ const Maliat = () => {
                 <div className="mb-3">
                     <Button onclick={addModalHandler} text="اضافه کردن جدول مالیاتی" sty="primary"/>
                 </div>
-                <ReactDataGrid
-                    theme="default-light"
-                    idProperty="id"
-                    rtl={true}
-                    style={gridStyle}
-                    columns={columns}
-                    dataSource={maliatJadval}
-                />
+                <DataGrid data={maliatJadval} columns={columns} gridStyle={gridStyle}/>
             </div>
         </div>
     );

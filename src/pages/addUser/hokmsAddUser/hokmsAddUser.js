@@ -2,11 +2,7 @@ import { useMutation, useQuery } from "react-query"
 import axios from "axios"
 import { BaseUrl } from "../../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from "../../../utils/dataGrid"
 import Button from "../../../utils/button"
 import { Input } from "../../../utils/input"
 import FormModal from "../../../utils/formModal"
@@ -38,14 +34,7 @@ const HokmsAddUser = ({ userName }) => {
     const { isLoading, error, data } = useQuery(['hokmByUser',userName], getfetcher)
     if (isLoading) return "Loading..."
     return (
-        <ReactDataGrid
-            theme="default-light"
-            idProperty="id"
-            rtl={true}
-            style={gridStyle}
-            columns={columns}
-            dataSource={data.data ? data.data : []}
-        />
+        <DataGrid data={data.data ? data.data : []} columns={columns} gridStyle={gridStyle}/>
     );
 }
 export default HokmsAddUser;

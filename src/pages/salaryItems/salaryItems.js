@@ -2,11 +2,7 @@ import React, { useState } from 'react'
 import Button from "../../utils/button"
 import BreadCrumb from '../breadCrumb/breadCrumb'
 import Modal from 'react-modal'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from '../../utils/dataGrid'
 import classes from './salaryItems.module.css'
 import DelSalaryItems from "./delSalaryItems"
 import EditSalaryItems from "./editSalaryItems"
@@ -83,14 +79,7 @@ const SalaryItems = () => {
                 <div className="mb-3">
                     <Button onclick={addModalHandler} text="اضافه کردن آیتم حقوق" sty="primary"/>
                 </div>
-                <ReactDataGrid
-                    theme="default-light"
-                    idProperty="id"
-                    rtl={true}
-                    style={gridStyle}
-                    columns={columns}
-                    dataSource={data.data}
-                />
+                <DataGrid data={data.data} columns={columns} gridStyle={gridStyle}/>
             </div>
         </div>
     );

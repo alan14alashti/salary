@@ -1,10 +1,6 @@
 import Modal from 'react-modal'
 import React, { useState, useCallback } from 'react'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
 import AddLoanTypes from "./addLoanType"
 import classes from './loanTypes.module.css'
@@ -88,14 +84,7 @@ const ListOfLoanTypes = () => {
 				<div className="mb-3">
 					<Button text="اضافه کردن وام" onclick={addModalHandler} sty="primary"/>
 				</div>
-				<ReactDataGrid
-					theme="default-light"
-					idProperty="id"
-					rtl={true}
-					style={gridStyle}
-					columns={columns}
-					dataSource={data.data}
-				/>
+				<DataGrid data={data.data} columns={columns} gridStyle={gridStyle}/>
 			</div>
         </div>
     );

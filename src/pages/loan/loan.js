@@ -1,9 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import FormModal from "../../utils/formModal"
@@ -76,14 +72,7 @@ const Loan = () => {
                     <Button sty="primary" text="جدید"/>
                 </div>
             </div>
-            <ReactDataGrid
-                theme="default-light"
-                idProperty="id"
-                rtl={true}
-                style={gridStyle}
-                columns={columns}
-                dataSource={searched}
-            />
+            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
         </div>
     );
 }

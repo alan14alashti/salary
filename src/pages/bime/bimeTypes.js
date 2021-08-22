@@ -1,13 +1,7 @@
 import { useQuery } from "react-query"
-import axios from "axios"
 import Modal from 'react-modal'
-import { BaseUrl } from "../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from "../../utils/dataGrid"
 import Button from "../../utils/button"
 import classes from './bimeTypes.module.css'
 import BreadCrumb from "../breadCrumb/breadCrumb"
@@ -15,20 +9,7 @@ import AddBimeTypes from "./addBime"
 const gridStyle = { 
     minHeight: 250 ,
 }
-// const getfetcher = async () => {
-// 	const token = localStorage.getItem("accessToken")
-//     const res =await 
-// 		axios(`${BaseUrl}/api/Loan/ListOfLoanTypes`, {
-// 		   method:'POST',
-// 		   headers: {
-// 			   "Content-Type": "application/json"	,
-// 			   "accept": "*/*",
-// 			   'Authorization':`Bearer ${token}`
-// 		   },                                   
-// 		   data : ""
-// 	    })
-//     return res
-// }
+
 const ListOfBimeTypes = () => {
 	const [registerIsOpen, setRegisterIsOpen] = useState(false);
 	const modalHandler = () => {
@@ -88,14 +69,7 @@ const ListOfBimeTypes = () => {
 				<div className="mb-3">
 					<Button text="اضافه کردن بیمه" onclick={modalHandler} sty="primary"/>
 				</div>
-				<ReactDataGrid
-					theme="default-light"
-					idProperty="id"
-					rtl={true}
-					style={gridStyle}
-					columns={columns}
-					dataSource={bimeTypes}
-				/>
+				<DataGrid data={bimeTypes} columns={columns} gridStyle={gridStyle}/>
 			</div>
         </div>
     );

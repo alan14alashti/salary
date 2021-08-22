@@ -11,6 +11,7 @@ import '@inovua/reactdatagrid-community/theme/default-light.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import { useListOfUsers } from "../../hooks"
+import DataGrid from '../../utils/dataGrid'
 const gridStyle = { 
     minHeight: 550 ,
 }
@@ -73,16 +74,7 @@ const ListOfUsers = () => {
         <FormModal open={registerIsOpen} modalHandler={modalHandler}>
             <Register/>
         </FormModal>
-        <div>
-            <ReactDataGrid
-                theme="default-light"
-                idProperty="id"
-                rtl={true}
-                style={gridStyle}
-                columns={columns}
-                dataSource={data.data}
-            />
-        </div>
+        <DataGrid data={data.data} columns={columns} gridStyle={gridStyle}/>
         </div>
     );
 }

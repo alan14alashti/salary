@@ -19,7 +19,7 @@ const FormAddEdit = ({modalHandler, changeRadio, radio, formState, options, Blur
                 <div className="w-100 col-12 row row-cols-1 row-cols-xl-3 row-cols-md-2 gx-3 gy-2">
                     <div className="col">
                         <Input
-                            value={formState.title}
+                            
                             required="true"
                             label=" نام آیتم "
                             BlurHandler={BlurHandler}

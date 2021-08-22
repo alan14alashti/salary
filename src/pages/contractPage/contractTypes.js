@@ -1,9 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
 import DelContractType from "./delContractType"
@@ -82,14 +78,7 @@ const ContractTypes = () => {
                 <div className="mb-3">
                     <Button text="اضافه کردن حکم" onclick={addContract} sty="primary"/>
                 </div>
-                <ReactDataGrid
-                    theme="default-light"
-                    idProperty="id"
-                    rtl={true}
-                    style={gridStyle}
-                    columns={columns}
-                    dataSource={contracts}
-                />
+                <DataGrid data={contracts} columns={columns} gridStyle={gridStyle}/>
 			</div>
         </div>
     );
