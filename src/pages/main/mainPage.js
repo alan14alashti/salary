@@ -3,6 +3,7 @@ import Dashboard from './dashboard/dashboard'
 import DrawerMenue from './drawerMenue'
 import React from "react"
 import BreadCrumb from '../breadCrumb/breadCrumb'
+import SideNav from '../sideNav/sideNav'
 const MainPage = () => {
     const [clickedItem, setClickedItem] = useState(0);
     const clickHandler = (index) => {
@@ -25,9 +26,6 @@ const MainPage = () => {
         <div className="container-fluid">
             <BreadCrumb data={breadCrumb}/>
             <div className="row">
-                {/* <div className="col-xxl-1 col-lg-2 col-3 ">
-                    <DrawerMenue clickHandler={clickHandler} data={data}/>
-                </div> */}
                 <div className="col-12">
                     <Dashboard/>
                 </div>

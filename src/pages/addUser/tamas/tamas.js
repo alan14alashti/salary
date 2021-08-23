@@ -6,7 +6,7 @@ const gridStyle = {
     minHeight: 250 ,
 }
 
-const Tamas = () => {
+const Tamas = ({BlurHandler}) => {
     const columns =  [
         { name: 'title', header: ' عنوان ', defaultFlex:1},
 		{ name: 'phoneNumber', header: ' شماره ', defaultFlex:1},

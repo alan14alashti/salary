@@ -1,13 +1,15 @@
 .topNav_container {
-    background-color: var(--my-bg-color);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 8px -1px, rgba(0, 0, 0, 0.06) 0px 4px 6px -1px;
+    background: rgb(217,243,255);
+    background: radial-gradient(circle, rgba(217,243,255,1) 0%, rgba(92,140,190,1) 81%);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: .25rem 1rem;  
-    color: var(--my-primary-color);
+    /* color: var(--my-primary-color); */
+    color: #fff;
     font-size: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: .25rem;
 }
 .bar_menue_icon_container i {
     cursor: pointer;

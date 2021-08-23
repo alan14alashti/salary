@@ -59,22 +59,22 @@ const ConfirmFormula = ({closeModal, onConfirm}) => {
                     <div className={classes.second_calculator}>
                         <CalKeypad>
 
-                            <LogicCalButton onClick={handleClick} label=" پس " value= " پس "/>
+                            <LogicCalButton onClick={handleClick} label=" پس " value= "[پس]"/>
                             <LogicCalButton onClick={handleClick} label=" = " value=" = "/>
-                            <LogicCalButton onClick={handleClick} label=" یا " value=" یا "/>
+                            <LogicCalButton onClick={handleClick} label=" یا " value="[یا]"/>
                             
-                            <LogicCalButton onClick={handleClick} label=" آنگاه " value=" آنگاه "/>
-                            <LogicCalButton onClick={handleClick} label=" بزرگتر " value=" بزرگتر "/>
-                            <LogicCalButton onClick={handleClick} label=" و " value=" و " />
+                            <LogicCalButton onClick={handleClick} label=" آنگاه " value="[آنگاه]"/>
+                            <LogicCalButton onClick={handleClick} label=" بزرگتر " value="[بزرگتر]"/>
+                            <LogicCalButton onClick={handleClick} label=" و " value="[و]" />
                             {/* <CalButton onClick={handleClick} label="." value="." />
 
                             <CalButton onClick={handleClick} label="x" value="*" /> */}
-                            <LogicCalButton onClick={handleClick} label=" اگر " value=" اگر "/>
-                            <LogicCalButton onClick={handleClick} label=" کوچکتر " value=" کوچکتر "/>
-                            <LogicCalButton onClick={handleClick} label=" مخالف " value=" مخالف "/>
+                            <LogicCalButton onClick={handleClick} label=" اگر " value="[اگر]"/>
+                            <LogicCalButton onClick={handleClick} label=" کوچکتر " value="[کوچکتر]"/>
+                            <LogicCalButton onClick={handleClick} label=" مخالف " value="[مخالف]"/>
 
-                            <LogicCalButton onClick={handleClick} label="[" value=" [ " />
-                            <LogicCalButton onClick={handleClick} label="]" value=" ] " />
+                            <LogicCalButton onClick={handleClick} label=")" value=" ) " />
+                            <LogicCalButton onClick={handleClick} label="(" value=" ( " />
                         </CalKeypad>
                     </div>
                     <Tree handleClick={handleClick}/>

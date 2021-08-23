@@ -8,7 +8,7 @@ const gridStyle = {
     minHeight: 250 ,
 }
 
-const PhysicInfo = () => {
+const PhysicInfo = ({BlurHandler}) => {
     const columns =  [
         { name: 'title', header: ' عنوان ', defaultFlex:1},
 		{ name: 'value', header: ' مقدار ', defaultFlex:1},

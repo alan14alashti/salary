@@ -19,7 +19,7 @@
     background-color: var(--my-primary-2-color);
     width: 100%;
     padding: 1.1rem 0rem;
-    color: #F8F9FF;
+    color: var(--my-bg-color);
     outline: 0;
     border-radius: 2.5px;
     cursor: pointer;

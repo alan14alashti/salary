@@ -18,9 +18,6 @@ import HokmsAddUser from './hokmsAddUser/hokmsAddUser'
 import Madarek from './madarek/madarek'
 
 const AddUser = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    } 
     const [modalIsOpen, setModalIsOpen] = useState(true)
     const closeModal =() => {
         setModalIsOpen(false)
@@ -29,7 +26,33 @@ const AddUser = () => {
     const tabClickHandler = (index) => {
         setClickedTab(index)
     }
-    console.log(clickedTab)
+    const [formState, setFormState] = useState({
+        personalNum: null,
+        firstName: '',
+        lastName: '',
+        codeMeli:'',
+        moreInfo: []
+    })
+    const commonInfoHandler = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+        setFormState({
+            ...formState,
+            [name]: value 
+        })
+    } 
+    const moreInfoHandler = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+        setFormState({
+            ...formState,
+            moreInfo: [
+                ...formState.moreInfo,
+                {title: name, value:value},
+            ]
+        })
+    }
+    console.log(formState)
     return (
         <Modal
 			isOpen={modalIsOpen}
@@ -38,20 +61,20 @@ const AddUser = () => {
            	overlayClassName={`${classes.overlay}`}
 		>
         <div className={classes.add_user_container}>
-            <CommonDiv/>
+            <CommonDiv BlurHandler={commonInfoHandler}/>
             <TabsContainer clickedTab={clickedTab} tabClickHandler={tabClickHandler}/>
             <div className={`${classes.content_container}`}>
                 {
-                    clickedTab === 0 ? <EmployeeInfo/>:
-                    clickedTab === 8 ? <HokmsAddUser userName="admin"/>:
-                    clickedTab === 9 ? <LoginInfo/>: 
-                    clickedTab === 2 ? <Tamas/>:
-                    clickedTab === 3 ? <EducationInfo/>:
-                    clickedTab === 4 ? <PhysicInfo/>:
-                    clickedTab === 1 ? <PrivateInfo/>:
-                    clickedTab === 5 ? <Bime/>:
-                    clickedTab ===  6 ? <Hesabdary/>:
-                    clickedTab === 7 ? <Madarek/>:
+                    clickedTab === 0 ? <EmployeeInfo BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 8 ? <HokmsAddUser userName="admin" BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 9 ? <LoginInfo BlurHandler={moreInfoHandler}/>: 
+                    clickedTab === 2 ? <Tamas BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 3 ? <EducationInfo BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 4 ? <PhysicInfo BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 1 ? <PrivateInfo BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 5 ? <Bime BlurHandler={moreInfoHandler}/>:
+                    clickedTab ===  6 ? <Hesabdary BlurHandler={moreInfoHandler}/>:
+                    clickedTab === 7 ? <Madarek BlurHandler={moreInfoHandler}/>:
                     null
                 }
             </div>

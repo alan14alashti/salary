@@ -23,7 +23,7 @@ const getfetcher = async (userName) => {
 	    })
     return res
 }
-const HokmsAddUser = ({ userName }) => { 
+const HokmsAddUser = ({ userName, BlurHandler }) => { 
     const columns =  [
 		{ name: 'subimssionDate', header: ' تاریخ ثبت ', defaultFlex:1 },
 		{ name: 'effectiveDate', header: ' تاریخ اثر گذاری ', defaultFlex:1 },

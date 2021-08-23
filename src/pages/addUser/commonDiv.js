@@ -1,9 +1,6 @@
 import classes from './addUser.module.css'
 import { Input } from '../../utils/input'
-const CommonDiv = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    }
+const CommonDiv = ({BlurHandler}) => {
     return (
         <div className="col-12 mb-5">
             <div className={`${classes.common_div_add_user} col-3 row row-cols-1`}>
@@ -20,7 +17,7 @@ const CommonDiv = () => {
                     label=" نام "
                     BlurHandler={BlurHandler}
                     id="name"
-                    name="name"
+                    name="firstName"
                     type="text"
                 />
                 <Input
@@ -29,7 +26,7 @@ const CommonDiv = () => {
                     BlurHandler={BlurHandler}
                     id="lastName"
                     name="lastName"
-                    type="password"
+                    type="text"
                 />
                 <Input
                     required="true"

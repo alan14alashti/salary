@@ -6,7 +6,7 @@ const gridStyle = {
     minHeight: 250 ,
 }
 
-const Madarek = () => {
+const Madarek = ({BlurHandler}) => {
     const columns =  [
         { name: 'title', header: ' عنوان ', defaultFlex:1},
 		{header: ' حذف ', defaultFlex:1 ,render:({data}) => <Button text=" حذف " sty="danger"/>},

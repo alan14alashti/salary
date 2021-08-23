@@ -16,10 +16,7 @@ const getfetcher = async () => {
 	    })
     return res
 }
-const LoginInfo = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    }
+const LoginInfo = ({BlurHandler}) => {
     const { isLoading, error, data } = useQuery('listOfRoles', getfetcher)
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message

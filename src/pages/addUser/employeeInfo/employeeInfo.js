@@ -1,9 +1,6 @@
 import Date from "../../datePicker/datePicker"
 import { Input, Select } from "../../../utils/input"
-const EmployeeInfo = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    }
+const EmployeeInfo = ({BlurHandler}) => {
     return (
         <div className="container">
         <div className="px-5 row row-cols-md-2 row-cols-1 gx-5 gy-3">

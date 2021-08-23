@@ -1,9 +1,6 @@
 import { Input ,Select } from '../../../utils/input'
 import Date from '../../datePicker/datePicker'
-const PrivateInfo = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    }
+const PrivateInfo = ({BlurHandler}) => {
     const roles = [{value: 1, title:" نر "}, {value: 0, title:" ماده "}]
     return (
         <div className="container">

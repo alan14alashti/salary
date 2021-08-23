@@ -1,0 +1,28 @@
+.side_nav_container {
+    width: 6rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.link {
+    margin: .25rem 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: .9rem;
+    width: 100%;
+    color: var(--my-primary-2-color);
+    cursor: pointer;
+}
+.active {
+    color: var(--my-primary-color);
+}
+.link i {
+    font-size: 2rem;
+}
+.link:hover {
+    color: var(--my-primary-color);
+}

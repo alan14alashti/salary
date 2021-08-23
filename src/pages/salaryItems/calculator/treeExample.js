@@ -6,46 +6,56 @@ import classes from './calculator.module.css'
 const data = {
     id: 'root',
     name: ' اطلاعات کارمند ',
+    value:' [اطلاعات کارمند] ',
     children: [
         {
             id: '1',
             name: ' تعداد اولاد ',
+            value:' [تعداد اولاد] ',
         }
     ],
 };
 const dataa = {
     id: 'root',
     name: ' کارکرد ',
+    value:' [کارکرد] ',
     children: [
         {
             id: '1',
             name: ' اضافه کار ',
+            value:' [اضافه کار] ',
         },
         {
             id: '2',
             name: ' تاخیر ',
+            value:' [تاخیر] ',
         },
         {
             id: '3',
             name:  ' کسرکار ',
+            value:' [کسر کار] '
         },
         {
             id: '4',
             name: ' کارکرد تحصیلی ',
+            value:' [کارکرد تحصیلی] '
         },
         {
             id: '5',
             name: ' کارکرد ',
+            value:' [کارکرد] '
         }
     ],
     };
     const dataaa = {
         id: 'root',
+        value:' [حکم] ',
         name: ' حکم ',
         children: [
         {
             id: '1',
             name: ' حق اولاد ',
+            value:' [حق اولاد] '
         }
         ],
     };
@@ -54,7 +64,7 @@ const dataa = {
 const Tree = ({handleClick}) => {
 
     const renderTree = (nodes) => (
-        <TreeItem onClick={!Array.isArray(nodes.children) ? () => handleClick(nodes.name): null} key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+        <TreeItem onClick={!Array.isArray(nodes.children) ? () => handleClick(nodes.value): null} key={nodes.id} nodeId={nodes.id} label={nodes.name}>
             {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
         </TreeItem>
     );

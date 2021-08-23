@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import classes from './dashboard.module.css'
 const Dashboard = () => {
     const dashboardItems = [
-        {title:"کارمندان", icon:"mb-2 fs-1 fas fa-users", to:"/admin/MainPage/karmandan"},
-        {title:"حکم ها ", icon:"mb-2 fs-1 fas fa-file-contract", to:"/admin/MainPage/hokms"},
-        {title:"ایتم های حقوق", icon:"mb-2 fs-1 fas fa-file-invoice-dollar", to:"/admin/MainPage/salaryItems"},
-        {title:"محاسبه", icon:"mb-2 fs-1 fas fa-calculator", to:"/admin/MainPage/Mohasebe"},
-        {title:"مساعده", icon:"mb-2 fs-1 fas fa-money-check", to:"/admin/MainPage/mosaede"},
-        {title:"وام", icon:"mb-2 fs-1 fas fa-money-check", to:"/admin/MainPage/loans"},
-        {title:"اطلاعات پایه", icon:"mb-2 fs-1 fas fa-info-circle", to:"/admin/MainPage/baseInfo"},
-        {title:"کارمند ان", icon:"mb-2 fs-1 fas fa-users", to:"/admin/MainPage/karmandan"},
+        {title:"کارمندان", icon:"mb-2 fs-1 fas fa-users", to:"/MainPage/karmandan"},
+        {title:"حکم ها ", icon:"mb-2 fs-1 fas fa-file-contract", to:"/MainPage/hokms"},
+        {title:"ایتم های حقوق", icon:"mb-2 fs-1 fas fa-file-invoice-dollar", to:"/MainPage/salaryItems"},
+        {title:"محاسبه", icon:"mb-2 fs-1 fas fa-calculator", to:"/MainPage/Mohasebe"},
+        {title:"مساعده", icon:"mb-2 fs-1 fas fa-money-check", to:"/MainPage/mosaede"},
+        {title:"وام", icon:"mb-2 fs-1 fas fa-money-check", to:"/MainPage/loans"},
+        {title:"اطلاعات پایه", icon:"mb-2 fs-1 fas fa-info-circle", to:"/MainPage/baseInfo"},
+        {title:"کارمند ان", icon:"mb-2 fs-1 fas fa-users", to:"/MainPage/karmandan"},
         
     ]
     return (

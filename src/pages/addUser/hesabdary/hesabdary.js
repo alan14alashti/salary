@@ -1,8 +1,6 @@
 import { Input, Select } from "../../../utils/input";
-const Hesabdary = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    }
+const Hesabdary = ({BlurHandler}) => {
+
     return (
         <div className="container">
         <div className="px-5 row row-cols-xl-3 row-cols-md-2 row-cols-1 gx-5 gy-3 ">

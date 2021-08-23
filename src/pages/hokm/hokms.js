@@ -6,6 +6,7 @@ import SearchSection from '../../utils/searchSection'
 import FormModal from "../../utils/formModal"
 import RegisterContract from "./registerContract"
 import { useFindHokmsByUser } from '../../hooks/index' 
+import SideNav from '../sideNav/sideNav'
 const gridStyle = { 
     minHeight: 550 ,
 }
@@ -59,22 +60,31 @@ const Hokms = () => {
         { name: 'executeDate', header: ' تاریخ اجرا  ', defaultFlex:1 },
         { header: "#", defaultFlex:1, render: ({ data }) => <div><Button sty="secondary" text=" انتصاب حکم "/></div>}
     ];
-    return ( 
-        <div>
-            {/* <FormModal open={modalIsOpen} modalHandler={modalHandler}>
-                <RegisterContract clickedUser={clickedUser} formProps={data.data}/>
-            </FormModal> */}
-            <BreadCrumb data={breadCrumb}/>
-            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
-                <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
-                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
-                </form>
-                <div className="col-4 col-sm-3 col-md-2">
-                    <Button sty="primary" text="جدید" onclick={modalHandler}/>
+    return (
+            <div className="d-flex h-100">
+                {/* <FormModal open={modalIsOpen} modalHandler={modalHandler}>
+                    <RegisterContract clickedUser={clickedUser} formProps={data.data}/>
+                </FormModal> */}
+                {/* <BreadCrumb data={breadCrumb}/> */}
+                {true ? <SideNav active="حکم ها"/> : null}
+                <div className="container-fluid">
+                    <div className="d-flex justify-content-stretch bg-white py-3">
+                        <div className="col-12">
+                            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
+                                <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
+                                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
+                                </form>
+                                <div className="col-4 col-sm-3 col-md-2">
+                                    <Button sty="primary" text="جدید" onclick={modalHandler}/>
+                                </div>
+                            </div>
+                            <div>
+                                <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
-        </div>
     );
 }
 export default Hokms;

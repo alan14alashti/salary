@@ -5,6 +5,7 @@ import FormModal from "../../utils/formModal"
 import SearchSection from "../../utils/searchSection"
 import { useFindLoanByUser, useListOfUsers } from "../../hooks"
 import DataGrid from '../../utils/dataGrid'
+import SideNav from '../sideNav/sideNav'
 const gridStyle = { 
     minHeight: 250 ,
 }
@@ -60,20 +61,29 @@ const Loan = () => {
    	// if (isLoading) return 'Loading...'
    	// if (error) return 'An error has occurred: ' + error.message
     return ( 
-        <div>
+        <div className="d-flex h-100">
+            {true ? <SideNav active="وام"/> : null}
+            <div className="container-fluid">
             {/* <FormModal open={modalIsOpen} modalHandler={modalHandler}>
                
             </FormModal> */}
-            <BreadCrumb data={breadCrumb}/>
-            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
-                <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
-                    <SearchSection searchHandler={searchHandler} changeHandler={changeHandler} name="userName"/>
-                </form>
-                <div className="col-4 col-sm-3 col-md-2">
-                    <Button sty="primary" text="جدید"/>
+            {/* <BreadCrumb data={breadCrumb}/> */}
+                <div className="d-flex justify-content-stretch bg-white py-3">
+                    <div className="col-12">
+                        <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
+                            <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
+                                <SearchSection searchHandler={searchHandler} changeHandler={changeHandler} name="userName"/>
+                            </form>
+                            <div className="col-4 col-sm-3 col-md-2">
+                                <Button sty="primary" text="جدید"/>
+                            </div>
+                        </div>
+                        <div>
+                            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
         </div>
     );
 }

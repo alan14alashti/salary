@@ -7,7 +7,7 @@ const gridStyle = {
     minHeight: 250 ,
 }
 
-const EducationInfo = () => {
+const EducationInfo = ({BlurHandler}) => {
     const columns =  [
         { name: 'title', header: ' عنوان ', defaultFlex:1},
 		{ name: 'date', header: ' تاریخ ', defaultFlex:1},

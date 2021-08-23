@@ -8,27 +8,28 @@ import Modal from 'react-modal'
 import AddMosaede from "./addMosaede"
 import { useListOfUsers, useFindLoanByUser } from '../../hooks'
 import SearchSection from '../../utils/searchSection'
+import SideNav from '../sideNav/sideNav'
 const gridStyle = { 
     minHeight: 250 ,
 }
 const Mosaede = () => {
-    const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " مساعده " ,
-            link: "/admin/MainPage",
-            active: 1
-        }
-    ]
+    // const breadCrumb = [
+    //     {
+    //         text: " ادمین " ,
+    //         link: "/admin",
+    //         active: 0
+    //     },
+    //     {
+    //         text: " داشبورد " ,
+    //         link: "/admin/MainPage",
+    //         active: 0
+    //     },
+    //     {
+    //         text: " مساعده " ,
+    //         link: "/admin/MainPage",
+    //         active: 1
+    //     }
+    // ]
 	const columns =  [
         { name: 'userName', header: ' نام کاربری ', defaultFlex:1},
 		{ name: 'amount', header: ' مقدار ', defaultFlex:1},
@@ -46,7 +47,8 @@ const Mosaede = () => {
     const [searched, setSearched] = useState([]);   
     const [userId ,setUserId] = useState()
     const mutation = useFindLoanByUser(userId)
-    const searchHandler = () => {
+    const searchHandler = (e) => {
+        e.preventDefault()
         mutation.mutate(userId, {onSuccess: (res) => {
             setSearched(res.data)
         }})
@@ -65,25 +67,34 @@ const Mosaede = () => {
    	// if (isLoading) return 'Loading...'
    	// if (error) return 'An error has occurred: ' + error.message
     return ( 
-        <div>
-            <Modal
-                isOpen={modalIsOpen}
-                ariaHideApp={false}
-                className={`${classes.content} col-11 col-xl-7 col-md-9 col-sm-10`}
-                overlayClassName={`${classes.overlay}`}
-            >
-                <AddMosaede closeModal={modalHandler}/>
-            </Modal>
-            <BreadCrumb data={breadCrumb}/>
-            <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
-                <div className="col-8 col-sm-9 col-md-10">
-                    <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
-                </div>
-                <div className="col-4 col-sm-3 col-md-2">
-                    <Button sty="primary" text="جدید" onclick={modalHandler}/>
+        <div className="d-flex h-100">
+            {true ? <SideNav active="مساعده"/> : null}
+            <div className="container-fluid">
+                <Modal
+                    isOpen={modalIsOpen}
+                    ariaHideApp={false}
+                    className={`${classes.content} col-11 col-xl-7 col-md-9 col-sm-10`}
+                    overlayClassName={`${classes.overlay}`}
+                >
+                    <AddMosaede closeModal={modalHandler}/>
+                </Modal>
+                {/* <BreadCrumb data={breadCrumb}/> */}
+                <div className="d-flex justify-content-stretch bg-white py-3">
+                    <div className="col-12">
+                        <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
+                            <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
+                                <SearchSection searchHandler={searchHandler} changeHandler={changeHandler} name="userName"/>
+                            </form>
+                            <div className="col-4 col-sm-3 col-md-2">
+                                <Button sty="primary" text="جدید" onclick={modalHandler}/>
+                            </div>
+                        </div>
+                        <div>
+                            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
         </div>
     );
 }

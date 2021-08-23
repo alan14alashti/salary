@@ -1,8 +1,5 @@
 import { Input } from "../../../utils/input";
-const Bime = () => {
-    const BlurHandler = (event) => {
-        console.log(event.target.value)
-    }
+const Bime = ({BlurHandler}) => {
     return (
         <div className="container">
         <div className="col-xl-3 col-lg-5 col-md-7 col-sm-9 col-11 row row-cols-1">
