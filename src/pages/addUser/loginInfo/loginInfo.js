@@ -1,26 +1,19 @@
 import { Input ,Select } from '../../../utils/input'
-import { useQuery } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../../utils/baseUrl"
-const getfetcher = async () => {
-	const token = localStorage.getItem("accessToken")
-    const res =await 
-		axios(`${BaseUrl}/api/Authenticate/listOfRoles`, {
-		   method:'POST',
-		   headers: {
-			   "Content-Type": "application/json"	,
-			   "accept": "*/*",
-			   'Authorization':`Bearer ${token}`
-		   },                                   
-		   data : ""
-	    })
-    return res
-}
-const LoginInfo = ({BlurHandler}) => {
-    const { isLoading, error, data } = useQuery('listOfRoles', getfetcher)
+import { useState } from 'react'
+import { useListOfRoles } from '../../../hooks'
+
+
+const LoginInfo = ({formState, moreInfoHandler, commonInfoHandler}) => {
+    const [pass, setPass] = useState(null)
+    const [isLogin, setIsLogin] = useState(false)
+    const [message, setMessage] = useState('')
+    const { isLoading, error, data } = useListOfRoles()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
-    console.log(data)
+    const isLoginHandler = (e) => {
+        setIsLogin(e.target.checked)
+        commonInfoHandler(e.target.name, e.target.checked)
+    }
     const roles = []
     data.data.map((item) => {
         roles.push({
@@ -28,49 +21,71 @@ const LoginInfo = ({BlurHandler}) => {
             title: item.roleName
         })
     })
-    console.log(roles)
+    const passwordHandler = (e) => {
+        commonInfoHandler(e.target.name, e.target.value)
+        // if(e.target.value === pass) {
+        //     commonInfoHandler(e.target.name, e.target.value, true)
+        // }
+        // else {
+        //     commonInfoHandler(e.target.name, e.target.value, false)
+        //     setMessage("password does not match")
+        // }
+    }
+    const passwordConfirmHandler = (e) => {
+        if(e.target.value != formState.password) {
+            setMessage("password does not match")
+        }
+    }
     return (
         <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10  row row-cols-1 g-2">
             <div className="col">
+                <label className="mx-2" htmlFor="isLogin"> اجازه ورود به سیستم </label> 
+                <input onChange={isLoginHandler} checked={isLogin} type="checkbox" id="isLogin" name="isLogin" />
+            </div>
+            <div className="col">
                 <Input
-                required="false"
-                label="نام کاربری"
-                BlurHandler={BlurHandler}
-                id="userName"
-                name="userName"
-                type="number"
+                    value={formState.userName}
+                    required={isLogin}
+                    label="نام کاربری"
+                    changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
+                    id="userName"
+                    name="userName"
+                    type="text"
                 />
             </div>
             <div className="col">
-            <Input
-                required="false"
-                label="کلمه رمز"
-                BlurHandler={BlurHandler}
-                id="passWord"
-                name="passWord"
-                type="password"
-            />
+                <Input
+                    value={formState.password}
+                    required={isLogin}
+                    label="کلمه رمز"
+                    changeHandler={passwordHandler}
+                    id="password"
+                    name="password"
+                    type="password"
+                />
             </div>
             <div className="col">
-            <Input
-                required="false"
-                label="تکرار کلمه رمز"
-                BlurHandler={BlurHandler}
-                id="passWordB"
-                name="passWordB"
-                type="password"
-            />
+                <Input
+                    required={isLogin}
+                    label="تکرار کلمه رمز"
+                    changeHandler={passwordConfirmHandler}
+                    id="passwordB"
+                    name="passwordB"
+                    type="password"
+                />
+                <span>{message}</span>
             </div>
             <div className="col">
-            <Select
-				options={roles}
-				defaultOpt="انتخاب کنید"
-				required="false"
-				label=" نقش "
-				changeHandler={BlurHandler}
-				id="roles"
-				name="roles"
-			/>
+                <Select
+                    value={formState.roleId}
+                    options={roles}
+                    defaultOpt="انتخاب کنید"
+                    required="true"
+                    label=" نقش "
+                    changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
+                    id="roleId"
+                    name="roleId"
+                />
             </div>
         </div>
     );

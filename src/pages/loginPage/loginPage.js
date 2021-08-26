@@ -62,7 +62,7 @@ const Login = () => {
     }), {
         onSuccess: (res) => {
             const data = res.data
-			console.log(res)
+			setUser(res.data)
 			Swal.fire({
 				title: 'success',
 				text: " خوش آمدید ",

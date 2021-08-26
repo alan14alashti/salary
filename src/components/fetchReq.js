@@ -6,9 +6,9 @@ const useRequest = ({ url, method, body }) => {
         const res =await axios(`${BaseUrl}/${url}`, {
         	method: method,
             headers: {
-    		   "Content-Type": "application/json"	,
-    		   "accept": "*/*",
-        		'Authorization':`Bearer ${token}`
+    		    "Content-Type": "application/json"	,
+    		    "accept": "*/*",
+        	    'Authorization':`Bearer ${token}`
             },                                   
            data : body
         })

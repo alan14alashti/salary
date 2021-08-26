@@ -16,33 +16,36 @@ import Madarek from './madarek/madarek'
 import Swal from "sweetalert2"
 import { useQueryClient, useMutation } from "react-query"
 import useRequest from '../../components/fetchReq'
+import { useEmployeeSearch } from '../../hooks'
 
-const AddUser = ({closeModal}) => {
+const EditUser = ({closeModal, id}) => {
     const queryClient = useQueryClient()
+    const { isLoading, error, data } = useEmployeeSearch(id)
+    console.log(data)
     const [clickedTab, setClickedTab] = useState(0)
     const tabClickHandler = (index) => {
         setClickedTab(index)
     }
     const [formState, setFormState] = useState({
-        id: 0,
-        isActive: false,
-        personalCode: null,
-        name: "",
-        family: "",
-        hireDate: "2021-05-25T11:04:37.521Z",
-        leaveDate: "2021-05-25T11:04:37.521Z",
-        attendanceStart: "2021-05-25T11:04:37.521Z",
-        attendanceCode: null,
-        extraDetails: [
-        ],
-        userName: "",
-        password: "",
-        isLogin: false,
-        lastLogin: "2021-05-25T11:04:37.521Z",
-        roleId: null,
-        positionId: null,
-        locationId: null
+        id: data.data.id,
+        isActive: data.data.isActive,
+        personalCode: data.data.personalCode,
+        name: data.data.name,
+        family: data.data.family,
+        hireDate: data.data.hireDate,
+        leaveDate: data.data.leaveDate,
+        attendanceStart: data.data.attendanceStart,
+        attendanceCode: data.data.attendanceCode,
+        extraDetails: data.data.extraDetails,
+        userName: data.data.userName,
+        password: data.data.password,
+        isLogin: data.data.isLogin,
+        lastLogin: data.data.lastLogin,
+        roleId: data.data.roleId,
+        positionId: data.data.positionId,
+        locationId: data.data.locationId
     })
+    console.log(formState)
     const commonInfoHandler = (name, value, isValidate) => {
         switch (name) {
             case 'password':
@@ -108,44 +111,45 @@ const AddUser = ({closeModal}) => {
             ]
         })
     }
-    
-    const mutation = useMutation(useRequest({
-		url:"api/Employee/EmployeeAdd",
-		method:"POST",
-		body: formState
-	}),
-	{
-        onSuccess: (res) => {
-			Swal.fire({
-				title: 'Success',
-				text: res.data.message,
-				icon: 'success',
-				confirmButtonColor: '#0050F0',
-				timer: 3000
-			})
-            // console.log(res)
-            // const charts = queryClient.getQueryData("OrgChart")
-            // console.log(charts)
-            // QueryClient.refetchQueries("OrgChart")
-            // queryClient.refetchQueries(["OrgChart"])
-            queryClient.refetchQueries({ stale: true })
-        },
-		onError: (error) => {
-			Swal.fire({
-				title: 'Error!',
-				text: error.response.data.message,
-				icon: 'error',
-				confirmButtonColor: '#0050f0',
-				confirmButtonText: 'امتحان دوباره',
-				timer: 3000
-			})
-		}
-    })
+    // const mutation = useMutation(useRequest({
+	// 	url:"api/Employee/EmployeeAdd",
+	// 	method:"POST",
+	// 	body: formState
+	// }),
+	// {
+    //     onSuccess: (res) => {
+	// 		Swal.fire({
+	// 			title: 'Success',
+	// 			text: res.data.message,
+	// 			icon: 'success',
+	// 			confirmButtonColor: '#0050F0',
+	// 			timer: 3000
+	// 		})
+    //         // console.log(res)
+    //         // const charts = queryClient.getQueryData("OrgChart")
+    //         // console.log(charts)
+    //         // QueryClient.refetchQueries("OrgChart")
+    //         // queryClient.refetchQueries(["OrgChart"])
+    //         queryClient.refetchQueries({ stale: true })
+    //     },
+	// 	onError: (error) => {
+	// 		Swal.fire({
+	// 			title: 'Error!',
+	// 			text: error.response.data.message,
+	// 			icon: 'error',
+	// 			confirmButtonColor: '#0050f0',
+	// 			confirmButtonText: 'امتحان دوباره',
+	// 			timer: 3000
+	// 		})
+	// 	}
+    // })
 	const formHandler = (event) => {
 		event.preventDefault();
         console.log(formState)
-        mutation.mutate()
+        // mutation.mutate()
   	}
+    if (isLoading) return 'Loading...'
+   	if (error) return 'An error has occurred: ' + error.message
     return (
         <form onSubmit={formHandler} className={classes.add_user_container}>
             <CommonDiv commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>
@@ -153,15 +157,15 @@ const AddUser = ({closeModal}) => {
             <div className={`${classes.content_container}`}>
                 {
                     clickedTab === 0 ? <EmployeeInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 8 ? <HokmsAddUser userName="admin" commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 8 ? <HokmsAddUser formState={formState} userName="admin" commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
                     clickedTab === 9 ? <LoginInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>: 
-                    clickedTab === 2 ? <Tamas commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 3 ? <EducationInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 4 ? <PhysicInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 1 ? <PrivateInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 5 ? <Bime commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab ===  6 ? <Hesabdary commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 7 ? <Madarek commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 2 ? <Tamas formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 3 ? <EducationInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 4 ? <PhysicInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 1 ? <PrivateInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 5 ? <Bime formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab ===  6 ? <Hesabdary formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 7 ? <Madarek formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
                     null
                 }
             </div>
@@ -173,4 +177,4 @@ const AddUser = ({closeModal}) => {
     )
 }
 
-export default AddUser;
+export default EditUser;

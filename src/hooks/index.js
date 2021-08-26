@@ -6,7 +6,8 @@ const useListOfContractTypes = () => {
     url:"api/Contract/ListOfContractDetails",
     method:"POST",
     body:""
-}))
+    })
+    )
 }
 
 const useFindHokmsByUser = (userName) => {
@@ -32,6 +33,30 @@ const useListOfUsers = () => {
         body:""
     }))
 }
+const useEmployeeGetAllSummery = () => {
+    return useQuery('employeeGetAllSummery', useRequest({
+        url:"api/Employee/EmployeeGetAllSummery",
+        method:"GET",
+        body:""
+    }))
+}
+
+const useEmployeeSearchSummery = (userId) => {
+    return useMutation(useRequest({
+        url:`api/Employee/EmployeeSearchSummery?temp=${userId}`,
+        method:"GET",
+        body: ''
+    }))
+}
+
+const useEmployeeSearch = (id) => {
+    return useQuery(['employeeSearch',id], useRequest({
+        url:`api/Employee/EmployeeSearch?id=${id}`,
+        method:"GET",
+        body:""
+    }))
+}
+
 const useListOfLoanTypes = () => {
     return useQuery('listOfLoanTypes', useRequest({
         url:'api/Loan/ListOfLoanTypes',
@@ -63,6 +88,14 @@ const useSalaryItems = () => {
 		body: "",
 	}))
 }
+const useListOfRoles = () => {
+    return useQuery('listOfRoles', useRequest({
+		url: 'api/Authenticate/listOfRoles',
+		method: 'POST',
+		body: "",
+	}))
+}
+
 export {
     useListOfContractTypes,
     useListOfUsers,
@@ -71,5 +104,9 @@ export {
     useFindLoanByUser,
     useOrgChart,
     useSalaryFormulaTypes,
-    useSalaryItems
+    useSalaryItems,
+    useEmployeeGetAllSummery,
+    useEmployeeSearchSummery,
+    useEmployeeSearch,
+    useListOfRoles
 }

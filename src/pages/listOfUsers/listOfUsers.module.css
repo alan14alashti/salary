@@ -1,16 +1,29 @@
-.list_of_users_title {
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.6);
+}
+.content {
+    margin: 1rem auto;
+    border: 1px solid #ccc;
+    background: #fff;
+    height: 95vh;
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 1rem;
+}
+.delete_icon {
+    cursor: pointer;
+    color: var(--my-danger-color);
     font-size: 2rem;
-    color: var(--my-primary-color);
-    font-weight: 600;
 }
-.user_info_container i {
-    color: var(--my-primary-color);
-    font-size: 3rem;
-    margin: 1rem 0;
-}
-.user_info_container {  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: .35rem 0;
+.edit_icon {
+    cursor: pointer;
+    color: var(--my-secondary-color);
+    font-size: 2rem;
 }

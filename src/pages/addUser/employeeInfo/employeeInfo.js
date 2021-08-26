@@ -1,52 +1,68 @@
-import Date from "../../datePicker/datePicker"
-import { Input, Select } from "../../../utils/input"
-const EmployeeInfo = ({BlurHandler}) => {
+import Date from "../../datePicker/datePicker" 
+import { Input, Select } from "../../../utils/input" 
+import { useOrgChart } from "../../../hooks" 
+
+const EmployeeInfo = ({moreInfoHandler, commonInfoHandler, formState}) => {
+    const { isLoading, error, data } = useOrgChart()
+    if (isLoading) return 'Loading...'
+   	if (error) return 'An error has occurred: ' + error.message
+    const orgChart = []
+    data.data.map((item) => {
+        orgChart.push({
+            value: item.id,
+            title: item.title
+        })
+    })
     return (
         <div className="container">
-        <div className="px-5 row row-cols-md-2 row-cols-1 gx-5 gy-3">
-            <div className="col">
-                <Date label=" تاریخ استخدام "/>
+            <div className="px-5 row row-cols-md-2 row-cols-1 gx-5 gy-3">
+                <div className="col">
+                    <Date label=" تاریخ استخدام "/>
+                </div>
+                <div className="col">
+                    <Date label=" تاریخ تسویه "/>
+                </div>
+                <div className="col">
+                    <Date label=" تاریخ ساعت زنی "/>
+                </div>
+                <div className="col">
+                    <Input
+                        value={formState.attendanceCode}
+                        required="flase"
+                        label="کد ساعت زنی"
+                        changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
+                        id="attendanceCode"
+                        name="attendanceCode"
+                        type="number"
+                    />
+                </div>
+                <div className="col">
+                    <Select
+                        value={formState.positionId}
+                        options={orgChart}
+                        defaultOpt="انتخاب کنید"
+                        required="false"
+                        label=" انتخاب سمت "
+                        changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
+                        id="positionId"
+                        name="positionId"
+                    />
+                </div>
+                <div className="col">
+                    <Select
+                        value={formState.locationId}
+                        options={orgChart}
+                        defaultOpt="انتخاب کنید"
+                        required="false"
+                        label=" محل خدمت "
+                        changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
+                        id="locationId"
+                        name="locationId"
+                    />
+                </div>
             </div>
-            <div className="col">
-                <Date label=" تاریخ تسویه "/>
-            </div>
-            <div className="col">
-                <Date label=" تاریخ ساعت زنی "/>
-            </div>
-            <div className="col">
-                <Input
-                    required="flase"
-                    label="کد ساعت زنی"
-                    BlurHandler={BlurHandler}
-                    id="clockTime"
-                    name="clockTime"
-                    type="number"
-                />
-            </div>
-            <div className="col">
-                <Select
-					options={[{value: 1, title:" مدیر "}, {value: 0, title:" منشی "}]}
-					defaultOpt="انتخاب کنید"
-					required="false"
-					label=" انتخاب سمت "
-					changeHandler={BlurHandler}
-					id="orgChart"
-					name="orgChart"
-				/>
-            </div>
-            <div className="col">
-                <Select
-					options={[{value: 1, title:" نیروهوایی "}, {value: 0, title:" 05 کرمان "}]}
-					defaultOpt="انتخاب کنید"
-					required="false"
-					label=" محل خدمت "
-					changeHandler={BlurHandler}
-					id="location"
-					name="location"
-				/>
-            </div>
-        </div>
         </div>
     );
 }
+
 export default EmployeeInfo;

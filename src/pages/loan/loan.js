@@ -7,7 +7,7 @@ import { useFindLoanByUser, useListOfUsers } from "../../hooks"
 import DataGrid from '../../utils/dataGrid'
 import SideNav from '../sideNav/sideNav'
 const gridStyle = { 
-    minHeight: 250 ,
+    minHeight: 750 ,
 }
 const Loan = () => {
     const [submitedLoan, setSubmitedLoan] = useState()

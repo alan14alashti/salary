@@ -10,7 +10,7 @@ const Input = ({ placeHolder, value, type, name, id, BlurHandler, label, require
                 placeholder={placeHolder}
                 value={value}
                 onBlur={BlurHandler ? (e) => BlurHandler(e) : null}
-                onChange={changeHandler? (e) => changeHandler(e) : null}
+                onChange={changeHandler ? (e) => changeHandler(e) : null}
 				id={id}
 				name={name}
 				type={type}
@@ -21,7 +21,7 @@ const Input = ({ placeHolder, value, type, name, id, BlurHandler, label, require
         </div>
     );
 }
-const Select = ( {id, label, name, options, defaultOpt, required, changeHandler}) => {
+const Select = ( {value, id, label, name, options, defaultOpt, required, changeHandler}) => {
     return(
         <div className="w-100 d-flex align-items-start flex-column">
             {label?
@@ -29,6 +29,7 @@ const Select = ( {id, label, name, options, defaultOpt, required, changeHandler}
                 null
             }
             <select 
+                value={value}
                 onChange={(e) => changeHandler(e)}
                 className={classes.form_input}
                 required={required} 

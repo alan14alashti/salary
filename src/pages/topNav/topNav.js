@@ -1,7 +1,10 @@
 import classes from './topNav.module.css'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../userContext';
 const TopNav = () => {
     const [ open, setOpen ] = useState(false); 
+    const { user, setUser } = useContext(UserContext);
+    // console.log(user,'ali')
     return (
         <div className={classes.topNav_container}>
             <div className={classes.bar_menue_icon_container}>

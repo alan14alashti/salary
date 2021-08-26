@@ -115,7 +115,6 @@ function App() {
                 </Switch>
             </Router>
             </UserContext.Provider>
-            {/* <AddUser/> */}
         </QueryClientProvider>
     );
 }
