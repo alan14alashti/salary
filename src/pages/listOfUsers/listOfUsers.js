@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import classes from './listOfUsers.module.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
-import { useEmployeeGetAllSummery, useListOfUsers, useEmployeeSearchSummery, useSalaryItems } from "../../hooks"
+import { useEmployeeGetAllSummery, useListOfUsers, useEmployeeSearchSummery, useSalaryItems, useEmployeeSearch } from "../../hooks"
 import DataGrid from '../../utils/dataGrid'
 import SideNav from '../sideNav/sideNav'
 import AddUser from '../addUser/addUser'
@@ -15,6 +15,7 @@ const gridStyle = {
 }
 const ListOfUsers = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [delModalIsOpen, setDelModalIsOpen] = useState(false)
     const [delUserId, setDelUserId] = useState(null)
     const [editUserId, setEditUserId] = useState(null)
     // const breadCrumb = [
@@ -37,9 +38,11 @@ const ListOfUsers = () => {
     const [modalDetHandler, setModalDetHandler] = useState(null)
     const [searched, setSearched] = useState([])
     const [temp ,setTemp] = useState()
-    const mutation = useEmployeeSearchSummery(temp)
+    // const mutation = useEmployeeSearchSummery(temp)
+    // const { isLoading, error, data } 
+    const search = useEmployeeSearchSummery(temp)
     const columns =  [
-        { name: 'isActive', header: ' فعال ', defaultFlex:1, render:({data}) => <input readOnly type="checkbox" checked={data.isActive}/>},
+        { name: 'isActive', header: ' فعال ', maxWidth: 75, defaultFlex:1, render:({data}) => <input readOnly type="checkbox" checked={data.isActive}/>},
         { name: 'personalCode', header: ' کد پرسنلی ', defaultFlex:1},
         { name: 'name', header: ' نام ', defaultFlex:1},
         { name: 'family', header: ' نام خانوادگی ', defaultFlex:1},
@@ -48,9 +51,10 @@ const ListOfUsers = () => {
     ];
     const searchHandler = (e) => {
         e.preventDefault()
-        mutation.mutate(temp, {onSuccess: (res) => {
-            setSearched(res.data)
-        }})
+        // mutation.mutate(temp, {onSuccess: (res) => {
+        //     setSearched(res.data)
+        // }})
+        
     }
     const changeHandler = (e) => {
         setTemp(e.target.value)
@@ -58,10 +62,13 @@ const ListOfUsers = () => {
     const modalHandler = () => {
         setModalIsOpen(!modalIsOpen)
     }
-    const delUser = (data) => {
-        setDelUserId(data.id)
-        setModalDetHandler(0)
-        setModalIsOpen(true)
+    const delModalHandler = () => {
+        setDelModalIsOpen(!delModalIsOpen)
+    }
+    const delUser = (id) => {
+        console.log(id)
+        setDelUserId(id)
+        setDelModalIsOpen(!delModalIsOpen)
     }
     const editUser = (data) => {
         setEditUserId(data.id)
@@ -75,10 +82,6 @@ const ListOfUsers = () => {
     // const { isLoading, error, data } = useEmployeeGetAllSummery()
    	// if (isLoading) return 'Loading...'
    	// if (error) return 'An error has occurred: ' + error.message
-    // const [modalIsOpen, setModalIsOpen] = useState(true)
-    // const closeModal =() => {
-    //     setModalIsOpen(false)
-    // }
     return (
         <div className="d-flex h-100">
             {true ? <SideNav active="کارمندان"/> : null}
@@ -91,11 +94,19 @@ const ListOfUsers = () => {
                 >
                     {
                         modalDetHandler === 1 ? <AddUser closeModal={modalHandler}/> :
-                        // modalDetHandler === 0 ? <DelUser id={delUserId}/> :
-                        modalDetHandler === 2 ? <EditUser closeModal={modalHandler} id={editUserId}/>:
+                        modalDetHandler === 2 ? <EditUser closeModal={modalHandler} id={editUserId}/> :
                         null
                     }
                 </Modal>
+                <Modal 
+                    isOpen={delModalIsOpen}
+                    ariaHideApp={false}
+                    className={`${classes.content_del} col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10`}
+                    overlayClassName={`${classes.overlay}`}
+                >
+                    <DelUser closeModal={delModalHandler} id={delUserId}/>
+                </Modal>
+
                 <div className="d-flex justify-content-stretch bg-white py-3">
                     <div className="col-12">
                         <div className="d-flex align-items-center justify-content-between ps-3 py-3">
@@ -107,7 +118,7 @@ const ListOfUsers = () => {
                             </div>
                         </div>
                         <div>
-                            <DataGrid data={searched} columns={columns} gridStyle={gridStyle}/>
+                            <DataGrid data={search.data ? search.data.data : []} columns={columns} gridStyle={gridStyle}/>
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,17 @@
     outline: none;
     padding: 1rem;
 }
+.content_del {
+    margin: 1rem auto;
+    border: 1px solid #ccc;
+    background: #fff;
+    height: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 1rem;
+}
 .delete_icon {
     cursor: pointer;
     color: var(--my-danger-color);

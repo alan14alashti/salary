@@ -18,6 +18,8 @@ const useFindHokmsByUser = (userName) => {
     })
     )
 }
+
+
 const useFindLoanByUser = (userId) => {
     return useMutation(useRequest({
         url:`api/Loan/UserLoans?userId=${userId}`,
@@ -41,19 +43,42 @@ const useEmployeeGetAllSummery = () => {
     }))
 }
 
-const useEmployeeSearchSummery = (userId) => {
-    return useMutation(useRequest({
-        url:`api/Employee/EmployeeSearchSummery?temp=${userId}`,
+const useEmployeeSearchSummery = (temp) => {
+    return useQuery(["employeeSearchByTemp", temp],useRequest({
+        url:`api/Employee/EmployeeSearchSummery?temp=${temp}`,
         method:"GET",
         body: ''
     }))
 }
 
 const useEmployeeSearch = (id) => {
-    return useQuery(['employeeSearch',id], useRequest({
+    return useQuery(['employeeSearchById',id],useRequest({
         url:`api/Employee/EmployeeSearch?id=${id}`,
         method:"GET",
         body:""
+    }))
+}
+const useAddEmployee = (body) => {
+    return useMutation(useRequest({
+        url:`api/Employee/EmployeeAdd`,
+        method:"POST",
+        body: body
+    })
+    )
+}
+const useEditEmployee = (body) => {
+    return useMutation(useRequest({
+        url:`api/Employee/EmployeeUpdate`,
+        method:"PUT",
+        body: body
+    })
+    )
+}
+const useDelEmployee = (userId) => {
+    return useMutation(useRequest({
+        url:`api/Employee/EmployeeDelete?id=${userId}`,
+        method:"DELETE",
+        body: ''
     }))
 }
 
@@ -108,5 +133,8 @@ export {
     useEmployeeGetAllSummery,
     useEmployeeSearchSummery,
     useEmployeeSearch,
-    useListOfRoles
+    useListOfRoles,
+    useAddEmployee,
+    useEditEmployee,
+    useDelEmployee
 }

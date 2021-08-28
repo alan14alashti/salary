@@ -1,21 +1,8 @@
 import { useState } from 'react'
-import classes from './addUser.module.css'
-import TabsContainer from './tabsContainer'
-import Button from '../../utils/button'
-import CommonDiv from './commonDiv'
-import LoginInfo from './loginInfo/loginInfo'
-import EmployeeInfo from './employeeInfo/employeeInfo'
-import Tamas from './tamas/tamas'
-import PrivateInfo from './privateInfo/privateInfo'
-import Bime from './bime/bime'
-import Hesabdary from './hesabdary/hesabdary'
-import EducationInfo from './educationInfo/educationInfo'
-import PhysicInfo from './physicInfo/physicInfo'
-import HokmsAddUser from './hokmsAddUser/hokmsAddUser'
-import Madarek from './madarek/madarek'
 import Swal from "sweetalert2"
-import { useQueryClient, useMutation } from "react-query"
-import useRequest from '../../components/fetchReq'
+import { useQueryClient } from "react-query"
+import AddEditForm from './addEditForm'
+import { useAddEmployee } from '../../hooks'
 
 const AddUser = ({closeModal}) => {
     const queryClient = useQueryClient()
@@ -54,7 +41,8 @@ const AddUser = ({closeModal}) => {
             case 'roleId':
                 setFormState({
                     ...formState,
-                    [name]: Number(value) 
+                    // [name]: Number(value) 
+                    [name]: 2
                 })
                 break;
             case 'personalCode':
@@ -72,13 +60,15 @@ const AddUser = ({closeModal}) => {
             case 'positionId':
                 setFormState({
                     ...formState,
-                    [name]: Number(value) 
+                    // [name]: Number(value)
+                    [name]: 100 
                 })
                 break;
             case 'locationId':
                 setFormState({
                     ...formState,
-                    [name]: Number(value) 
+                    // [name]: Number(value) 
+                    [name]: 1000
                 })
                 break;
             default:
@@ -109,68 +99,42 @@ const AddUser = ({closeModal}) => {
         })
     }
     
-    const mutation = useMutation(useRequest({
-		url:"api/Employee/EmployeeAdd",
-		method:"POST",
-		body: formState
-	}),
-	{
-        onSuccess: (res) => {
-			Swal.fire({
-				title: 'Success',
-				text: res.data.message,
-				icon: 'success',
-				confirmButtonColor: '#0050F0',
-				timer: 3000
-			})
-            // console.log(res)
-            // const charts = queryClient.getQueryData("OrgChart")
-            // console.log(charts)
-            // QueryClient.refetchQueries("OrgChart")
-            // queryClient.refetchQueries(["OrgChart"])
-            queryClient.refetchQueries({ stale: true })
-        },
-		onError: (error) => {
-			Swal.fire({
-				title: 'Error!',
-				text: error.response.data.message,
-				icon: 'error',
-				confirmButtonColor: '#0050f0',
-				confirmButtonText: 'امتحان دوباره',
-				timer: 3000
-			})
-		}
-    })
+    const mutation = useAddEmployee(formState)
 	const formHandler = (event) => {
 		event.preventDefault();
         console.log(formState)
-        mutation.mutate()
-  	}
+        mutation.mutate(formState, {
+            onSuccess: (res) => {
+                console.log(res)
+                Swal.fire({
+                    title: 'Success',
+                    text: " کارمند با موفقیت ثبت شد ",
+                    icon: 'success',
+                    confirmButtonColor: '#215A88',
+                    timer: 3000
+                })
+                // console.log(res)
+                // const charts = queryClient.getQueryData("OrgChart")
+                // console.log(charts)
+                // QueryClient.refetchQueries("OrgChart")
+                // queryClient.refetchQueries(["OrgChart"])
+                // queryClient.refetchQueries({ stale: true })
+            },
+            onError: (error) => {
+                console.log(error.response)
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'مشکلی وجود دارد',
+                    icon: 'error',
+                    confirmButtonColor: '#215A88',
+                    confirmButtonText: 'امتحان دوباره',
+                    timer: 3000
+                })
+            }
+        })
+    }
     return (
-        <form onSubmit={formHandler} className={classes.add_user_container}>
-            <CommonDiv commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>
-            <TabsContainer clickedTab={clickedTab} tabClickHandler={tabClickHandler}/>
-            <div className={`${classes.content_container}`}>
-                {
-                    clickedTab === 0 ? <EmployeeInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 8 ? <HokmsAddUser userName="admin" commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 9 ? <LoginInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>: 
-                    clickedTab === 2 ? <Tamas commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 3 ? <EducationInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 4 ? <PhysicInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 1 ? <PrivateInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 5 ? <Bime commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab ===  6 ? <Hesabdary commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 7 ? <Madarek commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    null
-                }
-            </div>
-            <div className="col-12 d-flex justify-content-between align-items-start my-3">
-                <Button type="submit" sty="secondary" text=" ثبت "/>
-                <Button onclick={closeModal} sty="danger" text=" انصراف "/>
-            </div>
-        </form>
+        <AddEditForm closeModal={closeModal} commonInfoHandler={commonInfoHandler} formState={formState} moreInfoHandler={moreInfoHandler} clickedTab={clickedTab} formHandler={formHandler} tabClickHandler={tabClickHandler} />
     )
-}
-
+    }
 export default AddUser;
