@@ -8,22 +8,21 @@ const OrgChart = () => {
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const response = data.data
-	const chart = []
 	function getUnflatten(arr, parentid) {
 		let output = []
 		for(const obj of arr) {
-		  if(obj.parent == parentid) {
-			var children = getUnflatten(arr, obj.id)
-			if(children.length) {
-			  obj.children = children
-			}
-			output.push(obj)
-		  }
+		  	if(obj.parentId == parentid) {
+				var children = getUnflatten(arr, obj.id)
+				if(children.length) {
+			  		obj.children = children
+				}
+				output.push(obj)
+		  	}
 		}
 		return output
 	}
 	const chartt = getUnflatten(response,null)
-	console.log(chartt[0])
+	console.log(chartt)
 	return (
 		<>
 		<div className={classes.chart}>

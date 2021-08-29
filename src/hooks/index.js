@@ -19,7 +19,6 @@ const useFindHokmsByUser = (userName) => {
     )
 }
 
-
 const useFindLoanByUser = (userId) => {
     return useMutation(useRequest({
         url:`api/Loan/UserLoans?userId=${userId}`,
@@ -35,6 +34,7 @@ const useListOfUsers = () => {
         body:""
     }))
 }
+
 const useEmployeeGetAllSummery = () => {
     return useQuery('employeeGetAllSummery', useRequest({
         url:"api/Employee/EmployeeGetAllSummery",
@@ -58,6 +58,7 @@ const useEmployeeSearch = (id) => {
         body:""
     }))
 }
+
 const useAddEmployee = (body) => {
     return useMutation(useRequest({
         url:`api/Employee/EmployeeAdd`,
@@ -66,6 +67,7 @@ const useAddEmployee = (body) => {
     })
     )
 }
+
 const useEditEmployee = (body) => {
     return useMutation(useRequest({
         url:`api/Employee/EmployeeUpdate`,
@@ -74,6 +76,7 @@ const useEditEmployee = (body) => {
     })
     )
 }
+
 const useDelEmployee = (userId) => {
     return useMutation(useRequest({
         url:`api/Employee/EmployeeDelete?id=${userId}`,
@@ -90,15 +93,87 @@ const useListOfLoanTypes = () => {
     })
 	)
 }
-const useOrgChart = () => {
-    return useQuery('OrgChart',useRequest(
+
+const useLocationChart = () => {
+    return useQuery('LocationChart',useRequest(
 		{
-			url:"api/OrganizationChart/ShowPositions",
-			method:"POST",
+			url:"api/OrganizationUnit/LocationShow",
+			method:"GET",
 			body:""
 		}
 	))
 }
+
+const useAddLocationChart = (body) => {
+    return useMutation(useRequest(
+		{
+			url:"api/OrganizationUnit/LocationAdd",
+			method:"POST",
+			body: body
+		}
+	))
+}
+
+const useEditLocationChart = (body) => {
+    return useMutation(useRequest(
+		{
+			url:"api/OrganizationUnit/LocationUpdate",
+			method:"PUT",
+			body: body
+		}
+	))
+}
+
+const useDeleteLocationChart = (body) => {
+    return useMutation(useRequest(
+		{
+			url:"api/OrganizationUnit/LocationDelete",
+			method:"DELETE",
+			body: body
+		}
+	))
+}
+
+const useOrgChart = () => {
+    return useQuery('OrgChart',useRequest(
+		{
+			url:"api/OrganizationChart/PositionsShow",
+			method:"GET",
+			body:""
+		}
+	))
+}
+
+const useAddOrgChart = (body) => {
+    return useMutation(useRequest(
+		{
+			url:"api/OrganizationChart/PositionAdd",
+			method:"POST",
+			body: body
+		}
+	))
+}
+
+const useEditOrgChart = (body) => {
+    return useMutation(useRequest(
+		{
+			url:"api/OrganizationChart/PositionEdit",
+			method:"PUT",
+			body: body
+		}
+	))
+}
+
+const useDeleteOrgChart = (body) => {
+    return useMutation(useRequest(
+		{
+			url:"api/OrganizationChart/PosiotionDelete",
+			method:"DELETE",
+			body: body
+		}
+	))
+}
+
 const useSalaryFormulaTypes = () => {
     return useQuery('showSalaryFormulaTypes', useRequest({
 		url: 'api/Salary/ShowSalaryFormulaTypes',
@@ -106,6 +181,7 @@ const useSalaryFormulaTypes = () => {
 		body: "",
 	}))
 }
+
 const useSalaryItems = () => {
     return useQuery('showSalaryItems', useRequest({
 		url: 'api/Salary/ShowSalaryItems',
@@ -113,6 +189,7 @@ const useSalaryItems = () => {
 		body: "",
 	}))
 }
+
 const useListOfRoles = () => {
     return useQuery('listOfRoles', useRequest({
 		url: 'api/Authenticate/listOfRoles',
@@ -136,5 +213,12 @@ export {
     useListOfRoles,
     useAddEmployee,
     useEditEmployee,
-    useDelEmployee
+    useDelEmployee,
+    useAddOrgChart,
+    useEditOrgChart,
+    useDeleteOrgChart,
+    useLocationChart,
+    useAddLocationChart,
+    useDeleteLocationChart,
+    useEditLocationChart
 }

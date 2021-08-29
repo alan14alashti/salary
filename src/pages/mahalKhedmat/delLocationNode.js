@@ -3,9 +3,9 @@ import Swal from "sweetalert2"
 import { useQueryClient } from "react-query"
 import Button from "../../utils/button"
 import { Select } from "../../utils/input"
-import { useDeleteOrgChart } from "../../hooks"
+import { useDeleteLocationChart } from "../../hooks"
 
-const DelPosition = ({ nodeData, closeModal }) => {
+const DelLocationNode = ({ nodeData, closeModal }) => {
     const queryClient = useQueryClient()
     const [formState, setFormState] = useState({
 		id: nodeData.id ,
@@ -19,7 +19,8 @@ const DelPosition = ({ nodeData, closeModal }) => {
           	[name]: value
         })
     }
-    const mutation = useDeleteOrgChart(formState)
+
+    const mutation = useDeleteLocationChart(formState)
 
 	const clickHandler = (event) => {
 		event.preventDefault();
@@ -56,9 +57,8 @@ const DelPosition = ({ nodeData, closeModal }) => {
     return (
 		<div className="w-100 mx-auto">
 				<form onSubmit={(e) => clickHandler(e)}  className={`w-100 d-flex flex-column align-items-center`}>
-					<h3> حذف سمت </h3>
 					<Select
-					 	options={[{value: 1, title:" حذف با فرزندان "}, {value: 0, title:" حذف سمت بدون حذف فرزندان "}]}
+					 	options={[{value: 1, title:" حذف با فرزندان "}, {value: 0, title:" حذف محل خدمت بدون حذف فرزندان "}]}
 						defaultOpt="انتخاب کنید"
 						required="false"
 						label=" انتخاب نوع حذف "
@@ -74,4 +74,4 @@ const DelPosition = ({ nodeData, closeModal }) => {
 		</div>
     );
 }
-export default DelPosition;
+export default DelLocationNode;

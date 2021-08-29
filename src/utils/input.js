@@ -21,7 +21,7 @@ const Input = ({ placeHolder, value, type, name, id, BlurHandler, label, require
         </div>
     );
 }
-const Select = ( {value, id, label, name, options, defaultOpt, required, changeHandler}) => {
+const Select = ( {value, id, label, name, options, defaultOpt, required, changeHandler, disabled}) => {
     return(
         <div className="w-100 d-flex align-items-start flex-column">
             {label?
@@ -29,6 +29,7 @@ const Select = ( {value, id, label, name, options, defaultOpt, required, changeH
                 null
             }
             <select 
+                disabled={disabled}
                 value={value}
                 onChange={(e) => changeHandler(e)}
                 className={classes.form_input}

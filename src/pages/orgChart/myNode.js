@@ -1,6 +1,6 @@
 import './defChart.css'
 import Modal from 'react-modal'
-import FormModal from "../../utils/formModal";
+import classes from './orgChart.module.css'
 import PropTypes from "prop-types";
 import { useState } from 'react';
 import AddPosition from './addPosition';
@@ -11,20 +11,20 @@ const propTypes = {
 };
 const MyNode = ({ nodeData }) => {
     const [modalDetHandler, setModalDetHandler] = useState(null)
-    const [registerIsOpen, setRegisterIsOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const modalHandler = () => {
-        setRegisterIsOpen(!registerIsOpen)
+        setModalIsOpen(!modalIsOpen)
     }
     const addModalHandler = () => {
-        setRegisterIsOpen(true)
+        setModalIsOpen(true)
         setModalDetHandler(1)
     }
     const delModalHandler = () => {
-        setRegisterIsOpen(true)
+        setModalIsOpen(true)
         setModalDetHandler(0)
     }
     const editModalHandler = () => {
-        setRegisterIsOpen(true)
+        setModalIsOpen(true)
         setModalDetHandler(2)
     }
     return (
@@ -52,14 +52,19 @@ const MyNode = ({ nodeData }) => {
                 </div>
             </div>
         </div>
-        <FormModal open={registerIsOpen} modalHandler={modalHandler}>
+        <Modal
+            isOpen={modalIsOpen}
+            ariaHideApp={false}
+            className={`${classes.content} col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10`}
+            overlayClassName={`${classes.overlay}`}
+        >
             {
-                modalDetHandler === 1 ? <AddPosition nodeData={nodeData}/> :
-                modalDetHandler === 0 ? <DelPosition nodeData={nodeData}/> :
-                modalDetHandler === 2 ? <EditPosition nodeData={nodeData}/> :
+                modalDetHandler === 1 ? <AddPosition closeModal={modalHandler} nodeData={nodeData}/> :
+                modalDetHandler === 0 ? <DelPosition closeModal={modalHandler} nodeData={nodeData}/> :
+                modalDetHandler === 2 ? <EditPosition closeModal={modalHandler} nodeData={nodeData}/> :
                 null
             }
-        </FormModal>
+        </Modal>
       </div>
     );
 };

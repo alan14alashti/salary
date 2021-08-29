@@ -1,33 +1,27 @@
 import { useState } from "react"
 import {Input} from "../../utils/input"
 import Swal from "sweetalert2"
-import { useQueryClient, useMutation } from "react-query"
+import { useQueryClient} from "react-query"
 import Button from "../../utils/button"
-import useRequest from '../../components/fetchReq'
-import { useAddOrgChart } from "../../hooks"
+import { useAddLocationChart } from "../../hooks"
 
-const AddPosition = ({ nodeData, closeModal }) => {
+const AddLocationNode = ({ nodeData, closeModal }) => {
     const queryClient = useQueryClient()
     const [formState, setFormState] = useState({
 		id:0,
-		title: "",
+		unitName: "",
         parentId: nodeData.id ? nodeData.id : null
     })
     const BlurHandler = (event) => {
         let value = event.target.value 
         const name = event.target.name
-        // if(name === "parent") {
-        //     value = Number(value)
-        // }
         setFormState({
 			...formState,
           	[name]: value
         })
     }
-    // const queryClient = useQueryClient()
-    // const charts = queryClient.getQueryData("OrgChart")
-    // console.log(charts)
-    const mutation = useAddOrgChart(formState)
+
+    const mutation = useAddLocationChart(formState)
 	
 	const clickHandler = (event) => {
 		event.preventDefault();
@@ -68,13 +62,13 @@ const AddPosition = ({ nodeData, closeModal }) => {
 			<form onSubmit={clickHandler} className={`w-100 d-flex flex-column align-items-center`}>
 				<Input
 					required="true"
-					label="عنوان شغلی"
+					label="عنوان محل خدمت"
 					changeHandler={BlurHandler}
-					id="title"
-					name="title"
+					id="unitName"
+					name="unitName"
 					type="text"
 				/>
-				<span>  عنوان شغلی مورد نظر به زیر  گروه  {nodeData.title}اضافه میشود </span>
+				<span> محل خدمت مورد نظر به زیر  گروه  {nodeData.unitName}اضافه میشود </span>
 				<div className="col-12 d-flex justify-content-between align-items-start my-3">
 					<Button type="submit" sty="secondary" text=" ثبت "/>
 					<Button onclick={closeModal} sty="danger" text=" انصراف "/>
@@ -84,4 +78,4 @@ const AddPosition = ({ nodeData, closeModal }) => {
     );
 }
 
-export default AddPosition;
+export default AddLocationNode;

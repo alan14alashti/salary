@@ -3,21 +3,22 @@ import Swal from "sweetalert2"
 import { useQueryClient } from "react-query"
 import Button from "../../utils/button"
 import { Select, Input } from "../../utils/input"
-import { useEditOrgChart } from "../../hooks"
+import { useEditLocationChart, useEditOrgChart } from "../../hooks"
 
-const EditPosition = ({ nodeData, closeModal }) => {
+const EditLocationNode = ({ nodeData, closeModal }) => {
     const queryClient = useQueryClient()
-    const orgchart = queryClient.getQueryData("OrgChart")
+    const locchart = queryClient.getQueryData("LocationChart")
+    
     // console.log(orgchart)
-    const positions = []
-    orgchart.data.map((item) => positions.push({
+    const locations = []
+    locchart.data.map((item) => locations.push({
         value:  item.id,
-        title: item.title
+        title: item.unitName
     }))
     // console.log(positions)
     const [formState, setFormState] = useState({
 		id: nodeData.id ,
-        title: nodeData.title, 
+        unitName: nodeData.unitName, 
         parentId: nodeData.parentId,
         isChildMove: false
     })
@@ -46,7 +47,7 @@ const EditPosition = ({ nodeData, closeModal }) => {
         }
         
     }
-    const mutation = useEditOrgChart(formState)
+    const mutation = useEditLocationChart(formState)
     
 	const clickHandler = (event) => {
 		event.preventDefault();
@@ -84,20 +85,19 @@ const EditPosition = ({ nodeData, closeModal }) => {
     return (
 		<div className="w-100 mx-auto">
 				<form onSubmit={(e) => clickHandler(e)}  className={`w-100 d-flex flex-column align-items-center`}>
-					<h3> تغییر سمت </h3>
                     <Input
-                        value={formState.title}
+                        value={formState.unitName}
 						required="true"
-						label="عنوان شغلی"
+						label="عنوان محل خدمت"
 						changeHandler={BlurHandler}
-						id="title"
-						name="title"
+						id="unitName"
+						name="unitName"
 						type="text"
 					/>
 					<Select 
                         disabled={nodeData.parentId == null ? true : false }
                         value={formState.parentId}
-					 	options={positions}
+					 	options={locations}
 						defaultOpt=" انتخاب کنید "
 						required="false"
 						label=" انتخاب سرپرست "
@@ -123,4 +123,4 @@ const EditPosition = ({ nodeData, closeModal }) => {
 		</div>
     );
 }
-export default EditPosition;
+export default EditLocationNode;
