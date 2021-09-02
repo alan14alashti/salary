@@ -11,23 +11,6 @@ const gridStyle = {
 }
 const Loan = () => {
     const [submitedLoan, setSubmitedLoan] = useState()
-    const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " وام ها " ,
-            link: "/admin/MainPage",
-            active: 1
-        }
-    ]
 	const columns =  [
         { name: 'title', header: ' عنوان وام ', defaultFlex:1},
 		{ name: 'amount', header: ' مقدار ', defaultFlex:1},
@@ -58,16 +41,12 @@ const Loan = () => {
             }
         })
     }
-   	// if (isLoading) return 'Loading...'
-   	// if (error) return 'An error has occurred: ' + error.message
+   	if (isLoading) return 'Loading...'
+   	if (error) return 'An error has occurred: ' + error.message
     return ( 
         <div className="d-flex h-100">
             {true ? <SideNav active="وام"/> : null}
             <div className="container-fluid">
-            {/* <FormModal open={modalIsOpen} modalHandler={modalHandler}>
-               
-            </FormModal> */}
-            {/* <BreadCrumb data={breadCrumb}/> */}
                 <div className="d-flex justify-content-stretch bg-white py-3">
                     <div className="col-12">
                         <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">

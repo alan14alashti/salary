@@ -7,33 +7,12 @@ import FormModal from "../../utils/formModal"
 import EditContractItem from "./editContractType"
 import AddContractItem from "./addContratType"
 import { useListOfContractTypes } from "../../hooks"
-
+import { EditIcon, DeleteIcon } from '../../utils/iconButton'
 const gridStyle = { 
     minHeight: 450 ,
 }
 const ContractTypes = () => {
-    const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " اطلاعات پایه " ,
-            link: "/admin/MainPage/baseInfo",
-            active: 0
-        },
-        {
-            text: " انواع حکم " ,
-            link: "/admin/MainPage/baseInfo/loanTypes",
-            active: 1
-        }
-    ]
+
     const [modalDetHandler, setModalDetHandler] = useState(null)
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [delContractId, setDelContractId] = useState(null)
@@ -57,14 +36,15 @@ const ContractTypes = () => {
     }
 	const columns =  [
         { name: 'name', header: ' نام حکم ', defaultFlex: 1},
-        { name: 'id', header: ' # ', defaultFlex: 1, render: ({ data }) => <div><Button onclick={() => delContract(data)} sty="danger" text="حذف"/> <Button onclick={() => editContract(data)} sty="secondary" text="ویرایش"/></div>},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon />},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon />}
     ];
     const { isLoading, error, data } = useListOfContractTypes()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const contracts = data.data
     return ( 
-        <div className="w-100 d-flex flex-column align-items-start">
+        <div className="w-100 d-flex bg-white flex-column align-items-start">
             <FormModal open={modalIsOpen} modalHandler={modalHandler}>
                 {
                     modalDetHandler === 1 ? <AddContractItem/> :
@@ -73,9 +53,8 @@ const ContractTypes = () => {
                     null
                 }
             </FormModal>
-            <BreadCrumb data={breadCrumb}/>
 			<div className="w-100">
-                <div className="mb-3">
+                <div className="m-1">
                     <Button text="اضافه کردن حکم" onclick={addContract} sty="primary"/>
                 </div>
                 <DataGrid data={contracts} columns={columns} gridStyle={gridStyle}/>

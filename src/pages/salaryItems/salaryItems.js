@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from "../../utils/button"
-import BreadCrumb from '../breadCrumb/breadCrumb'
+import { DeleteIcon, EditIcon } from '../../utils/iconButton'
 import Modal from 'react-modal'
 import DataGrid from '../../utils/dataGrid'
 import classes from './salaryItems.module.css'
@@ -17,29 +17,13 @@ const SalaryItems = () => {
     const [delId,setDelId] = useState(null)
 	const [editData,setEditData] = useState(null)
 	const [modalDetHandler, setModalDetHandler] = useState(null)
-	// const breadCrumb = [
-    //     {
-    //         text: " ادمین " ,
-    //         link: "/admin",
-    //         active: 0
-    //     },
-    //     {
-    //         text: " داشبورد " ,
-    //         link: "/admin/MainPage",
-    //         active: 0
-    //     },
-    //     {
-    //         text: " آیتم های حقوق " ,
-    //         link: "/admin/MainPage/salaryItems",
-    //         active: 1
-    //     }
-    // ]
+
     const columns = [
         { name: 'title', defaultFlex:1, header: ' عنوان '},
 		{ name: 'detailName', defaultFlex:1, header: ' عنوان نمایشی '},
 		{ name: 'formula',defaultFlex:3, header: ' فرمول '},
-        { header: ' حذف ', defaultFlex:1, render:({data}) => <Button onclick={() => delModalHandler(data)} text=" حذف " sty="danger"/>},
-        { header: ' ویرایش ', defaultFlex:1, render:({data}) => <Button onclick={() => editModalHandler(data)} text=" ویرایش " sty="secondary"/>}
+        { name:'id', header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editModalHandler(data)}/>},
+        { name:'id', header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delModalHandler(data)}/>}
     ];
     const { isLoading, error, data } = useSalaryItems()
    	if (isLoading) return 'Loading...'
@@ -75,7 +59,7 @@ const SalaryItems = () => {
                 	null
             	}
 			</Modal>
-            {/* <BreadCrumb data={breadCrumb}/> */}
+    
             {true ? <SideNav active="آیتم های حقوق"/> : null}
             <div className="container-fluid">
                 <div className="d-flex justify-content-stretch bg-white py-3">

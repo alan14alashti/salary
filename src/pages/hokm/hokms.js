@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
-import BreadCrumb from "../breadCrumb/breadCrumb"
 import SearchSection from '../../utils/searchSection'
 import FormModal from "../../utils/formModal"
 import RegisterContract from "./registerContract"
@@ -11,23 +10,6 @@ const gridStyle = {
     minHeight: 550 ,
 }
 const Hokms = () => {
-    const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " حکم ها " ,
-            link: "/admin/MainPage",
-            active: 1
-        }
-    ]
     const [userName,setUserName] = useState("")
     const [searched, setSearched] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -65,7 +47,6 @@ const Hokms = () => {
                 {/* <FormModal open={modalIsOpen} modalHandler={modalHandler}>
                     <RegisterContract clickedUser={clickedUser} formProps={data.data}/>
                 </FormModal> */}
-                {/* <BreadCrumb data={breadCrumb}/> */}
                 {true ? <SideNav active="حکم ها"/> : null}
                 <div className="container-fluid">
                     <div className="d-flex justify-content-stretch bg-white py-3">

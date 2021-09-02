@@ -1,0 +1,18 @@
+.delete_icon {
+    cursor: pointer;
+    color: var(--my-danger-color);
+    font-size: 1.75rem;
+    text-align: center;
+}
+.edit_icon {
+    cursor: pointer;
+    color: var(--my-secondary-color);
+    font-size: 1.75rem;
+    text-align: center;
+}
+.add_icon {
+    text-align: center;
+    cursor: pointer;
+    color: var(--my-primary-color);
+    font-size: 1.75rem;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import OrganizationChart from "@dabeng/react-orgchart";
 import './defChart.css'
-import MyNode from "./myNode";
+import MyNode from "./myNode/myNode";
 const DefaultChart = ({ ds }) => {
     return (
         <OrganizationChart 

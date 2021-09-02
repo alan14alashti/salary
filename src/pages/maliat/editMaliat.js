@@ -5,93 +5,39 @@ import Swal from "sweetalert2";
 import { useQueryClient, useMutation } from "react-query";
 import Button from "../../utils/button";
 import { Select, Input } from "../../utils/input";
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/index.css'
-import '@inovua/reactdatagrid-community/base.css'
-import '@inovua/reactdatagrid-community/theme/default-light.css'
+import DataGrid from "../../utils/dataGrid";
+import { AddIcon } from "../../utils/iconButton";
 const gridStyle = { 
-    minHeight: 250 ,
+    minHeight: 200 ,
 }
-// const PostForm = async (body) => {
-// 	const token = localStorage.getItem("accessToken")
-//     console.log(body.body)
-	
-//     const res = await axios(`${BaseUrl}/api/Loan/EditLoanType`, {
-//         method:'POST',
-//         headers: {
-// 			"Content-Type": "application/json",
-// 			"accept": "*/*",
-// 			'Authorization':`Bearer ${token}`
-// 		},                                   
-// 		data : body.body
-// 	})
-//     return res
-// }
 
 const EditMaliat = ({ id, closeModal }) => {
     const queryClient = useQueryClient()
+    const addIconClicked = () => {
+        console.log(data.length-2)
+        setData([
+            {from:"", to: "", percent:""},
+            ...data
+        ])
+    }
     const columns =  [
-        { name: 'from', type:"number",header: ' از مبلغ ', defaultFlex:1},
-		{ name: 'to', header: ' تا مبلغ ', defaultFlex:1},
-		{ name: 'percent', header: ' درصد ', defaultFlex:1}
+        { name: 'from <input/>', render:({data}) => data.index === 0 ? <div><AddIcon onclick={addIconClicked}/></div> : <div className=""><input required="false" label="" id="from" name="from" type="number"/></div>, type:"number",header: ' از مبلغ ', defaultFlex:1},
+		{ name: 'to', render:({data}) => data.index === 0 ? null : <div className=""><input required="false" label="" id="from" name="from" type="number"/></div>, header: ' تا مبلغ ', defaultFlex:1},
+		{ name: 'percent', render:({data}) =>  data.index === 0 ? null : <div className=""><input required="false" label="" id="from" name="from" type="number"/></div>, header: ' درصد ', defaultFlex:1}
     ]
-    const data = [
+    const [data, setData] = useState([
         {from:"", to: "", percent:""},
-        {from:"", to: "", percent:""},
-        {from:"", to: "", percent:""},
-        {from:"", to: "", percent:""},
-        {from:"", to: "", percent:""},
-        {from:"", to: "", percent:""},
-        {from:"", to: "", percent:""}
-    ]
-    // const [formState, setFormState] = useState({
-	// 	id: id,
-    //     detailName: "",
-    // 	detailValue: "",
-    //     description: ""
-    // })
+        {from:"", to: "", percent:"", index:0}
+    ])
+    
     const BlurHandler = (event) => {
         let value = event.target.value
         const name = event.target.name
-        // setFormState({
-        //     ...formState,
-        //     [name]: value
-        // })
+        
     }
-    // const mutation = useMutation(PostForm, {
-    //     onSuccess: (res) => {
-    //         Swal.fire({
-    // 			title: 'Success',
-    //             text: res.data.message,
-    //     		icon: 'success',
-    // 			confirmButtonColor: '#0050F0',
-    //             timer: 3000
-    //         })
-    //         // console.log(res)
-    //         // const charts = queryClient.getQueryData("OrgChart")
-    //         // console.log(charts)
-    //         // QueryClient.refetchQueries("OrgChart")
-    //         // queryClient.refetchQueries(["OrgChart"])
-    //         queryClient.refetchQueries({ stale: true })
-    //     },
-    //     onError: (res) => {
-    //         console.log(res.response)
-    //         Swal.fire({
-    //             title: 'Error!',
-    //             text:  res.response.data.errors.Id[0],
-    //             icon: 'error',
-    //             confirmButtonColor: '#0050f0',
-    //             confirmButtonText: 'امتحان دوباره',
-    //             timer: 3000
-    //         })
-    //     }
-    // }
-    // )
 	const clickHandler = (event) => {
 		event.preventDefault();
-		// const body = JSON.stringify(formState)
-        // mutation.mutate({body: body})
+		
   	}
     return (
 		<div className="w-100 mx-auto">
@@ -108,15 +54,7 @@ const EditMaliat = ({ id, closeModal }) => {
 				    />
                 </div>
                 <div className="my-3 w-100">
-                    <ReactDataGrid
-                        editable={true}
-                        theme="default-light"
-                        idProperty="id"
-                        rtl={true}
-                        style={gridStyle}
-                        columns={columns}
-                        dataSource={data}
-                    />
+                    <DataGrid showCellBorders="false" data={data} columns={columns} gridStyle={gridStyle}/>
                 </div>
 				<div className="col-12 d-flex justify-content-between mt-3">
                     <Button type="submit" sty="secondary" text=" ثبت "/>

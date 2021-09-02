@@ -1,4 +1,5 @@
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './pages/loginPage/loginPage'
 import Register from './pages/registerPage/register'
@@ -11,6 +12,7 @@ import {
   Route,
   Link
 } from "react-router-dom"
+import Logiin from '../src/pages/loginPage/login'
 import MainPage from './pages/main/mainPage'
 import TopNav from './pages/topNav/topNav'
 import Loan from './pages/loan/loan'
@@ -29,6 +31,7 @@ import SalaryItems from './pages/salaryItems/salaryItems'
 import Mohasebe from './pages/mohasebe/mohasebe'
 import NotFound from './pages/404/notFound'
 import { UserContext } from './userContext'
+import { Flip, ToastContainer } from 'react-toastify'
 
 const queryClient = new QueryClient()
 function App() {
@@ -115,6 +118,19 @@ function App() {
                 </Switch>
             </Router>
             </UserContext.Provider>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={true}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                transition={Flip}
+            />
+            <Logiin/>
         </QueryClientProvider>
     );
 }

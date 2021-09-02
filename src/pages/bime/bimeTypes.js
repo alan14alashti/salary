@@ -5,6 +5,7 @@ import DataGrid from "../../utils/dataGrid"
 import Button from "../../utils/button"
 import classes from './bimeTypes.module.css'
 import BreadCrumb from "../breadCrumb/breadCrumb"
+import { EditIcon, DeleteIcon } from '../../utils/iconButton'
 import AddBimeTypes from "./addBime"
 const gridStyle = { 
     minHeight: 250 ,
@@ -15,35 +16,13 @@ const ListOfBimeTypes = () => {
 	const modalHandler = () => {
         setRegisterIsOpen(!registerIsOpen)
     }
-	const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " اطلاعات پایه " ,
-            link: "/admin/MainPage/baseInfo",
-            active: 0
-        },
-        {
-            text: " انواع بیمه " ,
-            link: "/admin/MainPage/baseInfo/loanTypes",
-            active: 1
-        }
-    ]
 	const columns =  [
         { name: 'name', header: ' نام ', defaultFlex:1},
 		{ name: 'kargahName', header: ' نام کارگاه ', defaultFlex:1},
 		{ name: 'karfarma', header: ' کارفرما ', defaultFlex:1},
 		{ name: 'kargahCode', header: ' کد کارگاه ', defaultFlex:1},
-		{ header: ' حذف ', defaultFlex:1, render: ({ data }) => <Button sty="danger" text="حذف"/>},
-        { header: ' ویرایش ', defaultFlex:1, render: ({ data }) => <Button sty="secondary" text="ویرایش"/>},
+		{ header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon />},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon />}
     ];
     const bimeTypes = [
         {name:"تامین اجتماعی",kargahName:"شرکت فلان",karfarma:"اقای فلانی",kargahCode:"765421"},
@@ -56,8 +35,7 @@ const ListOfBimeTypes = () => {
    	// if (error) return 'An error has occurred: ' + error.message
 	// const loanTypes = data.data
     return (
-        <div className="w-100 d-flex flex-column align-items-start">
-			<BreadCrumb data={breadCrumb}/>
+        <div className="w-100 bg-white d-flex flex-column align-items-start">
 			<Modal
 				isOpen={registerIsOpen}
 				className={`${classes.content} col-xl-3 col-lg-4 col-md-6 col-sm-8 col-10`}
@@ -66,7 +44,7 @@ const ListOfBimeTypes = () => {
 				<AddBimeTypes closeModal={modalHandler}/>
 			</Modal>
 			<div className="w-100">
-				<div className="mb-3">
+				<div className="m-1">
 					<Button text="اضافه کردن بیمه" onclick={modalHandler} sty="primary"/>
 				</div>
 				<DataGrid data={bimeTypes} columns={columns} gridStyle={gridStyle}/>

@@ -28,13 +28,3 @@
     outline: none;
     padding: 1rem;
 }
-.delete_icon {
-    cursor: pointer;
-    color: var(--my-danger-color);
-    font-size: 2rem;
-}
-.edit_icon {
-    cursor: pointer;
-    color: var(--my-secondary-color);
-    font-size: 2rem;
-}

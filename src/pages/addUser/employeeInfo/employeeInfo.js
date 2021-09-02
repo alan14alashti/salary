@@ -1,8 +1,13 @@
 import Date from "../../datePicker/datePicker" 
 import { Input, Select } from "../../../utils/input" 
 import { useOrgChart } from "../../../hooks" 
+import moment from 'jalali-moment'
 
 const EmployeeInfo = ({moreInfoHandler, commonInfoHandler, formState}) => {
+    const date = moment.from('1400/06/14 05:23:32:300', 'fa', 'YYYY/MM/DD HH:mm:ss:sss')
+    .format('YYYY-MM-DDTHH:mm:ss.sssZ'); // 2013-8-25 16:40:00
+    console.log(date)
+
     const { isLoading, error, data } = useOrgChart()
     if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message

@@ -4,7 +4,7 @@ import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
 import AddLoanTypes from "./addLoanType"
 import classes from './loanTypes.module.css'
-import BreadCrumb from "../breadCrumb/breadCrumb"
+import { DeleteIcon, EditIcon } from '../../utils\/iconButton'
 import DelLoanType from "./delLoanType"
 import EditLoanType from "./editLoanType"
 import { useListOfLoanTypes } from "../../hooks"
@@ -33,41 +33,18 @@ const ListOfLoanTypes = () => {
         setModalIsOpen(true)
         setModalDetHandler(2)
     }
-	const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " اطلاعات پایه " ,
-            link: "/admin/MainPage/baseInfo",
-            active: 0
-        },
-        {
-            text: " انواع وام " ,
-            link: "/admin/MainPage/baseInfo/loanTypes",
-            active: 1
-        }
-    ]
 	const columns =  [
 		{ name: 'detailName', header: ' نام جزییات ', defaultFlex:1},
 		{ name: 'detailValue', header: ' مقدار جزییات ', defaultFlex:1},
 		{ name: 'description', header: ' توضیحات ', defaultFlex:1},
-		{ header: ' حذف ', defaultFlex:1, render: ({ data }) => <Button onclick={() => delModalHandler(data)} sty="danger" text="حذف"/>},
-		{ header: ' ویرایش ', defaultFlex:1, render: ({ data }) => <Button onclick={() => editModalHandler(data)} sty="secondary" text="ویرایش"/>}
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editModalHandler(data)}/>},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delModalHandler(data)}/>}
     ];
     const { isLoading, error, data } = useListOfLoanTypes()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     return (
-        <div className="w-100 d-flex flex-column align-items-start">
-			<BreadCrumb data={breadCrumb}/>
+        <div className="w-100 d-flex flex-column align-items-start bg-white">
 			<Modal
 				isOpen={modalIsOpen}
 				className={`${classes.content} col-xl-3 col-lg-4 col-md-6 col-sm-8 col-10`}
@@ -81,7 +58,7 @@ const ListOfLoanTypes = () => {
             	}
 			</Modal>
 			<div className="w-100">
-				<div className="mb-3">
+				<div className="m-1">
 					<Button text="اضافه کردن وام" onclick={addModalHandler} sty="primary"/>
 				</div>
 				<DataGrid data={data.data} columns={columns} gridStyle={gridStyle}/>

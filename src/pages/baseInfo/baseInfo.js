@@ -2,26 +2,8 @@ import classes from './baseInfo.module.css'
 import { Link } from 'react-router-dom';
 import BreadCrumb from '../breadCrumb/breadCrumb';
 const BaseInfo = () => {
-    const breadCrumb = [
-        {
-            text: " ادمین " ,
-            link: "/admin",
-            active: 0
-        },
-        {
-            text: " داشبورد " ,
-            link: "/admin/MainPage",
-            active: 0
-        },
-        {
-            text: " اطلاعات پایه " ,
-            link: "/admin/MainPage/baseInfo",
-            active: 1
-        }
-    ]
+    
     return (
-        <div>
-        <BreadCrumb data={breadCrumb}/>
         <div className="container-fluid">
             <div className={`${classes.base_info_container} row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-xl-6 row-cols-lg-5 g-2`}>
                 <div className="">
@@ -64,7 +46,6 @@ const BaseInfo = () => {
                     <Link to="/MainPage/baseInfo/Maliat" type="button" className={`${classes.fill} text-decoration-none text-center`}> مالیات </Link>
                 </div>
             </div>
-        </div>
         </div>
     );
 }

@@ -10,6 +10,7 @@ import SideNav from '../sideNav/sideNav'
 import AddUser from '../addUser/addUser'
 import EditUser from '../addUser/editUser'
 import DelUser from '../addUser/delUser'
+import { DeleteIcon, EditIcon } from '../../utils/iconButton'
 const gridStyle = { 
     minHeight: 550 ,
 }
@@ -42,12 +43,12 @@ const ListOfUsers = () => {
     // const { isLoading, error, data } 
     const search = useEmployeeSearchSummery(temp)
     const columns =  [
-        { name: 'isActive', header: ' فعال ', maxWidth: 75, defaultFlex:1, render:({data}) => <input readOnly type="checkbox" checked={data.isActive}/>},
+        { name: 'isActive', maxWidth:90, header: ' فعال ', defaultFlex:1, render:({data}) => <input readOnly type="checkbox" checked={data.isActive}/>},
         { name: 'personalCode', header: ' کد پرسنلی ', defaultFlex:1},
         { name: 'name', header: ' نام ', defaultFlex:1},
-        { name: 'family', header: ' نام خانوادگی ', defaultFlex:1},
-        { header: ' ویرایش ', maxWidth:88, defaultFlex:1 ,render:({data}) => <i onClick={() => editUser(data)} className={`${classes.edit_icon} fas fa-edit`}></i>},
-        { header: ' حذف ', maxWidth: 78, defaultFlex:1 ,render:({data}) => <i onClick={() => delUser(data.id)} className={`${classes.delete_icon} fas fa-trash-alt`}></i>}
+        { name: 'family', header: ' نام خانوادگی ', defaultFlex:2},
+        { name:'id', header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editUser(data)}/>},
+        { name:'id', header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delUser(data.id)}/>}
     ];
     const searchHandler = (e) => {
         e.preventDefault()
@@ -84,32 +85,31 @@ const ListOfUsers = () => {
    	// if (error) return 'An error has occurred: ' + error.message
     return (
         <div className="d-flex h-100">
+            <Modal
+                isOpen={modalIsOpen}
+                ariaHideApp={false}
+                className={`${classes.content} col-10`}
+                overlayClassName={`${classes.overlay}`}
+            >
+                {
+                    modalDetHandler === 1 ? <AddUser closeModal={modalHandler}/> :
+                    modalDetHandler === 2 ? <EditUser closeModal={modalHandler} id={editUserId}/> :
+                    null
+                }
+            </Modal>
+            <Modal 
+                isOpen={delModalIsOpen}
+                ariaHideApp={false}
+                className={`${classes.content_del} col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10`}
+                overlayClassName={`${classes.overlay}`}
+            >
+                <DelUser closeModal={delModalHandler} id={delUserId}/>
+            </Modal>
             {true ? <SideNav active="کارمندان"/> : null}
             <div className="container-fluid">
-                <Modal
-                    isOpen={modalIsOpen}
-                    ariaHideApp={false}
-                    className={`${classes.content} col-10`}
-                    overlayClassName={`${classes.overlay}`}
-                >
-                    {
-                        modalDetHandler === 1 ? <AddUser closeModal={modalHandler}/> :
-                        modalDetHandler === 2 ? <EditUser closeModal={modalHandler} id={editUserId}/> :
-                        null
-                    }
-                </Modal>
-                <Modal 
-                    isOpen={delModalIsOpen}
-                    ariaHideApp={false}
-                    className={`${classes.content_del} col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10`}
-                    overlayClassName={`${classes.overlay}`}
-                >
-                    <DelUser closeModal={delModalHandler} id={delUserId}/>
-                </Modal>
-
                 <div className="d-flex justify-content-stretch bg-white py-3">
                     <div className="col-12">
-                        <div className="d-flex align-items-center justify-content-between ps-3 py-3">
+                        <div className="d-flex mb-2">
                             <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">
                                 <SearchSection changeHandler={changeHandler} searchHandler={searchHandler} name="userName"/>
                             </form> 

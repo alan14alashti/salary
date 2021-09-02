@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React from 'react'
 import classes from './orgChart.module.css'
 import DefaultChart from "./dechart"
 import { useOrgChart } from "../../hooks"
@@ -23,12 +23,11 @@ const OrgChart = () => {
 	}
 	const chartt = getUnflatten(response,null)
 	console.log(chartt)
+	console.log(chartt[0])
 	return (
-		<>
 		<div className={classes.chart}>
 			<DefaultChart ds={chartt[0]}/>
 		</div>
-		</>
     );
 }
 export default OrgChart;
