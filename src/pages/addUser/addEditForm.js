@@ -12,25 +12,61 @@ import EducationInfo from './educationInfo/educationInfo'
 import PhysicInfo from './physicInfo/physicInfo'
 import HokmsAddUser from './hokmsAddUser/hokmsAddUser'
 import Madarek from './madarek/madarek'
+import { useEmployeeGetAllCombo } from '../../hooks'
 
-const AddEditForm = ({closeModal, commonInfoHandler, formState, moreInfoHandler, clickedTab, formHandler, tabClickHandler}) =>{
-    // console.log(formState)
+const AddEditForm = ({closeModal, clickedTab, tabClickHandler}) =>{
+    const { isLoading, error, data } = useEmployeeGetAllCombo()
+    if (isLoading) return 'Loading...'
+   	if (error) return 'An error has occurred: ' + error.message
+
+    const genderOptions = [{ key: 'انتخاب کنید', value: ''}]
+    const isMarriedOptions = [{ key: 'انتخاب کنید', value: ''}]
+    const militaryServiceOptions = [{ key: 'انتخاب کنید', value: ''}]
+    const nationalityOptions = [{ key: 'انتخاب کنید', value: ''}]
+    const insuranceOptions = [{ key: 'انتخاب کنید', value: ''}]
+    const accountBankOptions = [{ key: 'انتخاب کنید', value: ''}] 
+    
+    data.data.map( item => {
+            switch (item.master) {
+                case 'Gender':
+                    genderOptions.push({ title : item.detailName, value : item.detailValue })
+                    break
+                case 'IsMarried':
+                    isMarriedOptions.push({ title : item.detailName, value : item.detailValue })
+                    break
+                case 'MilitaryService':
+                    militaryServiceOptions.push({ title : item.detailName, value : item.detailValue })
+                    break
+                case 'Nationality':
+                    nationalityOptions.push({ title : item.detailName, value : item.detailValue })
+                    break
+                case 'Insurance':
+                    insuranceOptions.push({ title : item.detailName, value : item.detailValue })
+                    break
+                case 'AccountBank':
+                    accountBankOptions.push({ title : item.detailName, value : item.detailValue })
+                    break
+                default:
+                    break;
+            }
+        }
+        )
     return (
-        <form onSubmit={formHandler} className={classes.add_user_container}>
-            <CommonDiv formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>
+        <div className={classes.add_user_container}>
+            <CommonDiv/>
             <TabsContainer clickedTab={clickedTab} tabClickHandler={tabClickHandler}/>
             <div className={`${classes.content_container}`}>
                 {
-                    clickedTab === 0 ? <EmployeeInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 8 ? <HokmsAddUser userName="admin" commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 9 ? <LoginInfo formState={formState} commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>: 
-                    clickedTab === 2 ? <Tamas commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 3 ? <EducationInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 4 ? <PhysicInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 1 ? <PrivateInfo commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 5 ? <Bime commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab ===  6 ? <Hesabdary commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
-                    clickedTab === 7 ? <Madarek commonInfoHandler={commonInfoHandler} moreInfoHandler={moreInfoHandler}/>:
+                    clickedTab === 0 ? <EmployeeInfo/>: //done
+                    clickedTab === 8 ? <HokmsAddUser userName="admin"/>:
+                    clickedTab === 9 ? <LoginInfo />: //done
+                    clickedTab === 2 ? <Tamas />:
+                    clickedTab === 3 ? <EducationInfo />:
+                    clickedTab === 4 ? <PhysicInfo />:
+                    clickedTab === 1 ? <PrivateInfo genderOptions={genderOptions} isMarriedOptions={isMarriedOptions} militaryServiceOptions={militaryServiceOptions} nationalityOptions={nationalityOptions} />:
+                    clickedTab === 5 ? <Bime insuranceOptions={insuranceOptions} />:
+                    clickedTab ===  6 ? <Hesabdary accountBankOptions={accountBankOptions} />:
+                    clickedTab === 7 ? <Madarek />:
                     null
                 }
             </div>
@@ -38,7 +74,7 @@ const AddEditForm = ({closeModal, commonInfoHandler, formState, moreInfoHandler,
                 <Button type="submit" sty="secondary" text=" ثبت "/>
                 <Button onclick={closeModal} sty="danger" text=" انصراف "/>
             </div>
-        </form>
+        </div>
     );
 }
 

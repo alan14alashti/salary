@@ -1,105 +1,87 @@
-import { Input ,Select } from '../../../utils/input'
-import Date from '../../datePicker/datePicker'
-const PrivateInfo = ({BlurHandler}) => {
-    const roles = [{value: 1, title:" نر "}, {value: 0, title:" ماده "}]
+import FormikControl from '../../../components/formikControl';
+
+const PrivateInfo = ({ genderOptions, isMarriedOptions, militaryServiceOptions, nationalityOptions,}) => {
+    
     return (
         <div className="container">
         <div className="px-1 px-md-5 row row-cols-1 row-cols-xl-3 row-cols-md-2 gx-5 gy-3">
             <div className="col">
-                <Date label=" تاریخ تولد "/>
-            </div>
-            <div className="col">
-                <Input
-                required="false"
-                label="نام پدر"
-                BlurHandler={BlurHandler}
-                id="dadName"
-                name="dadName"
-                type="text"
+                <FormikControl
+                    control='date'
+                    label=' تاریخ تولد '
+                    name="extraDetails.birthDate"
                 />
             </div>
             <div className="col">
-                <Input
-                    required="false"
-                    label="محل تولد"
-                    BlurHandler={BlurHandler}
-                    id="birthLoc"
-                    name="birthLoc"
+                <FormikControl
                     type="text"
+                    control='input'
+                    label=' نام پدر '
+                    name='extraDetails.fatherName'
                 />
             </div>
             <div className="col">
-                <Input
-                    required="false"
-                    label="شماره شناسنامه"
-                    BlurHandler={BlurHandler}
-                    id="shenasNameNum"
-                    name="shenasNameNum"
-                    type="number"
-                />
-            </div>
-            <div className="col">
-                <Select
-                    options={roles}
-                    defaultOpt="جنسیت"
-                    required="false"
-                    label=" نقش "
-                    changeHandler={BlurHandler}
-                    id="sex"
-                    name="sex"
-                />
-            </div>
-            <div className="col">
-                <Input
-                    required="false"
-                    label="محل صدور"
-                    BlurHandler={BlurHandler}
-                    id="sodor"
-                    name="sodor"
+                <FormikControl
                     type="text"
+                    control='input'
+                    label=' محل تولد '
+                    name='extraDetails.birthPlace'
                 />
             </div>
             <div className="col">
-                <Select
-                    options={roles}
-                    defaultOpt="انتخاب کنید"
-                    required="false"
-                    label=" تاهل "
-                    changeHandler={BlurHandler}
-                    id="married"
-                    name="married"
+                <FormikControl
+                    type="text"
+                    control='input'
+                    label=' شماره شناسنامه '
+                    name='extraDetails.identityCardNo'
                 />
             </div>
             <div className="col">
-                <Select
-                    options={roles}
-                    defaultOpt="انتخاب کنید"
-                    required="false"
-                    label=" ملیت "
-                    changeHandler={BlurHandler}
-                    id="national"
-                    name="national"
+                <FormikControl
+                    options={genderOptions}
+                    control='select'
+                    label=' جنسیت '
+                    name='extraDetails.gender'
                 />
             </div>
             <div className="col">
-                <Select
-                    options={roles}
-                    defaultOpt="انتخاب کنید"
-                    required="false"
-                    label=" سربازی "
-                    changeHandler={BlurHandler}
-                    id="khedmat"
-                    name="khedmat"
-                />
-            </div>
-            <div className="col">
-                <Input
-                    required="false"
-                    label="عایله"
-                    BlurHandler={BlurHandler}
-                    id="family"
-                    name="family"
+                <FormikControl
                     type="number"
+                    control='input'
+                    label=' محل صدور '
+                    name='extraDetails.identityCardIssued'
+                />
+            </div>
+            <div className="col">
+                <FormikControl
+                    options={isMarriedOptions}
+                    control='select'
+                    label=' تاهل '
+                    name='extraDetails.isMarried'
+                />
+            </div>
+            <div className="col">
+                <FormikControl
+                    options={nationalityOptions}
+                    control='select'
+                    label=' ملیت '
+                    name='extraDetails.nationality'
+                />
+            </div>
+            <div className="col">
+                <FormikControl
+                    options={militaryServiceOptions}
+                    control='select'
+                    label=' سربازی '
+                    name='extraDetails.militaryService'
+                />
+            </div>
+            <div className="col">
+                <FormikControl
+                    type="number"
+                    control='input'
+                    label=' عایله '
+                    name='extraDetails.familySize'
                 />
             </div>
         </div>

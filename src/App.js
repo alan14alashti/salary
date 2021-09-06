@@ -1,7 +1,7 @@
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './pages/loginPage/loginPage'
+// import Login from './pages/loginPage/loginPage'
 import Register from './pages/registerPage/register'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import ListOfUsers from './pages/listOfUsers/listOfUsers'
@@ -12,7 +12,7 @@ import {
   Route,
   Link
 } from "react-router-dom"
-import Logiin from '../src/pages/loginPage/login'
+import Login from '../src/pages/loginPage/login'
 import MainPage from './pages/main/mainPage'
 import TopNav from './pages/topNav/topNav'
 import Loan from './pages/loan/loan'
@@ -130,7 +130,6 @@ function App() {
                 pauseOnHover
                 transition={Flip}
             />
-            <Logiin/>
         </QueryClientProvider>
     );
 }

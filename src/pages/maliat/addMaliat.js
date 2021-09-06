@@ -52,7 +52,6 @@ const AddMaliat = ({ id, closeModal }) => {
                         type="text"
 				    />
                 </div>
-                
                 <div className="my-3 w-100">
                     <DataGrid showCellBorders="false" data={data} columns={columns} gridStyle={gridStyle}/>
                 </div>

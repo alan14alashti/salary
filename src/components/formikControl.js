@@ -1,10 +1,11 @@
 import React from 'react'
 import Input from './input'
+import Select from './select'
 // import Textarea from './Textarea'
 // import Select from './Select'
 // import RadioButtons from './RadioButtons'
-// import CheckboxGroup from './CheckboxGroup'
-// import DatePicker from './DatePicker'
+import CheckboxGroup from './checkBox'
+import DatePicker from './datePicker'
 // import ChakraInput from './ChakraInput'
 
 function FormikControl (props) {
@@ -15,13 +16,13 @@ function FormikControl (props) {
     case 'textarea':
     //   return <Textarea {...rest} />
     case 'select':
-    //   return <Select {...rest} />
+      return <Select {...rest} />
     case 'radio':
     //   return <RadioButtons {...rest} />
     case 'checkbox':
-    //   return <CheckboxGroup {...rest} />
+        return <CheckboxGroup {...rest} />
     case 'date':
-    //   return <DatePicker {...rest} />
+        return <DatePicker {...rest} />
     case 'chakraInput':
     //   return <ChakraInput {...rest} />
     default:

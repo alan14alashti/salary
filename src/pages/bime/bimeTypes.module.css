@@ -10,7 +10,7 @@
     margin: 1rem auto;
     border: 1px solid #ccc;
     background: #fff;
-    height: 400px;
+    height: auto;
     overflow: auto;
     -webkit-overflow-scrolling:touch;
     border-radius: 4px;

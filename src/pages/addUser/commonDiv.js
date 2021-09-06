@@ -1,52 +1,51 @@
 import classes from './addUser.module.css'
-import { Input } from '../../utils/input'
-const CommonDiv = ({moreInfoHandler, commonInfoHandler, formState}) => {
-    // console.log(formState,"common div")
+import FormikControl from '../../components/formikControl'
+
+const CommonDiv = () => {
     return (
         <div className="col-12 mb-5 d-flex">
             <div className={`${classes.common_div_add_user} col-xxl-3 xol-xl-5 col-lg-5 col-md-6 col-sm-8 col-10 row row-cols-1`}>
-                <Input
-                    value={formState.personalCode}
-                    required="true"
-                    label="شماره پرسنلی"
-                    changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
-                    id="personalCode"
-                    name="personalCode"
-                    type="number"
+
+                <FormikControl
+                    control='input'
+                    type='number'
+                    label=' کد پرسنلی '
+                    name='personalCode'
                 />
-                <Input
-                    value={formState.name}
-                    required="true"
-                    label=" نام "
-                    changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
-                    id="name"
-                    name="name"
-                    type="text"
+
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' نام '
+                    name='name'
                 />
-                <Input
-                    value={formState.family}
-                    required="true"
-                    label=" نام خانوادگی "
-                    changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
-                    id="family"
-                    name="family"
-                    type="text"
+
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' نام خانوادگی '
+                    name='family'
                 />
-                <Input
-                    required="true"
-                    label=" کد ملی "
-                    BlurHandler={moreInfoHandler}
-                    id="codeMeli"
-                    name="codeMeli"
-                    type="text"
+
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' کد ملی '
+                    name='extraDetails.nationalCode'
                 />
             </div>
-            <div className="d-flex justify-content-center mt-5 me-5">
-                <label className="mx-2" for="isActive"> فعال </label>
-                <input checked={formState.isActive} onChange={(e) => commonInfoHandler(e.target.name, e.target.checked)} type="checkbox" id="isActive" name="isActive" />
+            <div className="d-flex align-items-start justify-content-center mt-5 me-5">
+                <div className="d-flex align-items-center ">
+                    <label className="mx-2" htmlFor="isActive">فعال</label>
+                    <FormikControl
+                        control='input'
+                        type='checkbox'
+                        name='isActive'
+                    />
+                </div>
             </div>
         </div>
     );
 }
- 
+
 export default CommonDiv;

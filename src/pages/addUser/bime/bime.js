@@ -1,31 +1,25 @@
-import { Input } from "../../../utils/input";
-const Bime = ({BlurHandler}) => {
+import FormikControl from "../../../components/formikControl";
+const Bime = ({ insuranceOptions }) => {
     return (
         <div className="container">
         <div className="col-xl-3 col-lg-5 col-md-7 col-sm-9 col-11 row row-cols-1">
-            <Input
-                required=" flase "
-                label="کد کارگاه"
-                BlurHandler={BlurHandler}
-                id="kargahCode"
-                name="kargahCode"
-                type="text"
+            <FormikControl
+                options={insuranceOptions}
+                control='select'
+                label=' بیمه '
+                name='extraDetails.workshopCode'
             />
-            <Input
-                required="flase"
-                label=" شماره بیمه "
-                BlurHandler={BlurHandler}
-                id="bimeNum"
-                name="bimeNum"
-                type="text"
+            <FormikControl
+                control='input'
+                type='text'
+                label=' شماره بیمه '
+                name='extraDetails.insuranceNo'
             />
-            <Input
-                required="flase"
-                label=" کد شغل "
-                BlurHandler={BlurHandler}
-                id="jobCode"
-                name="jobCode"
-                type="text"
+            <FormikControl
+                control='input'
+                type='text'
+                label=' کد شغل '
+                name='extraDetails.jobNo'
             />
         </div>
         </div>

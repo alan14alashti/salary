@@ -43,6 +43,14 @@ const useEmployeeGetAllSummery = () => {
     }))
 }
 
+const useEmployeeGetAllCombo = () => {
+    return useQuery('employeeGetAllCombo', useRequest({
+        url:"api/Employee/EmployeeGetAllCombo",
+        method:"GET",
+        body:""
+    }))
+}
+
 const useEmployeeSearchSummery = (temp) => {
     return useQuery(["employeeSearchByTemp", temp],useRequest({
         url:`api/Employee/EmployeeSearchSummery?temp=${temp}`,
@@ -198,7 +206,16 @@ const useListOfRoles = () => {
 	}))
 }
 
+const useInsuranceGetAlls = () => {
+    return useQuery('insuranceGetAlls', useRequest({
+		url: 'api/Insurance/InsuranceGetAll',
+		method: 'GET',
+		body: "",
+	}))
+}
+
 export {
+    useInsuranceGetAlls,
     useListOfContractTypes,
     useListOfUsers,
     useFindHokmsByUser,
@@ -220,5 +237,6 @@ export {
     useLocationChart,
     useAddLocationChart,
     useDeleteLocationChart,
-    useEditLocationChart
+    useEditLocationChart,
+    useEmployeeGetAllCombo
 }

@@ -22,7 +22,7 @@ const Date = ({label}) => {
     const [selectedDay, setSelectedDay] = useState(null);
     return (
         <DatePicker
-            calendarPopperPosition='auto'
+            calendarPopperPosition='top'
             renderInput={renderCustomInput}
             value={selectedDay}
             onChange={setSelectedDay}

@@ -1,16 +1,22 @@
 import Date from "../../datePicker/datePicker" 
-import { Input, Select } from "../../../utils/input" 
-import { useOrgChart } from "../../../hooks" 
-import moment from 'jalali-moment'
+import FormikControl from "../../../components/formikControl"
+import { useLocationChart, useOrgChart } from "../../../hooks" 
 
-const EmployeeInfo = ({moreInfoHandler, commonInfoHandler, formState}) => {
-    const date = moment.from('1400/06/14 05:23:32:300', 'fa', 'YYYY/MM/DD HH:mm:ss:sss')
-    .format('YYYY-MM-DDTHH:mm:ss.sssZ'); // 2013-8-25 16:40:00
-    console.log(date)
+const EmployeeInfo = () => {
 
+    const locationChart = useLocationChart()
     const { isLoading, error, data } = useOrgChart()
+    if (locationChart.isLoading) return 'Loading...'
+   	if (locationChart.error) return 'An error has occurred: ' + error.message
     if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
+    const locChart = []
+    locationChart.data.data.map((item) => {
+        locChart.push({
+            value: item.id,
+            title: item.unitName
+        })
+    })
     const orgChart = []
     data.data.map((item) => {
         orgChart.push({
@@ -19,49 +25,55 @@ const EmployeeInfo = ({moreInfoHandler, commonInfoHandler, formState}) => {
         })
     })
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="px-5 row row-cols-md-2 row-cols-1 gx-5 gy-3">
+
                 <div className="col">
-                    <Date label=" تاریخ استخدام "/>
-                </div>
-                <div className="col">
-                    <Date label=" تاریخ تسویه "/>
-                </div>
-                <div className="col">
-                    <Date label=" تاریخ ساعت زنی "/>
-                </div>
-                <div className="col">
-                    <Input
-                        value={formState.attendanceCode}
-                        required="flase"
-                        label="کد ساعت زنی"
-                        changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
-                        id="attendanceCode"
-                        name="attendanceCode"
-                        type="number"
+                    <FormikControl
+                    control='date'
+                    label=' تاریخ استخدام '
+                    name='hireDate'
                     />
                 </div>
+
                 <div className="col">
-                    <Select
-                        value={formState.positionId}
+                    <FormikControl
+                    control='date'
+                    label=' تاریخ تسویه '
+                    name='leaveDate'
+                    />
+                </div>
+
+                <div className="col">
+                    <FormikControl
+                    control='date'
+                    label=' تاریخ ساعت زنی '
+                    name='attendanceStart'
+                    />
+                </div>
+
+                <div className="col">
+                    <FormikControl
+                    control='input'
+                    type='number'
+                    label=' کد ساعت زنی '
+                    name='attendanceCode'
+                    />
+                </div>
+                
+                <div className="col">
+                    <FormikControl
                         options={orgChart}
-                        defaultOpt="انتخاب کنید"
-                        required="false"
+                        control='select'
                         label=" انتخاب سمت "
-                        changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
-                        id="positionId"
                         name="positionId"
                     />
                 </div>
                 <div className="col">
-                    <Select
-                        value={formState.locationId}
-                        options={orgChart}
-                        defaultOpt="انتخاب کنید"
-                        required="false"
+                    <FormikControl
+                        options={locChart}
+                        control='select'
                         label=" محل خدمت "
-                        changeHandler={(e) => commonInfoHandler(e.target.name, e.target.value)}
-                        id="locationId"
                         name="locationId"
                     />
                 </div>

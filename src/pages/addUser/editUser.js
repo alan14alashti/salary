@@ -126,10 +126,8 @@ const EditUser = ({closeModal, id}) => {
     
 	const formHandler = (event) => {
 		event.preventDefault();
-        console.log(formState)
         mutation.mutate(formState, {
             onSuccess: (res) => {
-                console.log(res)
                 Swal.fire({
                     title: 'Success',
                     text: " کارمند با موفقیت ویرایش شد ", 
@@ -145,7 +143,6 @@ const EditUser = ({closeModal, id}) => {
                 queryClient.refetchQueries({ stale: true })
             },
             onError: (error) => {
-                console.log(error.response)
                 Swal.fire({
                     title: 'Error!',
                     text: ' مشکلی وجود دارد ',

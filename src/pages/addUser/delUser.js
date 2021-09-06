@@ -5,7 +5,6 @@ import useRequest from '../../components/fetchReq'
 import { useDelEmployee } from "../../hooks"
 
 const DelUser = ({ closeModal, id }) => {
-    console.log(id)
     const queryClient = useQueryClient()
     const mutation = useDelEmployee(id)
     

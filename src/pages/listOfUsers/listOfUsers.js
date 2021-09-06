@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import classes from './listOfUsers.module.css'
 import Button from "../../utils/button"
 import BreadCrumb from "../breadCrumb/breadCrumb"
-import { useEmployeeGetAllSummery, useListOfUsers, useEmployeeSearchSummery, useSalaryItems, useEmployeeSearch } from "../../hooks"
+import { useEmployeeGetAllSummery, useListOfUsers, useEmployeeSearchSummery, useSalaryItems, useEmployeeSearch, useEmployeeGetAllCombo } from "../../hooks"
 import DataGrid from '../../utils/dataGrid'
 import SideNav from '../sideNav/sideNav'
 import AddUser from '../addUser/addUser'
@@ -19,43 +19,20 @@ const ListOfUsers = () => {
     const [delModalIsOpen, setDelModalIsOpen] = useState(false)
     const [delUserId, setDelUserId] = useState(null)
     const [editUserId, setEditUserId] = useState(null)
-    // const breadCrumb = [
-    //     {
-    //         text: " ادمین " ,
-    //         link: "/admin",
-    //         active: 0
-    //     },
-    //     {
-    //         text: " داشبورد " ,
-    //         link: "/admin/MainPage",
-    //         active: 0
-    //     },
-    //     {
-    //         text: " کارمندان " ,
-    //         link: "/admin/MainPage",
-    //         active: 1
-    //     }
-    // ]
     const [modalDetHandler, setModalDetHandler] = useState(null)
     const [searched, setSearched] = useState([])
-    const [temp ,setTemp] = useState()
-    // const mutation = useEmployeeSearchSummery(temp)
-    // const { isLoading, error, data } 
+    const [temp ,setTemp] = useState() 
     const search = useEmployeeSearchSummery(temp)
     const columns =  [
         { name: 'isActive', maxWidth:90, header: ' فعال ', defaultFlex:1, render:({data}) => <input readOnly type="checkbox" checked={data.isActive}/>},
         { name: 'personalCode', header: ' کد پرسنلی ', defaultFlex:1},
         { name: 'name', header: ' نام ', defaultFlex:1},
         { name: 'family', header: ' نام خانوادگی ', defaultFlex:2},
-        { name:'id', header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editUser(data)}/>},
-        { name:'id', header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delUser(data.id)}/>}
+        { header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editUser(data)}/>},
+        { header: '#', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delUser(data.id)}/>}
     ];
     const searchHandler = (e) => {
         e.preventDefault()
-        // mutation.mutate(temp, {onSuccess: (res) => {
-        //     setSearched(res.data)
-        // }})
-        
     }
     const changeHandler = (e) => {
         setTemp(e.target.value)
@@ -80,7 +57,7 @@ const ListOfUsers = () => {
         setModalDetHandler(1)
         setModalIsOpen(true)
     }
-    // const { isLoading, error, data } = useEmployeeGetAllSummery()
+    // const { isLoading, error, data } = useEmployeeGetAllCombo()
    	// if (isLoading) return 'Loading...'
    	// if (error) return 'An error has occurred: ' + error.message
     return (

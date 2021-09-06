@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@dabeng/react-orgchart": "^1.0.0",
+    "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
     "@inovua/reactdatagrid-community": "^4.1.24",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.14.1",

@@ -1,78 +1,63 @@
-import { Input, Select } from "../../../utils/input";
-const Hesabdary = ({BlurHandler}) => {
+import FormikControl from '../../../components/formikControl'
 
+const Hesabdary = ({ accountBankOptions }) => {
     return (
-        <div className="container">
-        <div className="px-5 row row-cols-xl-3 row-cols-md-2 row-cols-1 gx-5 gy-3 ">
+        <div className="container-fluid">
+        <div className="px-5 row row-cols-xxl-3 row-cols-md-2 row-cols-1 gx-5 gy-3">
             <div className="col">
-                <Input
-                    required=" flase "
-                    label=" کد تفصیلی "
-                    BlurHandler={BlurHandler}
-                    id="kargahCode"
-                    name="kargahCode"
-                    type="text"
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' کد تفضیلی '
+                    name='extraDetails.detailedCode'
                 />
             </div> 
             <div className="col"> 
-                <Input
-                    required="flase"
-                    label=" کد مرکز هزینه "
-                    BlurHandler={BlurHandler}
-                    id="bimeNum"
-                    name="bimeNum"
-                    type="text"
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' کد مرکز هزینه '
+                    name='extraDetails.costCenterCode'
                 />
             </div>
             <div className="col">
-                <Input
-                    required="flase"
-                    label=" شماره حساب "
-                    BlurHandler={BlurHandler}
-                    id="jobCode"
-                    name="jobCode"
-                    type="text"
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' شماره حساب '
+                    name='extraDetails.accountNo'
                 />
             </div>
             <div className="col">
-                <Select
-                    options={[{value: 1, title:" انصار "}, {value: 0, title:" سپه "}]}
-                    defaultOpt="انتخاب کنید"
-                    required="false"
-                    label=" انتخاب بانک "
-                    changeHandler={BlurHandler}
-                    id="bank"
-                    name="bank"
+                <FormikControl
+                    control='select'
+                    label=' انتخاب بانک '
+                    name='extraDetails.accountBank'
+                    options={accountBankOptions}
                 />
             </div>
             <div className="col">
-                <Input
-                    required="flase"
-                    label=" شماره کارت "
-                    BlurHandler={BlurHandler}
-                    id="jobCode"
-                    name="jobCode"
-                    type="text"
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' شماره کارت '
+                    name='extraDetails.cardNo'
                 />
             </div>
             <div className="col">
-                <Input
-                    required="flase"
-                    label=" بانک کارت "
-                    BlurHandler={BlurHandler}
-                    id="jobCode"
-                    name="jobCode"
-                    type="text"
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' بانک کارت '
+                    name='extraDetails.cardBank'
                 />
             </div>
             <div className="col">
-                <Input
-                    required="flase"
-                    label=" شماره شبا "
-                    BlurHandler={BlurHandler}
-                    id="jobCode"
-                    name="jobCode"
-                    type="text"
+                <FormikControl
+                    control='input'
+                    type='text'
+                    label=' شماره شبا '
+                    name='extraDetails.shabaNo'
                 />
             </div>
         </div>
