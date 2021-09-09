@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-import { Formik } from 'formik'
 import * as Yup from 'yup'
 import React, { useState } from "react"
 import { toast } from "react-toastify"
@@ -49,15 +48,12 @@ const AddBimeTypes = ({closeModal}) => {
         mutation.mutate()
   	}
     return (
-		<Formik
+		<AddBimeTypeView
 			initialValues={initialValues}
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
-        >
-			{ formik => (
-				<AddBimeTypeView closeModal={closeModal}/>
-			)}
-        </Formik> 
+			closeModal={closeModal}
+        />
     );
 }
 export default AddBimeTypes;

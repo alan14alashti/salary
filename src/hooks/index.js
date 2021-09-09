@@ -3,20 +3,19 @@ import useRequest from "../components/fetchReq"
 
 const useListOfContractTypes = () => {
   return useQuery('listOfContractTypes', useRequest({
-    url:"api/Contract/ListOfContractDetails",
-    method:"POST",
+    url:"api/Contract/ContractDetailTypesGetAll",
+    method:"GET",
     body:""
     })
     )
 }
 
-const useFindHokmsByUser = (userName) => {
-    return useMutation(useRequest({
-        url:`api/Contract/FindContractByUser?username=${userName}`,
-        method:"POST",
-        body:""
-    })
-    )
+const useContractFindByUser = (temp) => {
+    return useQuery(["contractFindByUser", temp],useRequest({
+        url:`api/Contract/ContractFindByUser?CodeOrFamily=${temp}`,
+        method:"GET",
+        body: ''
+    }))
 }
 
 const useFindLoanByUser = (userId) => {
@@ -236,7 +235,7 @@ export {
     useInsuranceGetAlls,
     useListOfContractTypes,
     useListOfUsers,
-    useFindHokmsByUser,
+    useContractFindByUser,
     useListOfLoanTypes,
     useFindLoanByUser,
     useOrgChart,

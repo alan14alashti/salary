@@ -60,8 +60,8 @@ const AddMaliat = ({ closeModal }) => {
         .of(
         Yup.object().shape({
             taxPercent: Yup.number().required('فیلد اجباری').min(0,'حداقل 0').max(100, 'حداکثر 100').nullable(),
-            fromIncome: Yup.number().required('فیلد اجباری').lessThan(Yup.ref('toIncome'),'از فیلد تا مبلغ بیشتر است').positive('مثبت!').nullable(),
-            toIncome: Yup.number().required('فیلد اجباری').positive('مثبت!').nullable()
+            fromIncome: Yup.number().required('فیلد اجباری').lessThan(Yup.ref('toIncome'),'از فیلد تا مبلغ بیشتر است').min(0,'مثبت!').nullable(),
+            toIncome: Yup.number().required('فیلد اجباری').min(0,'مثبت!').nullable()
         },['fromIncome', 'toIncome'])
         )
         .required('')

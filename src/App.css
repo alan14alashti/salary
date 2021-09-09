@@ -34,10 +34,6 @@ ul li {
   list-style: none;
 }
 input,
-/* input[type='email'],
-input[type='password'],
-input[type='number'],
-input[type='date'], */
 textarea,
 select {
     width: 100%;
@@ -58,6 +54,7 @@ label {
     font-weight: 500;
     font-size: 1.2rem;
     margin: 0 0 .3rem 0;
+    cursor: pointer;
 }
 .text-error {
     display: flex;
@@ -66,10 +63,7 @@ label {
     margin: .25rem 0 0 0;
     color: var(--my-danger-color);
 }
-/* input[type='text']:focus,
-input[type='email']:focus,
-input[type='password']:focus,
-input[type='number']:focus, */
+
 input:focus,
 textarea:focus,
 select:focus {

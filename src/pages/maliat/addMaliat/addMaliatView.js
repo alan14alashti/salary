@@ -10,7 +10,6 @@ const gridStyle = {
 }
 
 const AddMaliatView = ({ closeModal, validationSchema, initialValues, onSubmit }) => {
-
     const [taxDetails, setTaxDetails] = useState([
         {
             fromIncome: 0,
@@ -66,7 +65,7 @@ const AddMaliatView = ({ closeModal, validationSchema, initialValues, onSubmit }
                             <DataGrid rowHeight={75} data={taxDetails} columns={columns} gridStyle={gridStyle}/>
                         </div>
                         <div className="col-12 d-flex justify-content-between mt-3">
-                            <Button disabled={!formik.isValid || formik.isSubmitting} type="submit" sty="secondary" text=" ثبت "/>
+                            <Button disabled={formik.isSubmitting} type="submit" sty="secondary" text=" ثبت "/>
                             <Button onclick={closeModal} sty="danger" text=" انصراف "/>
                         </div>
                     </div>

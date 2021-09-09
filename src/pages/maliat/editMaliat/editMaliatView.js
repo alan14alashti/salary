@@ -65,7 +65,7 @@ const EditMaliatView = ({ data, closeModal, validationSchema, initialValues, onS
                             <DataGrid rowHeight={75} data={taxDetails} columns={columns} gridStyle={gridStyle}/>
                         </div>
                         <div className="col-12 d-flex justify-content-between mt-3">
-                            <Button disabled={!formik.isValid || formik.isSubmitting} type="submit" sty="secondary" text=" ثبت "/>
+                            <Button disabled={formik.isSubmitting} type="submit" sty="secondary" text=" ثبت "/>
                             <Button onclick={closeModal} sty="danger" text=" انصراف "/>
                         </div>
                     </div>

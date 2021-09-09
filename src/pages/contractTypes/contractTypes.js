@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from 'react'
+import React, { cloneElement, useState } from 'react'
 import DataGrid from '../../utils/dataGrid'
 import Button from "../../utils/button"
-import BreadCrumb from "../breadCrumb/breadCrumb"
-import DelContractType from "./delContractType"
-import FormModal from "../../utils/formModal"
-import EditContractItem from "./editContractType"
-import AddContractItem from "./addContratType"
+import DelContractType from "./delContractType/delContractType"
+import Modal from 'react-modal'
+import classes from './contractType.module.css'
+import EditContractType from "./editContractType/editContractType"
+import AddContractType from "./addContractType/addContratType"
 import { useListOfContractTypes } from "../../hooks"
 import { EditIcon, DeleteIcon } from '../../utils/iconButton'
 const gridStyle = { 
@@ -16,9 +16,9 @@ const ContractTypes = () => {
     const [modalDetHandler, setModalDetHandler] = useState(null)
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [delContractId, setDelContractId] = useState(null)
-    const [editContractId, setEditContractId] = useState(null)
-    const modalHandler = () => {
-        setModalIsOpen(!modalIsOpen)
+    const [editContractData, setEditContractData] = useState(null)
+    const closeModal = () => {
+        setModalIsOpen(false)
     }
     const delContract = (data) => {
         setDelContractId(data.id)
@@ -26,7 +26,7 @@ const ContractTypes = () => {
         setModalIsOpen(true)
     }
     const editContract = (data) => {
-        setEditContractId(data.id)
+        setEditContractData(data)
         setModalDetHandler(2)
         setModalIsOpen(true)
     }
@@ -35,9 +35,9 @@ const ContractTypes = () => {
         setModalIsOpen(true)
     }
 	const columns =  [
-        { name: 'name', header: ' نام حکم ', defaultFlex: 1},
-        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon />},
-        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon />}
+        { name: 'detailName', header: ' نام حکم ', defaultFlex: 1},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editContract(data)}/>},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delContract(data)}/>}
     ];
     const { isLoading, error, data } = useListOfContractTypes()
    	if (isLoading) return 'Loading...'
@@ -45,14 +45,18 @@ const ContractTypes = () => {
     const contracts = data.data
     return ( 
         <div className="w-100 d-flex bg-white flex-column align-items-start">
-            <FormModal open={modalIsOpen} modalHandler={modalHandler}>
+            <Modal
+				isOpen={modalIsOpen}
+				className={`${classes.content} col-xxl-3 col-xl-4 col-lg-5 col-sm-6 col-10`}
+           		overlayClassName={`${classes.overlay}`}
+			>
                 {
-                    modalDetHandler === 1 ? <AddContractItem/> :
-                    modalDetHandler === 0 ? <DelContractType id={delContractId}/> :
-                    modalDetHandler === 2 ? <EditContractItem id={editContractId}/> :
+                    modalDetHandler === 1 ? <AddContractType closeModal={closeModal}/> :
+                    modalDetHandler === 0 ? <DelContractType closeModal={closeModal} id={delContractId}/> :
+                    modalDetHandler === 2 ? <EditContractType closeModal={closeModal} data={editContractData}/> :
                     null
                 }
-            </FormModal>
+            </Modal>
 			<div className="w-100">
                 <div className="m-1">
                     <Button text="اضافه کردن حکم" onclick={addContract} sty="primary"/>

@@ -1,7 +1,6 @@
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-// import Login from './pages/loginPage/loginPage'
 import Register from './pages/registerPage/register'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import ListOfUsers from './pages/listOfUsers/listOfUsers'
@@ -18,11 +17,10 @@ import TopNav from './pages/topNav/topNav'
 import Loan from './pages/loan/loan'
 import BaseInfo from './pages/baseInfo/baseInfo'
 import ListOfLoanTypes from './pages/loan/loanTypes'
-import ContractItems from './pages/contractPage/contractTypes'
-import Hokms from './pages/hokm/hokms'
+import ContractTypes from './pages/contractTypes/contractTypes';
+import Contracts from './pages/contracts/contracts'
 import OrgChart from './pages/orgChart/orgChart'
 import ListOfRoles from './pages/createRole/listOfRoles'
-import AddUser from './pages/addUser/addUser'
 import Mosaede from './pages/mosaede/mosaede'
 import ListOfBimeTypes from './pages/bime/bimeTypes'
 import MahalKhedmat from './pages/mahalKhedmat/mahalKhedmat'
@@ -90,11 +88,11 @@ function App() {
                     </Route>
                     <Route path={'/MainPage/baseInfo/contractItems'}>
                         <TopNav/>
-                        <ContractItems/>
+                        <ContractTypes/>
                     </Route>
                     <Route path={'/MainPage/hokms'}>
                         <TopNav/>
-                        <Hokms/>
+                        <Contracts/>
                     </Route>
                     <Route path={'/MainPage/baseInfo/OrganizationChart'}>
                         <TopNav/>
