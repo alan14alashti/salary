@@ -239,7 +239,7 @@ const AddUser = ({closeModal}) => {
         
         mutation.mutate(formState, {
             onSuccess: (res) => {
-                console.log(res)
+                
                 toast.success(" کارمند با موفقیت ثبت شد ",)
 
                 // console.log(res)

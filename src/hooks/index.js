@@ -214,7 +214,25 @@ const useInsuranceGetAlls = () => {
 	}))
 }
 
+const useTaxGetAll = () => {
+    return useQuery('taxGetAll', useRequest({
+		url: 'api/Tax/TaxGetAll',
+		method: 'GET',
+		body: "",
+	}))
+}
+
+const useTaxGetById = (id) => {
+    return useQuery(['taxGetById',id],useRequest({
+        url:`api/Tax/TaxGetById?id=${id}`,
+        method:"GET",
+        body:""
+    }))
+}
+
 export {
+    useTaxGetAll,
+    useTaxGetById,
     useInsuranceGetAlls,
     useListOfContractTypes,
     useListOfUsers,

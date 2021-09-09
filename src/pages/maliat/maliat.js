@@ -1,31 +1,27 @@
-import { useQuery, useMutation } from "react-query"
-import axios from "axios"
-import { BaseUrl } from "../../utils/baseUrl"
 import React, { useState, useCallback } from 'react'
 import Button from "../../utils/button"
 import Modal from 'react-modal'
 import DataGrid from "../../utils/dataGrid"
 import classes from './maliat.module.css'
-import DelMaliat from "./delMaliat"
-import EditMaliat from "./editMaliat"
-import AddMaliat from "./addMaliat"
+import DelMaliat from "./delMaliat/delMaliat"
+import EditMaliat from "./editMaliat/editMaliat"
+import AddMaliat from "./addMaliat/addMaliat"
 import { DeleteIcon, EditIcon } from "../../utils/iconButton"
+import { useTaxGetAll } from "../../hooks"
+
 const gridStyle = { 
-    minHeight: 250 ,
+    minHeight: 650 ,
 }
 
-
 const Maliat = () => {
+    const { isLoading, error, data } = useTaxGetAll()
 
     const columns =  [
-        { name: 'name', header: ' نام ', defaultFlex:1},
-        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={editModalHandler}/>},
-        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={delModalHandler}/>}
+        { name: 'taxTitle', header: ' نام جدول مالیاتی ', defaultFlex:1},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editModalHandler(data)}/>},
+        { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delModalHandler(data)}/>}
     ]
-    const maliatJadval = [
-        {name: "جدول مالیاتی سال 99"},
-        {name: "جدول مالیاتی سال 98" }
-    ]
+    
     const [delId,setDelId] = useState(null)
 	const [editId,setEditId] = useState(null)
 	const [modalDetHandler, setModalDetHandler] = useState(null)
@@ -47,7 +43,8 @@ const Maliat = () => {
         setModalIsOpen(true)
         setModalDetHandler(2)
     }
-    
+    if (isLoading) return 'Loading...'
+   	if (error) return 'An error has occurred: ' + error.message
     return (
         <div className="w-100 d-flex flex-column align-items-start">
 			<Modal
@@ -66,7 +63,7 @@ const Maliat = () => {
                 <div className="m-1">
                     <Button onclick={addModalHandler} text="اضافه کردن جدول مالیاتی" sty="primary"/>
                 </div>
-                <DataGrid data={maliatJadval} columns={columns} gridStyle={gridStyle}/>
+                <DataGrid data={data.data} columns={columns} gridStyle={gridStyle}/>
             </div>
         </div>
     );

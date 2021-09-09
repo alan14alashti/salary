@@ -60,7 +60,9 @@ label {
     margin: 0 0 .3rem 0;
 }
 .text-error {
-    font-size: .85rem;
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
     margin: .25rem 0 0 0;
     color: var(--my-danger-color);
 }
