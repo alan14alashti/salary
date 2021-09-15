@@ -14,5 +14,5 @@
     -webkit-overflow-scrolling:touch;
     border-radius: 4px;
     outline: none;
-    padding: 20px;
+    padding: 1rem 1.25rem .25rem 1.25rem;
 }

@@ -44,6 +44,21 @@ select {
     background-color:var(--my-page-bg-color);
     border-radius: 3px;
 }
+input[type='checkbox'] {
+    width: auto;
+}
+
+/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete  for remove default chrome when input fill*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+    /* background-color: #EFFAFF !important;
+    color: #1B1A27 !important; */
+    -webkit-box-shadow: 0 0 0 1000px #EFFAFF inset !important;
+    -webkit-text-fill-color: #1B1A27 !important;
+}
 .form-item-container {
     display: flex;
     flex-direction: column;
@@ -56,6 +71,7 @@ label {
     margin: 0 0 .3rem 0;
     cursor: pointer;
 }
+
 .text-error {
     display: flex;
     align-items: center;

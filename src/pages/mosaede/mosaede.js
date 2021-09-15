@@ -79,7 +79,7 @@ const Mosaede = () => {
                     <AddMosaede closeModal={modalHandler}/>
                 </Modal>
                 {/* <BreadCrumb data={breadCrumb}/> */}
-                <div className="d-flex justify-content-stretch bg-white py-3">
+                <div className="d-flex justify-content-stretch bg-white pt-3">
                     <div className="col-12">
                         <div className="d-flex align-items-center bg-white justify-content-between ps-3 py-3">
                             <form onSubmit={searchHandler} className="col-8 col-sm-9 col-md-10">

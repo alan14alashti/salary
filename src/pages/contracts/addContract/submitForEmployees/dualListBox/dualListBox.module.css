@@ -1,0 +1,6 @@
+.list_container {
+    border: 1px solid #f1f1f1;
+    width: 14rem;
+    height: 18rem;
+    overflow-y: scroll;
+}

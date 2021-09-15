@@ -16,12 +16,21 @@ const changeFormat = (objDate) => {
     let strDate = objDate.year + '/' + objDate.month + '/' + objDate.day
     console.log(strDate)
     const date = moment.from(`${strDate} 00:00:00:000`, 'fa', 'YYYY/MM/DD HH:mm:ss:sss')
-    .format('YYYY-MM-DDTHH:mm:ss.sssZ');
+    .format('YYYY-MM-DDTHH:mm:ss.sss');
     return date 
 }
 
-export {
+const changeJalalyToMilady = (dateTime) => {
+    const date = moment(dateTime, 'YYYY-MM-DDTHH:mm:ss')
+    .locale('fa')
+    .format('YYYY/MM/DD');
+    return date 
+}
 
+
+
+export {
+    changeJalalyToMilady,
     useGetNowJalalyObj,
     changeFormat
 

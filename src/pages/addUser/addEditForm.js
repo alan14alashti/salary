@@ -19,12 +19,12 @@ const AddEditForm = ({closeModal, clickedTab, tabClickHandler}) =>{
     if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
 
-    const genderOptions = [{ key: 'انتخاب کنید', value: ''}]
-    const isMarriedOptions = [{ key: 'انتخاب کنید', value: ''}]
-    const militaryServiceOptions = [{ key: 'انتخاب کنید', value: ''}]
-    const nationalityOptions = [{ key: 'انتخاب کنید', value: ''}]
-    const insuranceOptions = [{ key: 'انتخاب کنید', value: ''}]
-    const accountBankOptions = [{ key: 'انتخاب کنید', value: ''}] 
+    const genderOptions = [{ title: 'انتخاب کنید', value: ''}]
+    const isMarriedOptions = [{ title: 'انتخاب کنید', value: ''}]
+    const militaryServiceOptions = [{ title: 'انتخاب کنید', value: ''}]
+    const nationalityOptions = [{ title: 'انتخاب کنید', value: ''}]
+    const insuranceOptions = [{ title: 'انتخاب کنید', value: ''}]
+    const accountBankOptions = [{ title: 'انتخاب کنید', value: ''}] 
     
     data.data.map( item => {
             switch (item.master) {

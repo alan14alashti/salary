@@ -35,11 +35,10 @@ const CommonDiv = () => {
                 />
             </div>
             <div className="d-flex align-items-start justify-content-center mt-5 me-5">
-                <div className="d-flex align-items-center ">
-                    <label className="mx-2" htmlFor="isActive">فعال</label>
+                <div className="">
                     <FormikControl
-                        control='input'
-                        type='checkbox'
+                        label="فعال"
+                        control='checkboxx'
                         name='isActive'
                     />
                 </div>

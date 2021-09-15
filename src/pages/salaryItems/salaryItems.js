@@ -62,7 +62,7 @@ const SalaryItems = () => {
     
             {true ? <SideNav active="آیتم های حقوق"/> : null}
             <div className="container-fluid">
-                <div className="d-flex justify-content-stretch bg-white py-3">
+                <div className="d-flex justify-content-stretch bg-white pt-3">
                     <div className="col-12">
                         <div className="mb-3">
                             <Button onclick={addModalHandler} text="اضافه کردن آیتم حقوق" sty="primary"/>

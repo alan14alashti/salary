@@ -31,7 +31,6 @@ const AddContractItem = ({closeModal}) => {
 		detailName: Yup.string().required('فیلد اجباری است')
     })
 	const onSubmit = (values) => {
-        console.log(values)
         setFormState({
             ...formState,
             detailName: values.detailName

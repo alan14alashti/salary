@@ -13,7 +13,7 @@ function Select (props) {
             <Field as='select' id={name} name={name} {...rest}>
                 {options.map(option => {
                 return (
-                    <option key={option.value} value={option.value}>
+                    <option hidden={option.value === ''} key={option.value} value={option.value}>
                         {option.title}
                     </option>
                 )

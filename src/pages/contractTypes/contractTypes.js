@@ -6,7 +6,7 @@ import Modal from 'react-modal'
 import classes from './contractType.module.css'
 import EditContractType from "./editContractType/editContractType"
 import AddContractType from "./addContractType/addContratType"
-import { useListOfContractTypes } from "../../hooks"
+import { useListOfContractDetailsTypes } from "../../hooks"
 import { EditIcon, DeleteIcon } from '../../utils/iconButton'
 const gridStyle = { 
     minHeight: 450 ,
@@ -39,7 +39,7 @@ const ContractTypes = () => {
         { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <EditIcon onclick={() => editContract(data)}/>},
         { header: ' # ', maxWidth: 60, defaultFlex:1 ,render:({data}) => <DeleteIcon onclick={() => delContract(data)}/>}
     ];
-    const { isLoading, error, data } = useListOfContractTypes()
+    const { isLoading, error, data } = useListOfContractDetailsTypes()
    	if (isLoading) return 'Loading...'
    	if (error) return 'An error has occurred: ' + error.message
     const contracts = data.data

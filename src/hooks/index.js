@@ -1,8 +1,8 @@
 import { useQuery, useMutation } from "react-query"
 import useRequest from "../components/fetchReq"
 
-const useListOfContractTypes = () => {
-  return useQuery('listOfContractTypes', useRequest({
+const useListOfContractDetailsTypes = () => {
+  return useQuery('listOfContractDetailsTypes', useRequest({
     url:"api/Contract/ContractDetailTypesGetAll",
     method:"GET",
     body:""
@@ -10,13 +10,31 @@ const useListOfContractTypes = () => {
     )
 }
 
-const useContractFindByUser = (temp) => {
-    return useQuery(["contractFindByUser", temp],useRequest({
-        url:`api/Contract/ContractFindByUser?CodeOrFamily=${temp}`,
-        method:"GET",
-        body: ''
-    }))
+const useHireTypesGetAll = () => {
+    return useQuery('listOfHireTypes', useRequest({
+      url:"api/Contract/HireTypesGetAll",
+      method:"GET",
+      body:""
+      })
+      )
 }
+
+const useContractTypesGetAll = () => {
+    return useQuery('listOfContractTypes', useRequest({
+      url:"api/Contract/ContractTypesGetAll",
+      method:"GET",
+      body:""
+      })
+      )
+}
+
+// const useContractFindByUser = (temp) => {
+//     return useQuery(["contractFindByUser", temp],useRequest({
+//         url:`api/Contract/ContractFindByEmployee?CodeOrFamily=${temp}`,
+//         method:"GET",
+//         body: ''
+//     }))
+// }
 
 const useFindLoanByUser = (userId) => {
     return useMutation(useRequest({
@@ -50,13 +68,13 @@ const useEmployeeGetAllCombo = () => {
     }))
 }
 
-const useEmployeeSearchSummery = (temp) => {
-    return useQuery(["employeeSearchByTemp", temp],useRequest({
-        url:`api/Employee/EmployeeSearchSummery?temp=${temp}`,
-        method:"GET",
-        body: ''
-    }))
-}
+// const useEmployeeSearchSummery = (temp) => {
+//     return useQuery(["employeeSearchByTemp", temp],useRequest({
+//         url:`api/Employee/EmployeeSearchSummery?temp=${temp}`,
+//         method:"GET",
+//         body: ''
+//     }))
+// }
 
 const useEmployeeSearch = (id) => {
     return useQuery(['employeeSearchById',id],useRequest({
@@ -94,8 +112,8 @@ const useDelEmployee = (userId) => {
 
 const useListOfLoanTypes = () => {
     return useQuery('listOfLoanTypes', useRequest({
-        url:'api/Loan/ListOfLoanTypes',
-        method:"POST",
+        url:'api/Loan/LoanTypesGetAll',
+        method:"GET",
         body: ''
     })
 	)
@@ -229,20 +247,29 @@ const useTaxGetById = (id) => {
     }))
 }
 
+const useLoansGetAll = () => {
+    return useQuery('loansGetAll', useRequest({
+		url: 'api/Loan/LoansGetAll',
+		method: 'GET',
+		body: "",
+	}))
+}
+
 export {
+    useLoansGetAll,
+    useContractTypesGetAll,
+    useHireTypesGetAll,
     useTaxGetAll,
     useTaxGetById,
     useInsuranceGetAlls,
-    useListOfContractTypes,
+    useListOfContractDetailsTypes,
     useListOfUsers,
-    useContractFindByUser,
     useListOfLoanTypes,
     useFindLoanByUser,
     useOrgChart,
     useSalaryFormulaTypes,
     useSalaryItems,
     useEmployeeGetAllSummery,
-    useEmployeeSearchSummery,
     useEmployeeSearch,
     useListOfRoles,
     useAddEmployee,

@@ -5,18 +5,13 @@ import Register from './pages/registerPage/register'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import ListOfUsers from './pages/listOfUsers/listOfUsers'
 import React, {useState} from "react"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Login from '../src/pages/loginPage/login'
 import MainPage from './pages/main/mainPage'
 import TopNav from './pages/topNav/topNav'
-import Loan from './pages/loan/loan'
+import Loan from './pages/loan/loans/loan'
 import BaseInfo from './pages/baseInfo/baseInfo'
-import ListOfLoanTypes from './pages/loan/loanTypes'
+import ListOfLoanTypes from './pages/loan/loanType/loanTypes'
 import ContractTypes from './pages/contractTypes/contractTypes';
 import Contracts from './pages/contracts/contracts'
 import OrgChart from './pages/orgChart/orgChart'
@@ -31,9 +26,27 @@ import NotFound from './pages/404/notFound'
 import { UserContext } from './userContext'
 import { Flip, ToastContainer } from 'react-toastify'
 
-const queryClient = new QueryClient()
+
 function App() {
     const [user, setUser] = useState(null);
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                refetchOnWindowFocus: false,
+                refetchOnMount: false,
+                retry:1,
+                refetchOnReconnect: false,
+                refetchInterval: false
+            },
+            mutations: {
+                refetchOnWindowFocus: false,
+                refetchOnMount: false,
+                retry:1,
+                refetchOnReconnect: false,
+                refetchInterval: false
+            }
+        },
+      })
     return (
         <QueryClientProvider client={queryClient}> 
             <UserContext.Provider value={{ user, setUser }}>

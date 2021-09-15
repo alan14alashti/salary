@@ -8,7 +8,7 @@ import TextError from './textError'
 import { useState } from 'react';
 
 function DatePickerr (props) {
-    const { label, name, ...rest } = props
+    const { label, name, calendarPopperPosition, ...rest } = props
     const formik = useFormikContext();
     const field = formik.getFieldProps(name);
     const renderCustomInput = ({ ref }) => (
@@ -21,8 +21,7 @@ function DatePickerr (props) {
                 placeholder="انتخاب کنید ... "
                 value={field.value ? `${field.value.year}/${field.value.month}/${field.value.day}` : null}
                 className='w-100'
-            /> 
-    
+            />
         </div>
     )
     const [selectedDay, setSelectedDay] = useState("");
@@ -37,7 +36,7 @@ function DatePickerr (props) {
                 
                 return (
                     <DatePicker
-                        calendarPopperPosition='top'
+                        calendarPopperPosition={calendarPopperPosition ? calendarPopperPosition : 'top'}
                         renderInput={renderCustomInput}
                         value={field.value}
                         onChange={value => formik.setFieldValue(name, value)}
